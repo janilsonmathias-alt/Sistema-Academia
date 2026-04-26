@@ -1,13 +1,13 @@
-import sqlite3
+import psycopg2
+import os
 from pathlib import Path
  
-DB_PATH = Path("academia.db")
  
 def get_connection():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
+    conn = psycopg2.connect(os.getenv("DATABASE_URL"))
     return conn
-
+                        
+    
 def init_db():
     with get_connection() as conn:
         cur = conn.cursor()
