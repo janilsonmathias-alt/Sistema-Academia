@@ -2,10 +2,9 @@ import psycopg2
 import os
  
  
-def get_connection():
-    raise Exception("ESTOU USANDO ESSAPORRA")
-    #conn = psycopg2.connect(os.getenv("DATABASE_URL"))
-    #return conn
+def get_connection():    
+    conn = psycopg2.connect(os.getenv("DATABASE_URL"))
+    return conn
                         
     
 def init_db():
