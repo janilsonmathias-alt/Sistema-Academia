@@ -8,7 +8,7 @@ def total_faturamento_mes(ano: int, mes: int) -> float:
         cur.execute("""
             SELECT COALESCE(SUM(faturamento),0)
             FROM fechamentos_diarios
-            WHERE data LIKE ?
+            WHERE data LIKE %s
         """, (prefixo + "%",))
         return float(cur.fetchone()[0])
 
@@ -19,7 +19,7 @@ def total_despesas_mes(ano: int, mes: int) -> float:
         cur.execute("""
             SELECT COALESCE(SUM(valor),0)
             FROM despesas
-            WHERE data LIKE ?
+            WHERE data LIKE %s
         """, (prefixo + "%",))
         return float(cur.fetchone()[0])
     
@@ -30,7 +30,7 @@ def total_frequencia_mes(ano: int, mes: int) -> int:
         cur.execute("""
             SELECT COALESCE(SUM(frequencia_alunos),0)
             FROM fechamentos_diarios
-            WHERE data LIKE ?
+            WHERE data LIKE %s
         """, (prefixo + "%",))
         return int(cur.fetchone()[0])
 
@@ -46,7 +46,7 @@ def listar_fechamentos_mes(ano: int, mes: int):
         cur.execute("""
             SELECT data, faturamento, frequencia_alunos, observacao
             FROM fechamentos_diarios
-            WHERE data LIKE ?
+            WHERE data LIKE %s
             ORDER BY data
         """, (prefixo + "%", ))
         return cur.fetchall()
@@ -58,7 +58,7 @@ def listar_despesas_mes(ano: int, mes: int):
         cur.execute("""
             SELECT data, tipo, categoria, valor, observacao
             FROM despesas
-            WHERE data LIKE ?
+            WHERE data LIKE %s
             ORDER BY data
         """, (prefixo + "%", ))
     return cur.fetchall()
