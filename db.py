@@ -13,7 +13,7 @@ def init_db():
         cur.execute("""
             CREATE TABLE IF NOT EXISTS fechamentos_diarios (
                 id SERIAL PRIMARY KEY,
-                data DATE NOT NULL,
+                data TEXT NOT NULL,
                 faturamento NUMERIC NOT NULL,
                 frequencia_alunos INTEGER NOT NULL,
                 observacao TEXT
@@ -23,7 +23,7 @@ def init_db():
         cur.execute("""
             CREATE TABLE IF NOT EXISTS despesas(
                 id SERIAL PRIMARY KEY,
-               data DATE NOT NULL,
+               data TEXT NOT NULL,
                tipo TEXT NOT NULL,
                categoria TEXT NOT NULL,
                valor NUMERIC NOT NULL,
