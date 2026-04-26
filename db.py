@@ -1,11 +1,11 @@
 import psycopg2
 import os
-from pathlib import Path
  
  
 def get_connection():
-    conn = psycopg2.connect(os.getenv("DATABASE_URL"))
-    return conn
+    raise Exception("ESTOU USANDO ESSAPORRA")
+    #conn = psycopg2.connect(os.getenv("DATABASE_URL"))
+    #return conn
                         
     
 def init_db():
