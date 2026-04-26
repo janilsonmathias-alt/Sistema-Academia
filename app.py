@@ -11,6 +11,7 @@ from calculations import(
 #import os
 
 app = Flask(__name__)
+init_db()
 
 #def limpa_tela():
 #    os.system('cls' if os.name == 'nt' else 'clear')
@@ -35,7 +36,7 @@ def fechamento():
             cur = conn.cursor()
             cur.execute("""
                 INSERT INTO fechamentos_diarios (data, faturamento, frequencia_alunos, observacao)
-                VALUES(?,?,?,?)
+                VALUES(%s, %s, %s, %s, %s)
             """,(data, faturamento, frequencia, observacao))
             conn.commit()
         return redirect("/")
@@ -55,7 +56,7 @@ def despesa():
             cur = conn.cursor()
             cur.execute("""
                 INSERT INTO despesas (data, tipo, categoria, valor, observacao)
-                VALUES (?, ?, ?, ?, ?)
+                VALUES (%s, %s, %s, %s, %s)
             """,(data, tipo, categoria, valor, observacao))
             conn.commit()
         return redirect("/")
