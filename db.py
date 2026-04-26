@@ -12,9 +12,9 @@ def init_db():
         cur = conn.cursor()
         cur.execute("""
             CREATE TABLE IF NOT EXISTS fechamentos_diarios (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                 data TEXT NOT NULL,
-                faturamento REAL NOT NULL,
+                faturamento NUMERIC NOT NULL,
                 frequencia_alunos INTEGER NOT NULL,
                 observacao TEXT
              )
@@ -22,13 +22,13 @@ def init_db():
 
         cur.execute("""
             CREATE TABLE IF NOT EXISTS despesas(
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                data TEXT NOT NULL,
                tipo TEXT NOT NULL,
                categoria TEXT NOT NULL,
-               valor REAL NOT NULL,
+               valor NUMERIC NOT NULL,
                observacao TEXT
             )
         """)
-
+    conn.commit()
          
