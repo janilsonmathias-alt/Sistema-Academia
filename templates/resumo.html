@@ -1,19 +1,40 @@
-<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
-
-<h2>Resumo do Mês</h2>
-
-<form method = "post">
-	Ano: <input type="number" name="ano"><br><br>
-	Mes: <input type="number" name="mes"><br><br>
-	<button type="submit">Buscar</button>
-</form>
-
-{% if faturamento is defined %}
-	<h3>Resultados</h3>
-
-	<p>Faturamento: {{ faturamento }}</p>
-	<p>Frequencia: {{ frequencia }}</p>
-	<p>Despesas: {{ despesas_total }}</p>
-	<p>Lucro: {{ lucro }}</p>
-{% endif %}
-	
+<html>
+    <head>
+        <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+        
+        <style>
+            html {
+                font-size: 24px;
+            }
+            body {
+                margin: 3;
+                padding: 00px;
+                font-size: 1rem;
+                line-height: 1.5;
+            }  
+        </style>
+    </head>
+    
+    <body>
+		<h2>Resumo do Mês</h2>
+		
+		<form method = "post">
+			Ano: <input type="number" name="ano"><br><br>
+			Mes: <input type="number" name="mes"><br><br>
+			<button type="submit">Buscar</button>
+		</form>
+		
+		{% if faturamento is defined %}
+			<h3>Resultados</h3>
+		
+			<p>Faturamento: {{ faturamento }}</p>
+			<p>Frequencia: {{ frequencia }}</p>
+			<p>Despesas: {{ despesas_total }}</p>
+			<p>Lucro: {{ lucro }}</p>
+		{% endif %}
+	</body>
+</html>
+			
+		
+		
+		
