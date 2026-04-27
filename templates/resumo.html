@@ -54,7 +54,7 @@
 			{% for f in fechamentos %}
 			<tr>
 				<td>{{ f[0] }}</td>
-				<td>{{ f[1] }}</td>
+				<td>R$ {{ "%.2f" | format(f[1]) }}</td>
 				<td>{{ f[2] }}</td>
 			</tr>
 			{% endfor %}
@@ -68,10 +68,10 @@
 		
 			<h3>Resultados</h3>
 			
-			<p>Faturamento: {{ faturamento }}</p>
+			<p>Faturamento: R$ {{ "%.2f" | format(faturamento) }}</p>
 			<p>Frequencia: {{ frequencia }}</p>
-			<p>Despesas: {{ despesas_total }}</p>
-			<p>Lucro: {{ lucro }}</p>
+			<p>Despesas: R$ {{ "%.2f" | format(despesas_total) }}</p>
+			<p>Lucro: R$ {{ "%.2f" | format(lucro) }}</p>
 		{% endif %}
 
 		<a href="/">Voltar ao menu</a>
