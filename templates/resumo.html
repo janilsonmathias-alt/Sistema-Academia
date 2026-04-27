@@ -22,6 +22,7 @@
 			Ano: <input type="number" name="ano"><br><br>
 			Mes: <input type="number" name="mes"><br><br>
 			<button type="submit">Buscar</button>
+			
 		</form>
 		
 		{% if faturamento is defined %}
@@ -32,6 +33,8 @@
 			<p>Despesas: {{ despesas_total }}</p>
 			<p>Lucro: {{ lucro }}</p>
 		{% endif %}
+
+		<a href="/">Voltar ao menu</a>
 	</body>
 </html>
 			
