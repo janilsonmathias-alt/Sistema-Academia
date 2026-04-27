@@ -70,6 +70,11 @@ def listar_despesas_mes(ano: int, mes: int):
             WHERE data LIKE %s
             ORDER BY data
         """, (prefixo + "%", ))
+
+        
+        cur.execute("SELECT * FROM despesas")
+    
+        
         resultado = cur.fetchall()
         print(resultado)
         return resultado
