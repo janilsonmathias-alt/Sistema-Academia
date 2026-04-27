@@ -30,5 +30,7 @@ def init_db():
                observacao TEXT
             )
         """)
-    conn.commit()
+        conn.commit()
          
+
+
