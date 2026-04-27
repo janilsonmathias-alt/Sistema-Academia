@@ -12,7 +12,23 @@
                 font-size: 1rem;
                 line-height: 1;
             }  
-        </style>
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				table-layout: fixed;
+			}
+			th, td {
+				border: 1px solid #ccc;
+				padding: 8px;
+				text-align: left;
+				word-wrap: break-word;
+			}
+			
+			th:nth-child(1), td:nth-child(1) {width: 40%;}
+			th:nth-child(2), td:nth-child(2) {width: 30%;}
+			th:nth-child(3), td:nth-child(3) {width: 30%;}
+        
+		</style>
     </head>
     
     <body>
