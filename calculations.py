@@ -52,6 +52,9 @@ def listar_fechamentos_mes(ano: int, mes: int):
             WHERE data LIKE %s
             ORDER BY data
         """, (prefixo + "%", ))
+        
+        cur.execute("SELECT * FROM fechamentos_diarios")
+               
         resultado = cur.fetchall()
         print(resultado)
         return resultado
