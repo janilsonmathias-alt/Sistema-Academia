@@ -1,13 +1,37 @@
-<meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+<html>
+    <head>
+        <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
+        
+        <style>
+            html {
+                font-size: 22px;
+            }
+            body {
+                margin: 0;
+                padding: 15px;
+                font-size: 1rem;
+                line-height: 1;
+            }  
+        </style>
+    </head>
+    
+    <body>
+		<h2>Registrar Despesa</h2>
+		
+		<form method="post">
+			Data: <input type="date" name="data"><br><br>
+			Tipo: <input type="text" name="tipo"><br><br>
+			Categoria: <input type="text" name="categoria"><br><br>
+			Valor: <input type="number" step="0.01" name="valor"><br><br>
+			Observação: <input type="text" name="observacao"><br><br>
+		
+			<button type="submit">Salvar</button>
+		</form>
+	</body>
+</html>
 
-<h2>Registrar Despesa</h2>
 
-<form method="post">
-	Data: <input type="date" name="data"><br><br>
-	Tipo: <input type="text" name="tipo"><br><br>
-	Categoria: <input type="text" name="categoria"><br><br>
-	Valor: <input type="number" step="0.01" name="valor"><br><br>
-	Observação: <input type="text" name="observacao"><br><br>
 
-	<button type="submit">Salvar</button>
-</form>
+
+
+		
