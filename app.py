@@ -58,7 +58,7 @@ def despesa():
             cur = conn.cursor()
             cur.execute("""
                 INSERT INTO despesas (data, tipo, categoria, valor, observacao)
-                VALUES (%s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s)
             """,(data, tipo, categoria, valor, observacao))
             conn.commit()
         return redirect("/")
