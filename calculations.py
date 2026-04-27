@@ -53,7 +53,7 @@ def listar_fechamentos_mes(ano: int, mes: int):
             ORDER BY data
         """, (prefixo + "%", ))
         
-        cur.execute("SELECT * FROM fechamentos_diarios")
+        #cur.execute("SELECT * FROM fechamentos_diarios")
                
         resultado = cur.fetchall()
         print(resultado)
@@ -72,7 +72,7 @@ def listar_despesas_mes(ano: int, mes: int):
         """, (prefixo + "%", ))
 
         
-        cur.execute("SELECT * FROM despesas")
+        #cur.execute("SELECT * FROM despesas")
     
         
         resultado = cur.fetchall()
