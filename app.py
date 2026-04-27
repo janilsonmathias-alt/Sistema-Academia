@@ -37,7 +37,7 @@ def fechamento():
             cur = conn.cursor()
             cur.execute("""
                 INSERT INTO fechamentos_diarios (data, faturamento, frequencia_alunos, observacao)
-                VALUES(%s, %s, %s, %s, %s)
+                VALUES(%s, %s, %s, %s)
             """,(data, faturamento, frequencia, observacao))
             conn.commit()
             
@@ -58,7 +58,7 @@ def despesa():
             cur = conn.cursor()
             cur.execute("""
                 INSERT INTO despesas (data, tipo, categoria, valor, observacao)
-                VALUES (%s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s)
             """,(data, tipo, categoria, valor, observacao))
             conn.commit()
         return redirect("/")
