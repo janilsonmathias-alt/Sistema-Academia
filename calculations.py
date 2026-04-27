@@ -3,6 +3,7 @@ from db import get_connection
 
 def total_faturamento_mes(ano: int, mes: int) -> float:
     prefixo = f"{ano:04d}-{mes:02d}"
+    
     with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
@@ -14,6 +15,7 @@ def total_faturamento_mes(ano: int, mes: int) -> float:
 
 def total_despesas_mes(ano: int, mes: int) -> float:
     prefixo = f"{ano:04d}-{mes:02d}"
+    
     with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
@@ -41,6 +43,7 @@ def lucro_mensal(ano: int, mes: int) -> float:
 
 def listar_fechamentos_mes(ano: int, mes: int):
     prefixo = f"{ano:04d}-{mes:02d}"
+    print("PREFIXO: ", prefixo)
     with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
@@ -49,10 +52,13 @@ def listar_fechamentos_mes(ano: int, mes: int):
             WHERE data LIKE %s
             ORDER BY data
         """, (prefixo + "%", ))
-        return cur.fetchall()
-
+        resultado = cur.fetchall()
+        print(resultado)
+        return resultado
+        
 def listar_despesas_mes(ano: int, mes: int):
     prefixo = f"{ano:04d}-{mes:02d}"
+    print("PREFIXO: ", prefixo)
     with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
@@ -61,8 +67,9 @@ def listar_despesas_mes(ano: int, mes: int):
             WHERE data LIKE %s
             ORDER BY data
         """, (prefixo + "%", ))
-        return cur.fetchall()
-
+        resultado = cur.fetchall()
+        print(resultado)
+        return resultado
 
 
 
