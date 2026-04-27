@@ -59,6 +59,7 @@
 			</tr>
 			{% endfor %}			
 		</table>
+		{% endif %}
 		
 		{% if despesas %}
 		<h2>Despesas do mês</h2>
@@ -71,19 +72,16 @@
 				<th>Valor</th>				
 			</tr>			
 
-			{% for f in despesas}
-			<r>
+			{% for f in despesas %}
+			<tr>
 				<td>{{ f[0] }}</td>
 				<td>{{ f[1] }}</td>
 				<td>{{ f[2] }}</td>
 				<td>{{ "%.2f" | format(f[3]) }}</td>
-			</r>
+			</tr>
 			{% endfor %}
 		</table>
-		
-		
 		<br><br>
-		
 		{% endif %}
 		
 		{% if faturamento is defined %}
