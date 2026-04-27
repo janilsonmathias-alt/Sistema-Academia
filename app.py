@@ -32,6 +32,7 @@ def fechamento():
         frequencia = int(request.form["frequencia"])
         observacao = request.form["observacao"]
 
+        print("DATASALVA", data)
         with get_connection() as conn:
             cur = conn.cursor()
             cur.execute("""
@@ -39,6 +40,7 @@ def fechamento():
                 VALUES(%s, %s, %s, %s, %s)
             """,(data, faturamento, frequencia, observacao))
             conn.commit()
+            
         return redirect("/")
     return render_template("fechamento.html")
 
@@ -80,6 +82,7 @@ def resumo():
         fechamentos = listar_fechamentos_mes(ano, mes)
         despesas = listar_despesas_mes(ano, mes)
 
+              
         return render_template("resumo.html",
                                fechamentos = fechamentos,
                                despesas = despesas,
