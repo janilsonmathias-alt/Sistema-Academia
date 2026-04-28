@@ -92,7 +92,56 @@ def resumo():
                                lucro = lucro_mensal(ano, mes))
     
     return render_template("resumo.html")
+  
+@app.route("/fechamento/editar/<int:id>", methods("GET", "POST")
+def editar_fechamento(id):
+  with get_connection() as conn:
+    cur = conn.cursor()
+
+    if request.method == "POST":
+      data = request.form["data"]
+      faturamento = float(request.form["faturamento"])
+      frequencia = int(request.fom["frequencia"])
+      observacao = request.form["observacao"]
+
+      cur.execute("""
+          UPDATE fechamentos_diarios
+          SET data = %s, faturamento = &s, frequencia_alunos = %s, observacao = %s
+          WHERE id = %s
+      """, (data, faturamento, frequencia, observacao, id))
+      conn.commit()
+      return redirect("/resumo")
+      
+    cur.execute("""
+        SELECT id, data, faturamento, frequencia_alunos, observacao
+        FROM fechamentos_diarios
+        WHERE id = %s
+    """, (id,))
+    fechamento = cur.fetchone()
+
+  return render_template("fechamento.html", fechamento = fechamento)
+
+
+@app.route("/fechamento/excluir/<int:id>", methods = ["POST"])
+def excluir_fechamento(id):
+    with get_connection() as conn:
+        cur = conn.cursor()
+        cur.execute("DELETE FROM fechamentos_darios WHERE id = %s", (id,))
+        conn.commit()
+    return redirect("/resumo")
+
+@app.route("/despesa/excluir/<int:id>", methods=["POST"])
+def excluir_despesa(id):
+    with get_connection as conn:
+        cur = conn.cursor()
+        cur.execute("DELETE FROM despesa WHERE id = %s", (id,))
+        conn.commit()
+    return redirect("/resumo")
+        
 
 if __name__ == "__main__":
-    app.run(debug = True, host="0.0.0.0")
 
+
+
+  
+    app.run(debug = True, host="0.0.0.0")
