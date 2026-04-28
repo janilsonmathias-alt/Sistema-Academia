@@ -93,7 +93,7 @@ def resumo():
     
     return render_template("resumo.html")
   
-@app.route("/fechamento/editar/<int:id>", methods("GET", "POST")
+@app.route("/fechamento/editar/<int:id>", methods=["GET", "POST"])
 def editar_fechamento(id):
   with get_connection() as conn:
     cur = conn.cursor()
