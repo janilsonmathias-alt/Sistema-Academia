@@ -132,9 +132,9 @@ def excluir_fechamento(id):
 
 @app.route("/despesa/excluir/<int:id>", methods=["POST"])
 def excluir_despesa(id):
-    with get_connection as conn:
+    with get_connection() as conn:
         cur = conn.cursor()
-        cur.execute("DELETE FROM despesa WHERE id = %s", (id,))
+        cur.execute("DELETE FROM despesas WHERE id = %s", (id,))
         conn.commit()
     return redirect("/resumo")
         
