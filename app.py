@@ -126,7 +126,7 @@ def editar_fechamento(id):
 def excluir_fechamento(id):
     with get_connection() as conn:
         cur = conn.cursor()
-        cur.execute("DELETE FROM fechamentos_darios WHERE id = %s", (id,))
+        cur.execute("DELETE FROM fechamentos_diarios WHERE id = %s", (id,))
         conn.commit()
     return redirect("/resumo")
 
