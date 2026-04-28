@@ -20,7 +20,7 @@
 		<h2>Registrar Fechamento</h2>
 		
 		<form method = "post" action = "{{ form_action if form_action else '/fechamento' }}">
-			Data: <input type="date" name="data" value="{{ fechamento[1] if fechamento else ''"><br><br>
+			Data: <input type="date" name="data" value="{{ fechamento[1] if fechamento else '' }}"><br><br>
 			Faturamento: <input type="number" step="0.01" name="faturamento" value="{{ fechamento[2] if fechamento else ''}}"><br><br>
 			Frequência: <input type="number" name="frequencia" value="{{ fechamento[3] if fechamento else '' }}"><br><br>
 			Observação: <input type="text" name="observacao" value="{{ fechamento[4] if fechamento else '' }}"><br><br>
