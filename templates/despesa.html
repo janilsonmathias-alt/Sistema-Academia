@@ -18,12 +18,12 @@
     <body>
 		<h2>Registrar Despesa</h2>
 		
-		<form method="post">
-			Data: <input type="date" name="data"><br><br>
-			Tipo: <input type="text" name="tipo"><br><br>
-			Categoria: <input type="text" name="categoria"><br><br>
-			Valor: <input type="number" step="0.01" name="valor"><br><br>
-			Observação: <input type="text" name="observacao"><br><br>
+		<form method="post" action="{{ form_action if form_action else '/despesa' }}">
+			Data: <input type="date" name="data" value="{{ despesa[1] if despesa else '' }}"><br><br>
+			Tipo: <input type="text" name="tipo" value="{{ despesa[2] if despesa else '' }}"><br><br>
+			Categoria: <input type="text" name="categoria" value="{{ despesa[3] if despesa else '' }}"><br><br>
+			Valor: <input type="number" step="0.01" name="valor" value="{{ despesa[4] if despesa else '' }}"><br><br>
+			Observação: <input type="text" name="observacao" value="{{ despesa[5] if despesa else '' }}"><br><br>
 		
 			<button type="submit">Salvar</button>
 			
