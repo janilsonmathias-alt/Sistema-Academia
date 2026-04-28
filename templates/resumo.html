@@ -35,7 +35,14 @@
 				th:nth-child(3), td:nth-child(3) {width: 30%;}
 				th:nth-child(4), td:nth-child(4) {width: 16%;}
 			}
-			
+
+			.acoes a, .acoes button{
+				font-size: 14px;
+			}
+
+			.acoes form{
+				display: inline;
+			}
 		</style>
     </head>
     
@@ -58,13 +65,20 @@
 					<th>Data</th>
 					<th>Faturamento</th>
 					<th>Frequencia</th>
+					<th>Ações</th>
 				</tr>
 	
 				{% for f in fechamentos %}
 				<tr>
-					<td>{{ f[0] }}</td>
-					<td>R$ {{ "%.2f" | format(f[1]) }}</td>
-					<td>{{ f[2] }}</td>
+					<td>{{ f[1] }}</td>
+					<td>R$ {{ "%.2f" | format(f[2]) }}</td>
+					<td>{{ f[3] }}</td>
+					<td class="acoes">
+						<a href="fechamento/editar/{{ f[0] }}">Editar</a>
+						<form method="post" action="/fechamento/excluir/{{ f[0] }}" onsubmit="return confirm('Excluir este fechamento ?')">
+							<button type="submit">Excluir</button>
+						</form>
+					</td>
 				</tr>
 				{% endfor %}			
 			</table>
@@ -80,15 +94,19 @@
 					<th>Data</th>
 					<th>Tipo</th>
 					<th>Categoria</th>
-					<th>Valor</th>				
+					<th>Valor</th>
+					<th>Observação</th>
+					<th>Ações</th>
 				</tr>			
 	
 				{% for f in despesas %}
 				<tr>
-					<td>{{ f[0] }}</td>
 					<td>{{ f[1] }}</td>
 					<td>{{ f[2] }}</td>
-					<td>{{ "%.2f" | format(f[3]) }}</td>
+					<td>{{ f[3] }}</td>
+					<td>{{ "%.2f" | format(f[4]) }}</td>
+					<td>{{ f[5] }}</td>
+					
 				</tr>
 				{% endfor %}
 			</table>
