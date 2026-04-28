@@ -101,12 +101,12 @@ def editar_fechamento(id):
     if request.method == "POST":
       data = request.form["data"]
       faturamento = float(request.form["faturamento"])
-      frequencia = int(request.fom["frequencia"])
+      frequencia = int(request.form["frequencia"])
       observacao = request.form["observacao"]
 
       cur.execute("""
           UPDATE fechamentos_diarios
-          SET data = %s, faturamento = &s, frequencia_alunos = %s, observacao = %s
+          SET data = %s, faturamento = %s, frequencia_alunos = %s, observacao = %s
           WHERE id = %s
       """, (data, faturamento, frequencia, observacao, id))
       conn.commit()
@@ -119,7 +119,7 @@ def editar_fechamento(id):
     """, (id,))
     fechamento = cur.fetchone()
 
-  return render_template("fechamento.html", fechamento = fechamento)
+  return render_template("fechamento.html", fechamento = fechamento, form_action=f"/fechamento/editar/{id}")
 
 
 @app.route("/fechamento/excluir/<int:id>", methods = ["POST"])
