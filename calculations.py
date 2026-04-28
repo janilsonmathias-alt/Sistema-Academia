@@ -47,7 +47,7 @@ def listar_fechamentos_mes(ano: int, mes: int):
     with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
-            SELECT data, faturamento, frequencia_alunos, observacao
+            SELECT id, data, faturamento, frequencia_alunos, observacao
             FROM fechamentos_diarios
             WHERE data LIKE %s
             ORDER BY data
@@ -65,7 +65,7 @@ def listar_despesas_mes(ano: int, mes: int):
     with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
-            SELECT data, tipo, categoria, valor, observacao
+            SELECT id, data, tipo, categoria, valor, observacao
             FROM despesas
             WHERE data LIKE %s
             ORDER BY data
