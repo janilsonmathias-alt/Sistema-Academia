@@ -79,7 +79,18 @@ def listar_despesas_mes(ano: int, mes: int):
         print(resultado)
         return resultado
 
+def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
+    prefixo = f"{ano:04d}-{mes:02d}"
 
+    with get_connection() as conn:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT COALESCE(SUM(faturamento),0)
+            FROM fechamentos_diarios
+            WHERE data LIKE %s
+            AND CAST(SUBSTRING(data, 9,2) AS INTEGER) <= %s
+        """, (prefixo + "%", dia))
+    return float(cur.fetchone()[0])
 
 
 
