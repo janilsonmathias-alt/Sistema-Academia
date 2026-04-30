@@ -143,7 +143,7 @@ def editar_despesa(id):
             
         cur.execute("""
             SELECT data, tipo, categoria, valor, observacao,id
-            FROM despesa
+            FROM despesas
             WHERE id = %s
         """,(id,))
         despesa = cur.fetchone()
