@@ -1,3 +1,4 @@
+from calculations import previsao_mes
 from flask import Flask, render_template, request, redirect
 #from datetime import datetime
 from db import init_db, get_connection
