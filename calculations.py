@@ -108,12 +108,18 @@ def fator_medio(dia:int, ano_atual:int, mes_atual:int) -> float:
         cur.execute("""
             SELECT DISTINCT SUBSTRING(data, 1, 7)
             FROM fechamentos_diarios
-            WHERE SUBSTRING(data, 1, 7) < %s
+            WHERE data LIKE IS NOT NULL
+            AND data <> ''
+            AND LENGHT(data) >= 7 
+            AND SUBSTRING(data, 1, 7) < %s
         """, (f"{ano_atual:04d}-{mes_atual:02d}",))
         meses = cur.fetchall()
 
     for m in meses:
-        ano, mes = map(int, m[0].split("-"))
+        valor_mes = m[0]
+        if not valor_mes or "-"  not in valor_mes:
+            continue
+        ano, mes = map(int, valor_mes.split("-"))
         f = fator_mes(ano, mes, dia)
         if f > 0:
             fatores.append(f)
