@@ -1,5 +1,5 @@
 from db import get_connection
-
+from datetime import datetime
 
 def total_faturamento_mes(ano: int, mes: int) -> float:
     prefixo = f"{ano:04d}-{mes:02d}"
@@ -122,6 +122,20 @@ def fator_medio(dia:int, ano_atual:int, mes_atual:int) -> float:
 
     return sum(fatores) / len(fatores)
 
+def previsao_mes(ano:int, mes: int) -> dict:
+    hoje = datetime.now()
+    dia = datetime.day()
+
+    acomulado_atual = acomulado_ate_dia(ano, mes, dia)
+    fator_atua = fator_medio(dia, ano, mes)
+
+    previsao = acomulado_atual * fator_atual if fator_atual > 0 else 0
+
+    return {
+        "acomulado": acomulado_atual,
+        "fator": fator_atual,
+        "previsao": previsao
+    }
 
 
 
