@@ -82,7 +82,7 @@ def resumo():
         
         fechamentos = listar_fechamentos_mes(ano, mes)
         despesas = listar_despesas_mes(ano, mes)
-
+        previsao = previsao_mes(ano, mes)
               
         return render_template("resumo.html",
                                fechamentos = fechamentos,
@@ -91,7 +91,9 @@ def resumo():
                                frequencia = total_frequencia_mes(ano, mes),
                                despesas_total = total_despesas_mes(ano, mes),
                                lucro = lucro_mensal(ano, mes))
-    
+                               previsao = previsao("previsao")
+                               fator = previsao("fator")
+                               acomulado = previsao("acomulado")
     return render_template("resumo.html")
   
 @app.route("/fechamento/editar/<int:id>", methods=["GET", "POST"])
