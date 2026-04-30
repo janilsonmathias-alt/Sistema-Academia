@@ -142,11 +142,15 @@ def editar_despesa(id):
             return redirect("/resumo")
             
         cur.execute("""
-            SELECT data, tipo, categoria, valor, observacao,id
+            SELECT id, data, tipo, categoria, valor, observacao
             FROM despesas
             WHERE id = %s
         """,(id,))
         despesa = cur.fetchone()
+    return render_template(
+        "despesa.html",
+        despesa = despesa,
+        form_action = f"/despesa/editar/{id}"
     
 
 @app.route("/fechamento/excluir/<int:id>", methods = ["POST"])###
