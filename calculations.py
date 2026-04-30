@@ -92,6 +92,36 @@ def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
         """, (prefixo + "%", dia))
     return float(cur.fetchone()[0])
 
+def fator_mes(anos:int, mes:int, dia:int) -> float:
+    total = total_faturamento_mes(ano, mes)
+    acomulado = acomulado_ate_dia(ano, mes, dia)
+
+    if acomulado == 0:
+        return 0
+        
+    return total/acomulado
+
+def fator_medio(dia:int, ano_atual:int, mes_atual:int) -> float:
+    fatores = []
+    with get_connection as conn:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT DISTINCT SUBSTRING(data, 1, 7)
+            FROM fechamentos_diarios
+            WHERE SUBSTRINGS(data, 1, 7) < %s
+        """, (f"{ano_atual:04d}-{mes_atual:02d}",))
+        meses = cur.fetchall()
+
+    for m in meses:
+        ano, mes = map(int, m[0].split("-"))
+        f = fator_mes(ano, mes, dia)
+        if f > 0:
+            fatores.append(f)
+        if not fatores:
+            return 0
+
+    return sum(fatores) / len(fatores)
+
 
 
 
