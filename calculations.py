@@ -110,7 +110,7 @@ def fator_medio(dia:int, ano_atual:int, mes_atual:int) -> float:
             FROM fechamentos_diarios
             WHERE data IS NOT NULL
             AND data <> ''
-            AND LENGHT(data) >= 7 
+            AND LENGTH(data) >= 7 
             AND SUBSTRING(data, 1, 7) < %s
         """, (f"{ano_atual:04d}-{mes_atual:02d}",))
         meses = cur.fetchall()
