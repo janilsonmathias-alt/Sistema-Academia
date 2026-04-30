@@ -108,7 +108,7 @@ def fator_medio(dia:int, ano_atual:int, mes_atual:int) -> float:
         cur.execute("""
             SELECT DISTINCT SUBSTRING(data, 1, 7)
             FROM fechamentos_diarios
-            WHERE data LIKE IS NOT NULL
+            WHERE data IS NOT NULL
             AND data <> ''
             AND LENGHT(data) >= 7 
             AND SUBSTRING(data, 1, 7) < %s
