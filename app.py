@@ -90,10 +90,10 @@ def resumo():
                                faturamento = total_faturamento_mes(ano, mes),
                                frequencia = total_frequencia_mes(ano, mes),
                                despesas_total = total_despesas_mes(ano, mes),
-                               lucro = lucro_mensal(ano, mes))
-                               previsao = previsao("previsao")
-                               fator = previsao("fator")
-                               acomulado = previsao("acomulado")
+                               lucro = lucro_mensal(ano, mes),
+                               previsao = previsao("previsao"),
+                               fator = previsao("fator"),
+                               acomulado = previsao("acomulado"))
     return render_template("resumo.html")
   
 @app.route("/fechamento/editar/<int:id>", methods=["GET", "POST"])
