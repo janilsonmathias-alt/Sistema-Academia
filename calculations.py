@@ -90,9 +90,9 @@ def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
             WHERE data LIKE %s
             AND CAST(SUBSTRING(data, 9,2) AS INTEGER) <= %s
         """, (prefixo + "%", dia))
-    return float(cur.fetchone()[0])
+        return float(cur.fetchone()[0])
 
-def fator_mes(anos:int, mes:int, dia:int) -> float:
+def fator_mes(ano:int, mes:int, dia:int) -> float:
     total = total_faturamento_mes(ano, mes)
     acomulado = acomulado_ate_dia(ano, mes, dia)
 
@@ -103,12 +103,12 @@ def fator_mes(anos:int, mes:int, dia:int) -> float:
 
 def fator_medio(dia:int, ano_atual:int, mes_atual:int) -> float:
     fatores = []
-    with get_connection as conn:
+    with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
             SELECT DISTINCT SUBSTRING(data, 1, 7)
             FROM fechamentos_diarios
-            WHERE SUBSTRINGS(data, 1, 7) < %s
+            WHERE SUBSTRING(data, 1, 7) < %s
         """, (f"{ano_atual:04d}-{mes_atual:02d}",))
         meses = cur.fetchall()
 
@@ -117,17 +117,17 @@ def fator_medio(dia:int, ano_atual:int, mes_atual:int) -> float:
         f = fator_mes(ano, mes, dia)
         if f > 0:
             fatores.append(f)
-        if not fatores:
-            return 0
+    if not fatores:
+        return 0
 
     return sum(fatores) / len(fatores)
 
 def previsao_mes(ano:int, mes: int) -> dict:
     hoje = datetime.now()
-    dia = datetime.day
+    dia = hoje.day
 
     acomulado_atual = acomulado_ate_dia(ano, mes, dia)
-    fator_atua = fator_medio(dia, ano, mes)
+    fator_atual = fator_medio(dia, ano, mes)
 
     previsao = acomulado_atual * fator_atual if fator_atual > 0 else 0
 
