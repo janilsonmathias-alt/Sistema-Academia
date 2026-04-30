@@ -122,7 +122,34 @@ def editar_fechamento(id):
   return render_template("fechamento.html", fechamento = fechamento, form_action=f"/fechamento/editar/{id}")
 
 
-@app.route("/fechamento/excluir/<int:id>", methods = ["POST"])
+@app.route("/despesa/editar/<int:id>", methods=["GET", "POST"])
+def editar_despesa(id):
+    with get_connection() as conn: 
+        cur = conn.cursor()
+        if request.method == "POST":
+            data = request.form["data"]
+            tipo = request.form["tipo"]
+            categoria = request.form["categoria"]
+            valor = float(request.form["valor"])
+            observacao = request.form["observacao"]
+            
+            cur.execute("""
+                UPDATE despesas
+                SET data = %s, tipo = %s, categoria = %s, valor = %s, observacao = %s
+                WHERE id = %s
+            """, (data, tipo, categoria, valor, observacao, id))
+            conn.commit()
+            return redirect("/resumo")
+            
+        cur.execute("""
+            SELECT data, tipo, categoria, valor, observacao,id
+            FROM despesa
+            WHERE id = %s
+        """,(id,))
+        despesa = cur.fetchone()
+    
+
+@app.route("/fechamento/excluir/<int:id>", methods = ["POST"])###
 def excluir_fechamento(id):
     with get_connection() as conn:
         cur = conn.cursor()
