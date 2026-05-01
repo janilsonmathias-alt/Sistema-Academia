@@ -137,9 +137,14 @@ def fator_medio(dia:int, ano_atual:int, mes_atual:int) -> float:
 
 
 def previsao_mes(ano:int, mes: int) -> dict:
-    hoje = datetime.now()
-    dia = hoje.day
-
+    
+    hoje = datetime.today()
+    
+    if ano == hoje.year and mes == hoje.month:
+        dia = hoje.day
+    else:
+        dia = calendar.monthrange(ano, mes)[1]
+        
     acomulado_atual = acomulado_ate_dia(ano, mes, dia)
     fator_atual = fator_medio(dia, ano, mes)
 
