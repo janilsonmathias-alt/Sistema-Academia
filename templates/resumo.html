@@ -54,7 +54,6 @@
 			Ano: <input type="number" name="ano"><br><br>
 			Mes: <input type="number" name="mes"><br><br>
 			<button type="submit">Buscar</button>
-			
 		</form>
 
 		{% if fechamentos %}
@@ -82,6 +81,7 @@
 					</td>
 				</tr>
 				{% endfor %}			
+			
 			</table>
 		</div>
 		{% endif %}
@@ -112,26 +112,21 @@
 						<form method="post" action="/despesa/excluir/{{ f[0] }}" onsubmit="return confirm('Excluir essa despesa ?')">
 							<button type="submit">Excluir</button>
 						</form>
-					
 				</tr>
 				{% endfor %}
+
 			</table>
 		</div>
 		<br><br>
 		{% endif %}
 		
 		{% if faturamento is defined %}
-		
 			<h3>Resultados</h3>
-			{% if mes_atual %}
 			<p>Previsao de Faturamento: R$ {{ "%.2f" | format(previsao) }}</p>
-			{% endif %}
 			<p>Faturamento: R$ {{ "%.2f" | format(faturamento) }}</p>
 			<p>Frequencia: {{ frequencia }}</p>
 			<p>Despesas: R$ {{ "%.2f" | format(despesas_total) }}</p>
-			{% if mes_atual %}
 			<p>Previsao de Lucro: R$ {{ "%.2f" | format(previsao - despesas_total) }}</p>
-			{% endif %}
             <p>Lucro: R$ {{ "%.2f" | format(lucro) }}</p>
 		{% endif %}
 
