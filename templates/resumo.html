@@ -123,11 +123,15 @@
 		{% if faturamento is defined %}
 		
 			<h3>Resultados</h3>
-			<!-- <p>Previsao de Faturamento: R$ {{ "%.2f" | format(previsao) }}</p>-->
+			{% if mes_atual %}
+			<p>Previsao de Faturamento: R$ {{ "%.2f" | format(previsao) }}</p>
+			{% endif %}
 			<p>Faturamento: R$ {{ "%.2f" | format(faturamento) }}</p>
 			<p>Frequencia: {{ frequencia }}</p>
 			<p>Despesas: R$ {{ "%.2f" | format(despesas_total) }}</p>
-			<!--<p>Previsao de Lucro: R$ {{ "%.2f" | format(previsao - despesas_total) }}</p>-->
+			{% if mes_atual %}
+			<p>Previsao de Lucro: R$ {{ "%.2f" | format(previsao - despesas_total) }}</p>
+			{% endif %}
             <p>Lucro: R$ {{ "%.2f" | format(lucro) }}</p>
 		{% endif %}
 
