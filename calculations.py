@@ -1,3 +1,4 @@
+import calendar
 from db import get_connection
 from datetime import datetime
 
@@ -92,14 +93,20 @@ def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
         """, (prefixo + "%", dia))
         return float(cur.fetchone()[0])
 
+
+def ultimo_dia_do_mes(ano: int, mes: int) -> int:
+    return calendar.monthrange(ano, mes)[1]
+
+
 def fator_mes(ano:int, mes:int, dia:int) -> float:
+    dia_efetivo = min(dia, ultimo_dia_do_mes(ano, mes))
     total = total_faturamento_mes(ano, mes)
-    acomulado = acomulado_ate_dia(ano, mes, dia)
+    acomulado = acomulado_ate_dia(ano, mes, dia_efetivo)
 
     if acomulado == 0:
-        return 0
-        
+        return 0        
     return total/acomulado
+
 
 def fator_medio(dia:int, ano_atual:int, mes_atual:int) -> float:
     fatores = []
@@ -127,6 +134,7 @@ def fator_medio(dia:int, ano_atual:int, mes_atual:int) -> float:
         return 0
 
     return sum(fatores) / len(fatores)
+
 
 def previsao_mes(ano:int, mes: int) -> dict:
     hoje = datetime.now()
