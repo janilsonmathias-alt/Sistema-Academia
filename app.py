@@ -79,11 +79,16 @@ def resumo():
     if ano and mes:
         ano = int(ano)
         mes = int(mes)
-        
+
+        hoje = date.today() #pega a data de hj
+
+        #a preveisao sera feito sobre todos o s meses mas so sera mostrado quanto  o foco do resumo for 
+        # o mes atual pq se nao da merda na previsao 
+               
         fechamentos = listar_fechamentos_mes(ano, mes)
         despesas = listar_despesas_mes(ano, mes)
         previsao = previsao_mes(ano, mes)
-              
+        mes_atual = ( ano == hoje.year and mes == hoje.month )    # verifica se resumo sera sobre o mes atual   
         return render_template("resumo.html",
                                fechamentos = fechamentos,
                                despesas = despesas,
@@ -91,6 +96,7 @@ def resumo():
                                frequencia = total_frequencia_mes(ano, mes),
                                despesas_total = total_despesas_mes(ano, mes),
                                lucro = lucro_mensal(ano, mes),
+                               mes_atual = mes_atual, # leva a resposta se a previsao dsera sobre o mes atal
                                previsao = previsao["previsao"],
                                fator = previsao["fator"],
                                acomulado = previsao["acomulado"])
