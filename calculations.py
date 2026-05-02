@@ -127,7 +127,7 @@ def fator_medio(dia:int, ano_atual:int, mes_atual:int) -> float:
         if not valor_mes or "-"  not in valor_mes:
             continue
             
-        print("MES: ", valor_mes[0])
+        print("MES: ", valor_mes)
         print("FATURAMENTO: ", total_faturamento_mes(ano, mes))
         print("ACOMULADO: ", acomulado_ate_dia(ano, mes, dia) )    
         print("FATOR: ", fator_mes(ano, mes, dia))
