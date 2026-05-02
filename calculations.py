@@ -121,11 +121,17 @@ def fator_medio(dia:int, ano_atual:int, mes_atual:int) -> float:
             AND SUBSTRING(data, 1, 7) < %s
         """, (f"{ano_atual:04d}-{mes_atual:02d}",))
         meses = cur.fetchall()
-
+    print("MESES ENCONTRADOS: ", meses)
     for m in meses:
         valor_mes = m[0]
         if not valor_mes or "-"  not in valor_mes:
             continue
+            
+    print("MES: ", valor_mes[0])
+    print("FATURAMENTO: ", total_faturamento_mes(ano, mes))
+    print("ACOMULADO: ", acomulado_ate_dia(ano, mes, dia) )    
+    print("FATOR: ", fator_mes(ano, mes, dia))
+        
         ano, mes = map(int, valor_mes.split("-"))
         f = fator_mes(ano, mes, dia)
         if f > 0:
