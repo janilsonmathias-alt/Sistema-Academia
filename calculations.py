@@ -60,7 +60,8 @@ def listar_fechamentos_mes(ano: int, mes: int):
         print(resultado)
         return {
             "lista": resultado
-             "ultimo_dia_da_lista": resultado[-1]
+            "ultimo_dia_da_lista": resultado[-1][1]
+            "faturamento_ultimo_dia_da_lista": resultado[-1][2]
         }
         
 def listar_despesas_mes(ano: int, mes: int):
