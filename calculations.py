@@ -57,9 +57,11 @@ def listar_fechamentos_mes(ano: int, mes: int):
         #cur.execute("SELECT * FROM fechamentos_diarios")
                
         resultado = cur.fetchall()
-        resultado_ultimo_dia = resultado[-1]
         print(resultado)
-        return resultado, resultado_ultimo_dia
+        return {
+            "lista": resultado
+             "ultimo_dia_da_lista": resultado[-1]
+        }
         
 def listar_despesas_mes(ano: int, mes: int):
     prefixo = f"{ano:04d}-{mes:02d}"
