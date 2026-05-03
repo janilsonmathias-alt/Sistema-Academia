@@ -94,17 +94,18 @@ def resumo():
         mes_atual = ( ano == hoje.year and mes == hoje.month )    # verifica se resumo sera sobre o mes atual   
         mes_em_foco_str = lista_meses[ mes - 1]
         return render_template("resumo.html",
-                               fechamentos = fechamentos,
-                               despesas = despesas,
-                               faturamento = total_faturamento_mes(ano, mes),
-                               frequencia = total_frequencia_mes(ano, mes),
-                               despesas_total = total_despesas_mes(ano, mes),
-                               lucro = lucro_mensal(ano, mes),
-                               mes_em_foco_str = mes_em_foco_str, # leva a resposta se a previsao dsera sobre o mes ata
-                               previsao = previsao["previsao"],
-                               fator = previsao["fator"],
-                               acomulado = previsao["acomulado"],
-                               previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day))
+                                fechamentos = fechamentos,
+                                despesas = despesas,
+                                faturamento = total_faturamento_mes(ano, mes),
+                                frequencia = total_frequencia_mes(ano, mes),
+                                despesas_total = total_despesas_mes(ano, mes),
+                                lucro = lucro_mensal(ano, mes),
+                                mes_em_foco_str = mes_em_foco_str, # leva a resposta se a previsao dsera sobre o mes ata
+                                previsao = previsao["previsao"],
+                                fator = previsao["fator"],
+                                acomulado = previsao["acomulado"],
+                                mes_atual = mes_atual,
+                                previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day))
       
     return render_template("resumo.html")
   
