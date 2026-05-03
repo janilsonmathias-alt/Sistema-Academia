@@ -163,6 +163,28 @@ def previsao_mes(ano:int, mes: int) -> dict:
         "previsao": previsao
     }
 
+def previsao_diaria(ano_atual:int, mes_atual:int, dia:int) -> float:
+    #prefixo#
+    mes_atual_str = f"{ano_atual:04d}-{mes_atual:02d}"
+    with get_connection() as conn:
+        cur = conn.cursor()        
+        cur.execute("""
+            SELECT COALESCE(AVG(valor_dia), 0)
+            FROM (
+                SELECT 
+                    SUBSTRING(data, 1, 7) as mes,
+                    SUM(faturamento) as valor_dia
+                FROM fechamentos_diarios
+                WHERE SUBSTRING(data, 1, 7) < %s  
+                    AND CAST(SUBSTRING(data, 9, 2) as INTEGER) = %s
+                GROUP BY mes                    
+                ) t
+        """, (mes_atual_str, dia) )  #mes_atual_str = prefixo
+        resultado = cur.fetchone()                          # antes ->> cur.fetchone()[0]    -  fazebdi assim ele verifica se tem linha 0 preimeiro pq qaqui eke oega tudo
+        return float(resultado[0]) if resultado else 0.0    # e aqui verifica se tem alguma coisa na linha  0 amtes 
+                                                            # ma verdade verifica se tem linha mas o coalasce la em cima sempre garante q vai existeir
+
+
 
 
 
