@@ -69,6 +69,7 @@ def despesa():
 
 @app.route("/resumo", methods=["GET", "POST"])
 def resumo():
+    lista_meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"] 
     if request.method == "POST":
         ano = int(request.form["ano"])
         mes = int(request.form["mes"])
@@ -91,7 +92,7 @@ def resumo():
         previsao = previsao_mes(ano, mes)
         previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day)
         mes_atual = ( ano == hoje.year and mes == hoje.month )    # verifica se resumo sera sobre o mes atual   
-                
+        mes_em_foco_str = lista_meses[ mes - 1]
         return render_template("resumo.html",
                                fechamentos = fechamentos,
                                despesas = despesas,
@@ -99,7 +100,7 @@ def resumo():
                                frequencia = total_frequencia_mes(ano, mes),
                                despesas_total = total_despesas_mes(ano, mes),
                                lucro = lucro_mensal(ano, mes),
-                               mes_atual = mes_atual, # leva a resposta se a previsao dsera sobre o mes atal
+                               mes_em_foco_str = mes_em_foco_str, # leva a resposta se a previsao dsera sobre o mes ata
                                previsao = previsao["previsao"],
                                fator = previsao["fator"],
                                acomulado = previsao["acomulado"],
