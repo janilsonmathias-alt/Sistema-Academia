@@ -90,7 +90,8 @@ def resumo():
         dados = listar_fechamentos_mes(ano, mes)
         fechamentos = dados["lista"]
         ultimo_dia_da_lista = dados["ultimo_dia_da_lista"]
-        ultimo_dia_da_lista = (ultimo_dia_da_lista == hoje)
+        faturamento_ultimo_dia_da_lista = dados["faturamento_ultimo_dia_da_lista"]
+        ultimo_dia_da_lista = (ultimo_dia_da_lista == hoje.strftime("%Y, %m, %d"))
         despesas = listar_despesas_mes(ano, mes)
         previsao = previsao_mes(ano, mes)
         previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day)
@@ -108,7 +109,7 @@ def resumo():
                                 fator = previsao["fator"],
                                 acomulado = previsao["acomulado"],
                                 mes_atual = mes_atual,
-                                 ultimo_dia_da_lista = ultimo_dia_da_lista,
+                                ultimo_dia_da_lista_e_hj = ultimo_dia_da_lista,
                                 previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day))
       
     return render_template("resumo.html")
