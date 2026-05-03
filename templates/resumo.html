@@ -102,8 +102,11 @@
 				<tr>
 					<td>{{ f[1] }}<br>
                         <a href="/despesa/editar/{{ f[0] }}">Editar</a>
-						<form method="post" action="/despesa/excluir/{{ f[0] }}" onsubmit="return confirm('Excluir essa despesa ?')">
-							<button type="submit">Excluir</button>
+						<form method="post" 
+                            action="/despesa/excluir/{{ f[0] }}" 
+                            style = "display:inline;"
+                            onsubmit="return confirm('Excluir essa despesa ?')">
+							 <button type="submit">Excluir</button>
 						</form>
                     </td>
 					<td>{{ f[2] }}</td>
