@@ -89,7 +89,7 @@ def resumo():
         fechamentos = listar_fechamentos_mes(ano, mes)
         despesas = listar_despesas_mes(ano, mes)
         previsao = previsao_mes(ano, mes)
-        previsao_hoje = previsao_hoje(hoje.year, hoje.month, hoje.day)
+        previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day)
         mes_atual = ( ano == hoje.year and mes == hoje.month )    # verifica se resumo sera sobre o mes atual   
                 
         return render_template("resumo.html",
