@@ -1,5 +1,5 @@
 from datetime import date
-from calculations import previsao_mes
+from calculations import previsao_mes, previsao_hoje
 from flask import Flask, render_template, request, redirect
 #from datetime import datetime
 from db import init_db, get_connection
@@ -89,7 +89,9 @@ def resumo():
         fechamentos = listar_fechamentos_mes(ano, mes)
         despesas = listar_despesas_mes(ano, mes)
         previsao = previsao_mes(ano, mes)
+        previsao_hoje = previsao_hoje(hoje.year, hoje.month, hoje.day)
         mes_atual = ( ano == hoje.year and mes == hoje.month )    # verifica se resumo sera sobre o mes atual   
+                
         return render_template("resumo.html",
                                fechamentos = fechamentos,
                                despesas = despesas,
