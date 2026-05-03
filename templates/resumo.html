@@ -101,16 +101,18 @@
 	
 				{% for f in despesas %}
 				<tr>
-					<td>{{ f[1] }}</td>
+					<td>{{ f[1] }}
+                        <a href="/despesa/editar/{{ f[0] }}">Editar</a>
+						<form method="post" action="/despesa/excluir/{{ f[0] }}" onsubmit="return confirm('Excluir essa despesa ?')">
+							<button type="submit">Excluir</button>
+						</form>
+                    </td>
 					<td>{{ f[2] }}</td>
 					<td>{{ f[3] }}</td>
 					<td>{{ "%.2f" | format(f[4]) }}</td>
 					<!--<td>{{ f[5] }}</td>-->
 					<td class="acoes">
-						<a href="/despesa/editar/{{ f[0] }}">Editar</a>
-						<form method="post" action="/despesa/excluir/{{ f[0] }}" onsubmit="return confirm('Excluir essa despesa ?')">
-							<button type="submit">Excluir</button>
-						</form>
+						
 				</tr>
 				{% endfor %}
 
