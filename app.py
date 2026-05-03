@@ -101,6 +101,7 @@ def resumo():
                                lucro = lucro_mensal(ano, mes),
                                mes_atual = mes_atual, # leva a resposta se a previsao dsera sobre o mes atal
                                previsao = previsao["previsao"],
+                               previsao_hoje = previsao_diaria(ano, mes, dia)
                                fator = previsao["fator"],
                                acomulado = previsao["acomulado"])
     return render_template("resumo.html")
