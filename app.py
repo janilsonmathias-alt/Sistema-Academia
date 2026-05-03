@@ -101,9 +101,10 @@ def resumo():
                                lucro = lucro_mensal(ano, mes),
                                mes_atual = mes_atual, # leva a resposta se a previsao dsera sobre o mes atal
                                previsao = previsao["previsao"],
-                               previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day),
                                fator = previsao["fator"],
-                               acomulado = previsao["acomulado"])
+                               acomulado = previsao["acomulado"],
+                               previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day))
+      
     return render_template("resumo.html")
   
 @app.route("/fechamento/editar/<int:id>", methods=["GET", "POST"])
