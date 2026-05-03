@@ -86,8 +86,11 @@ def resumo():
 
         #a preveisao sera feito sobre todos o s meses mas so sera mostrado quanto  o foco do resumo for 
         # o mes atual pq se nao da merda na previsao 
-               
-        fechamentos = listar_fechamentos_mes(ano, mes)
+              
+        dados = listar_fechamentos_mes(ano, mes)
+        fechamentos = dados["lista"]
+        ultimo_dia_da_lista = dados["ultimo_dia"]
+        ultimo_dia_da_lista = (ultimo_dia_da_lista == hoje)
         despesas = listar_despesas_mes(ano, mes)
         previsao = previsao_mes(ano, mes)
         previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day)
@@ -105,6 +108,7 @@ def resumo():
                                 fator = previsao["fator"],
                                 acomulado = previsao["acomulado"],
                                 mes_atual = mes_atual,
+                                 ultimo_dia_da_lista = ultimo_dia_da_lista,
                                 previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day))
       
     return render_template("resumo.html")
