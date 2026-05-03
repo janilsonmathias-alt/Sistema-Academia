@@ -1,5 +1,5 @@
 from datetime import date
-from calculations import previsao_mes, previsao_hoje
+from calculations import previsao_mes, previsao_diaria
 from flask import Flask, render_template, request, redirect
 #from datetime import datetime
 from db import init_db, get_connection
