@@ -91,7 +91,7 @@ def resumo():
         fechamentos = dados["lista"]
         ultimo_dia_da_lista = dados["ultimo_dia_da_lista"]
         faturamento_ultimo_dia_da_lista = dados["faturamento_ultimo_dia_da_lista"]
-        ultimo_dia_da_lista = (ultimo_dia_da_lista == hoje.strftime("%Y, %m, %d"))
+        ultimo_dia_da_lista = (ultimo_dia_da_lista == hoje.strftime("%Y-%m-%d"))
         despesas = listar_despesas_mes(ano, mes)
         previsao = previsao_mes(ano, mes)
         previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day)
