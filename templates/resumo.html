@@ -130,6 +130,11 @@
 			<p>===============================</p>
 			<h3>Resultados</h3>
             <p>Faturamento do mês: R$ {{ "%.2f" | format(faturamento) }}</p>
+            {% if mes_atual %}
+                {% if ultimo_dia_da_lista_e_hj %}
+                    <p>Faturamento do dia: R$ {{ "%.2f" | format(faturamento_hoje) }}
+                {% endif %}
+            {% endif %}
 			<p>Despesas: R$ {{ "%.2f" | format(despesas_total) }}</p>			
             <p>Lucro do mês: R$ {{ "%.2f" | format(lucro) }}</p>
             <p>Frequencia de alunos: {{ frequencia }}</p>
