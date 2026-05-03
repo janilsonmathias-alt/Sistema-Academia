@@ -110,6 +110,7 @@ def resumo():
                                 acomulado = previsao["acomulado"],
                                 mes_atual = mes_atual,
                                 ultimo_dia_da_lista_e_hj = ultimo_dia_da_lista,
+                                faturamento_ultimo_dia_da_lista = faturamento_ultimo_dia_da_lista,
                                 previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day))
       
     return render_template("resumo.html")
