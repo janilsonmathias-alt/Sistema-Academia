@@ -57,7 +57,7 @@
 		</form>
 
 		{% if fechamentos %}
-		<h3>Fechamento do mês</h3>
+		<h3>Fechamentos de {{ mes_em_foco_str }}</h3>
 
 		<div class="fechamentos">
 			<table>
@@ -121,12 +121,12 @@
 		{% endif %}
 		
 		{% if faturamento is defined %}
-			<h3>Resultados {{ mes_em_foco_str }}</h3>
+			<h3>Previsoes</h3>
 			<p>Previsao de Faturamento do mês: R$ {{ "%.2f" | format(previsao) }}</p>
 			<p>Previsao de Lucro: R$ {{ "%.2f" | format(previsao - despesas_total) }}</p>
-			<p>Previsao de Faturamento Hoje: R$ {{ "%.2f" | format(previsao_hoje) }}</p>
-			<p>=================================</p>
-			<p>Faturamento atual: R$ {{ "%.2f" | format(faturamento) }}</p>
+			<p>Previsao de Faturamento do dia: R$ {{ "%.2f" | format(previsao_hoje) }}</p>
+			<p>===============================</p>
+			<p>Faturamento do mês: R$ {{ "%.2f" | format(faturamento) }}</p>
 			<p>Frequencia: {{ frequencia }}</p>
 			<p>Despesas: R$ {{ "%.2f" | format(despesas_total) }}</p>			
             <p>Lucro Atual: R$ {{ "%.2f" | format(lucro) }}</p>
