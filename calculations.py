@@ -177,6 +177,9 @@ def previsao_diaria(ano_atual:int, mes_atual:int, dia:int) -> float:
                 FROM fechamentos_diarios
                 WHERE SUBSTRING(data, 1, 7) < %s  
                     AND CAST(SUBSTRING(data, 9, 2) as INTEGER) = %s
+                    AND data IS NOT NULL
+                    AND data <> ''
+                    AND LENGHTH(data) >= 10 
                 GROUP BY mes                    
                 ) t
         """, (mes_atual_str, dia) )  #mes_atual_str = prefixo
