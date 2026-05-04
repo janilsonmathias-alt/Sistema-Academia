@@ -43,26 +43,37 @@ def fechamento():
             """,(data, faturamento, frequencia, observacao))
             conn.commit()
             
+            #vai copiar despesas fixa de mes anteriroe
+            #caso nao tenha cadastro de despesa
+            #vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
             prefixo = request.form["data"]
             prefixo = prefixo[:7]
 
             cur.execute("""
                 SELECT COUNT(*) 
                 FROM despesas
-                WHERE data LIKE %s
-            """, (prefixo + %))
+                WHERE data::text LIKE %s
+            """, (prefixo + '%',))
             
-            despesa_virgem = cur.fetchone()
+            despesa_virgem = cur.fetchone()[0]
+            if (int(data[0:4]) == date.today().year and
+                int(data[5:7]) == date.today().month and 
+                despesa_virgem == 0):
+                    mes_anterior = int(prefixo[5:7]) - 1
+                    if mes_anterior < 1:
+                        mes_anterior = 12 
+                    
+                    prefixo = prefixo[:4] + '-' + f"{mes_anterior:02d}"
+                
+            cur.execute("""
+                INSERT INTO despesas(data, tipo, categoria, valor, observacao)
+                SELECT data, tipo, categoria, valor, observacao
+                FROM despesas
+                WHERE data::text LIKE %s
+            """,(prefixo + '%',))
+            conn.commit()
+            #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             
-        if (
-            int(data[0:4]) == date.today().year and
-            int(data[5:7]) == date.today().month and despesa_virgem = ''
-        ):
-          mes_anterior = int(prefixo[5:7) - 1
-            
-          cur.execute("""
-                SELECT
-            """, )
         return redirect("/")
     return render_template("fechamento.html")
 
