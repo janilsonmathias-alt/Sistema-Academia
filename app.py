@@ -42,7 +42,10 @@ def fechamento():
                 VALUES(%s, %s, %s, %s)
             """,(data, faturamento, frequencia, observacao))
             conn.commit()
-            
+        #if (
+            #int(data[0:4]) == date.today().year and
+            #int(data[5:7]) == date.today().month and despesa_virgem
+        #)
         return redirect("/")
     return render_template("fechamento.html")
 
