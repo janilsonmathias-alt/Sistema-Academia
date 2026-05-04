@@ -56,24 +56,23 @@ def fechamento():
             """, (prefixo + '%',))
             
             despesa_virgem = cur.fetchone()[0]
-            if (int(data[0:4]) == date.today().year and
-                int(data[5:7]) == date.today().month and 
-                despesa_virgem == 0):
-                    mes_anterior = int(prefixo[5:7]) - 1
-                    if mes_anterior < 1:
-                        mes_anterior = 12 
-                    
-                    prefixo = prefixo[:4] + '-' + f"{mes_anterior:02d}"
+            if (int(data[0:4]) == date.today().year and int(data[5:7]) == date.today().month and despesa_virgem == 0):
+                mes_anterior = int(prefixo[5:7]) - 1
+                if mes_anterior < 1:
+                    mes_anterior = 12
+                    prefixo = str(int(prefixo[:4]) - 1)
+                prefixo = prefixo[:4] + '-' + f"{mes_anterior:02d}"
                 
-            cur.execute("""
-                INSERT INTO despesas(data, tipo, categoria, valor, observacao)
-                SELECT data, tipo, categoria, valor, observacao
-                FROM despesas
-                WHERE data::text LIKE %s
-            """,(prefixo + '%',))
-            conn.commit()
+                cur.execute("""
+                    INSERT INTO despesas(data, tipo, categoria, valor, observacao)
+                    SELECT (data_trunc('month', %s::date) + (data - data_trunc('month', data)))::date, tipo, categoria, valor, observacao
+                    FROM despesas
+                    WHERE data::text LIKE %s                 
+                """,(data, prefixo + '%', ))
+                conn.commit()
             #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            
+            #WHERE data::text LIKE %s
+            # é semelhante a ->>  if str(data) == %s
         return redirect("/")
     return render_template("fechamento.html")
 
