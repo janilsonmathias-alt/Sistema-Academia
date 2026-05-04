@@ -42,10 +42,27 @@ def fechamento():
                 VALUES(%s, %s, %s, %s)
             """,(data, faturamento, frequencia, observacao))
             conn.commit()
-        #if (
-            #int(data[0:4]) == date.today().year and
-            #int(data[5:7]) == date.today().month and despesa_virgem
-        #)
+            
+            prefixo = request.form["data"]
+            prefixo = prefixo[:7]
+
+            cur.execute("""
+                SELECT COUNT(*) 
+                FROM despesas
+                WHERE data LIKE %s
+            """, (prefixo + %))
+            
+            despesa_virgem = cur.fetchone()
+            
+        if (
+            int(data[0:4]) == date.today().year and
+            int(data[5:7]) == date.today().month and despesa_virgem = ''
+        ):
+          mes_anterior = int(prefixo[5:7) - 1
+            
+          cur.execute("""
+                SELECT
+            """, )
         return redirect("/")
     return render_template("fechamento.html")
 
