@@ -65,7 +65,7 @@ def fechamento():
                 
                 cur.execute("""
                     INSERT INTO despesas(data, tipo, categoria, valor, observacao)
-                    SELECT (date_trunc('month', %s::date) + (data - date_trunc('month', data)))::date, tipo, categoria, valor, observacao
+                    SELECT ((date_trunc('month', %s::date) + (data::date - date_trunc('month', data::date)))::date)::text, tipo, categoria, valor, observacao
                     FROM despesas
                     WHERE data::text LIKE %s                 
                 """,(data, prefixo + '%', ))
