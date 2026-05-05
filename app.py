@@ -27,8 +27,19 @@ def home():
 
 
 #@app.route("/aluno")
-#def aluno():
-    
+#def alunos():
+
+#@app.route("/aluno/novo")
+#def alunos_novo():
+
+#@app.route("/aluno/editar")
+#def alunos_editar():
+
+#@app.route("/aluno/excluir")
+#def aluno_excluir():
+
+
+
   
 @app.route("/fechamento", methods=["GET", "POST"])
 def fechamento():
