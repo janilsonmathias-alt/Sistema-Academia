@@ -30,6 +30,17 @@ def init_db():
                observacao TEXT
             )
         """)
+
+        cur.execute("""
+            CREAT TABLE IF NOT EXISTS alunos(
+               id SERIAL PRIMARY KEY,
+               nome TEXT NOT NULL,
+               telefone TEXT NOT NULL,
+               plano TEXT, 
+               data_da_Matricula TEXT,
+               esta_ativo BOOLEAN
+            )
+        """)
         conn.commit()
          
 
