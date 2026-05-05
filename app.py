@@ -26,17 +26,17 @@ def home():
     return render_template("home.html")
 
 
-#@app.route("/aluno")
-#def alunos():
+@app.route("/alunos")
+def alunos():
 
-#@app.route("/aluno/novo")
-#def alunos_novo():
+@app.route("/alunos/novo")
+def aluno_novo():
 
-#@app.route("/aluno/editar")
-#def alunos_editar():
+app.route("/alunos/editar/<int:id>")
+def aluno_editar():
 
-#@app.route("/aluno/excluir")
-#def aluno_excluir():
+@app.route("/alunos/excluir/<int:id>")
+def aluno_excluir():
 
 
 
