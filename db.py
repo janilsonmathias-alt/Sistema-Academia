@@ -32,12 +32,12 @@ def init_db():
         """)
 
         cur.execute("""
-            CREAT TABLE IF NOT EXISTS alunos(
+            CREATE TABLE IF NOT EXISTS alunos(
                id SERIAL PRIMARY KEY,
                nome TEXT NOT NULL,
                telefone TEXT NOT NULL,
                plano TEXT, 
-               data_da_Matricula TEXT,
+               data_da_matricula TEXT,
                esta_ativo BOOLEAN
             )
         """)
