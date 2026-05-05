@@ -26,6 +26,10 @@ def home():
     return render_template("home.html")
 
 
+#@app.route("/aluno")
+#def aluno():
+    
+  
 @app.route("/fechamento", methods=["GET", "POST"])
 def fechamento():
     if request.method == "POST":
