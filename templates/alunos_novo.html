@@ -1,14 +1,28 @@
 <html>
+    <head>
+        <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
 
+        <style>
+            html {
+                font-size: 22px;
+            }
+            body {
+                margin: 0;
+                padding: 15px;
+                font-size: 1rem;
+                line-height: 1;
+            }
+        </style>
+    </head>
 
     <body>
         <h1>Cadastro de Aluno</h1>
 
         <form method = "POST" action = "{{ form_action if form_action else '/' }}" >
             Nome: <input type = "text" name = "nome" value = "{{ alunos[1] if alunos else '' }}"><br><br>
-            Telefone: <input type = "text" name = "telefone" value = {{ alunos[2] if alunos else '' }}"><br><br>
-            Plano: <input type = "text" name = "plano" value = {{ alunos[3] if alunos else '' }}"><br><br>
-            Ativo ? <input type = "boolean" name = "esta_ativo" value = {{ alunos[4] if alunos else '' }}"><br><br>
+            Telefone: <input type = "text" name = "telefone" value = "{{ alunos[2] if alunos else '' }}"><br><br>
+            Plano: <input type = "text" name = "plano" value = "{{ alunos[3] if alunos else '' }}"><br><br>
+            Ativo ? <input type = "boolean" name = "esta_ativo" value = "{{ alunos[4] if alunos else '' }}"><br><br>
 
             <button type = "submit">Salvar</button>
             <a href = "/">Voltar ao menu</a>
