@@ -22,8 +22,8 @@ init_db()
 #    input("\nPressione enter para continuar...")    
 
 @app.route("/")
-def home():
-    return render_template("home.html")
+def financeiro():
+    return render_template("financeiro.html")
 
 
 #@app.route("/alunos")
