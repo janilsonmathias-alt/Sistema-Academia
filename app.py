@@ -35,7 +35,7 @@ def alunos():
     return render_template("alunos.html")
     
 
-@app.route("/alunos/novo", methods = ["GET", "POST"] )
+@app.route("/alunos_novo", methods = ["GET", "POST"] )
 def alunos_novo():
   if request.method == "POST":
     #id = request.form[""]
