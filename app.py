@@ -45,7 +45,7 @@ def alunos_novo():
     data_da_matricula = date.today().strftime("%Y-%m-%d")
     esta_ativo = request.form["esta_ativo"]
 
-    with get_connection as conn:
+    with get_connection() as conn:
       cur = conn.cursor()
       cur.execute("""
           INSERT INTO alunos( nome, telefone, plano, data_da_matricula, esta_ativo)
