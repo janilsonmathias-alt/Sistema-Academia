@@ -16,4 +16,10 @@ class Despesa:
     valor: float
     observacao: str = ""
 
+class AlunoNovo:
+    nome: str
+    telefone: str
+    plano: str
+    esta_ativo: boolean
+
     
