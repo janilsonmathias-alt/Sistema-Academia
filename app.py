@@ -30,8 +30,9 @@ def financeiro():
     return render_template("financeiro.html")
 
 
-#@app.route("/alunos")
-#def alunos():
+@app.route("/alunos")
+def alunos():
+    return render_template("alunos.html")
 
 
 @app.route("/alunos/novo")
