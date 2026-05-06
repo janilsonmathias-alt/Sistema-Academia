@@ -18,7 +18,7 @@
     <body>
         <h1>Cadastro de Aluno</h1>
 
-        <form method = "POST" action = "{{ form_action if form_action else '/alunos/novo' }}" >
+        <form method = "post" action = "{{ form_action if form_action else '/' }}" >
             Nome: <input type = "text" name = "nome" value = "{{ alunos[1] if alunos else '' }}"><br><br>
             Telefone: <input type = "text" name = "telefone" value = "{{ alunos[2] if alunos else '' }}"><br><br>
             Plano: <input type = "text" name = "plano" value = "{{ alunos[3] if alunos else '' }}"><br><br>
