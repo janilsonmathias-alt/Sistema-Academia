@@ -3,6 +3,11 @@
 
     <body>
         <h1>Cadastro de Aluno</h1>
+
+        <form method = "POST" action = "{{ form_action if form_action else '/' }}" >
+            Nome: <input type = "text" name = "nome" value = "{{ alunos[1] }}"><br><br>
+
+        </form>
     </body>
 
 </html>
