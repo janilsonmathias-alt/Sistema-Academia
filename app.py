@@ -33,6 +33,8 @@ def financeiro():
 @app.route("/alunos")
 def alunos():
     return render_template("alunos.html")
+    
+
 
 
 @app.route("/alunos/novo")
