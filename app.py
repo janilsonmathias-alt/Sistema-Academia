@@ -42,14 +42,15 @@ def alunos_novo():
     nome = request.form["nome"]
     telefone = request.form["telefone"]
     plano = request.form["plano"]
+    data_da_matricula = date.today().strftime("%Y-%m-%d")
     esta_ativo = request.form["esta_ativo"]
 
     with get_connection as conn:
       cur = conn.cursor()
       cur.execute("""
-          INSERT INTO alunos( nome, telefone, plano, esta_ativo)
-          VALUES(%s, %s, %s, %s)
-      """,(nome, telefone, plano, esta_ativo))
+          INSERT INTO alunos( nome, telefone, plano, data_da_matricula, esta_ativo)
+          VALUES(%s, %s, %s, %s, %s)
+      """,(nome, telefone, plano, data_da_matricula, esta_ativo))
       conn.commit()
     return redirect("/financeiro")
   return render_template("alunos_novo.html")
