@@ -29,20 +29,31 @@ def home():
 #@app.route("/alunos")
 #def alunos():
 
-#@app.route("/alunos/novo")
-#def aluno_novo():
+
+@app.route("/alunos/novo")
+def alunos_novo():
   if request.method == "POST":
-    id = request.form[""]
+    #id = request.form[""]
     nome = request.form["nome"]
     telefone = request.form["telefone"]
-    plano = request.form["planoiiuuu"]
+    plano = request.form["plano"]
     esta_ativo = request.form["esta_ativo"]
 
+    with get_connection as conn:
+      cur = conn.cursor()
+      cur.execute("""
+          INSERT INTO alunos( nome, telefone, plano, esta_ativo)
+          VALUES(%s, %s, %s, %s)
+      """,(nome, telefone, plano, esta_ativo))
+      conn.commit()
+    return redirect("/")
+  return render_template("alunos_novo.html")
+    
 #idapp.route("/alunos/editar/<int:id>")
-#def aluno_editar():
+#def alunos_editar():
 
 #@app.route("/alunos/excluir/<int:id>")
-#def aluno_excluir():
+#def alunos_excluir():
 
 
 
