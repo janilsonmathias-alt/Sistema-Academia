@@ -31,8 +31,14 @@ def home():
 
 #@app.route("/alunos/novo")
 #def aluno_novo():
+  if request.method == "POST":
+    id = request.form[""]
+    nome = request.form["nome"]
+    telefone = request.form["telefone"]
+    plano = request.form["planoiiuuu"]
+    esta_ativo = request.form["esta_ativo"]
 
-#app.route("/alunos/editar/<int:id>")
+#idapp.route("/alunos/editar/<int:id>")
 #def aluno_editar():
 
 #@app.route("/alunos/excluir/<int:id>")
