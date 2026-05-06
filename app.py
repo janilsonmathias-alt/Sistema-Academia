@@ -52,7 +52,7 @@ def alunos_novo():
           VALUES(%s, %s, %s, %s, %s)
       """,(nome, telefone, plano, data_da_matricula, esta_ativo))
       conn.commit()
-    return redirect("/financeiro")
+    return redirect("/alunos")
   return render_template("alunos_novo.html")
     
 #idapp.route("/alunos/editar/<int:id>")
