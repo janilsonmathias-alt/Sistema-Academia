@@ -22,6 +22,10 @@ init_db()
 #    input("\nPressione enter para continuar...")    
 
 @app.route("/")
+def home():
+    return render_template("home.html")
+
+@app.route("/financeiro")
 def financeiro():
     return render_template("financeiro.html")
 
@@ -46,7 +50,7 @@ def alunos_novo():
           VALUES(%s, %s, %s, %s)
       """,(nome, telefone, plano, esta_ativo))
       conn.commit()
-    return redirect("/")
+    return redirect("/financeiro")
   return render_template("alunos_novo.html")
     
 #idapp.route("/alunos/editar/<int:id>")
@@ -105,7 +109,7 @@ def fechamento():
             #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             #WHERE data::text LIKE %s
             # é semelhante a ->>  if str(data) == %s
-        return redirect("/")
+        return redirect("/financeiro")
     return render_template("fechamento.html")
 
 
@@ -125,7 +129,7 @@ def despesa():
                 VALUES (%s, %s, %s, %s, %s)
             """,(data, tipo, categoria, valor, observacao))
             conn.commit()
-        return redirect("/")
+        return redirect("/financeiro")
     return render_template("despesa.html")
         
 
