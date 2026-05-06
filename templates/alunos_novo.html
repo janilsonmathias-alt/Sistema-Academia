@@ -18,11 +18,11 @@
     <body>
         <h1>Cadastro de Aluno</h1>
 
-        <form method = "post" action = "{{ form_action if form_action else '/' }}" >
+        <form method = "post" action = "{{ form_action if form_action else '/alunos/novo' }}" >
             Nome: <input type = "text" name = "nome" value = "{{ alunos[1] if alunos else '' }}"><br><br>
             Telefone: <input type = "text" name = "telefone" value = "{{ alunos[2] if alunos else '' }}"><br><br>
             Plano: <input type = "text" name = "plano" value = "{{ alunos[3] if alunos else '' }}"><br><br>
-            Ativo ? <input type = "boolean" name = "esta_ativo" value = "{{ alunos[4] if alunos else '' }}"><br><br>
+            Ativo ? <input type = "checkbox" name = "esta_ativo" value = "{{ alunos[4] if alunos else false }}"><br><br>
 
             <button type = "submit">Salvar</button>
             <a href = "/">Voltar ao menu</a>
