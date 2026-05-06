@@ -43,7 +43,7 @@ def alunos_novo():
     telefone = request.form["telefone"]
     plano = request.form["plano"]
     data_da_matricula = date.today().strftime("%Y-%m-%d")
-    esta_ativo = request.form["esta_ativo"]
+    esta_ativo = request.form.get["esta_ativo"]
 
     with get_connection() as conn:
       cur = conn.cursor()
