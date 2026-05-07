@@ -52,9 +52,8 @@ def init_db():
                pg_status BOOLEAN
             )
         """)
-     
 
-       conn.commit()
+        conn.commit()
          
 
       
