@@ -11,7 +11,7 @@ from calculations import(
                     lucro_mensal,
                     listar_fechamentos_mes,
                     listar_despesas_mes,
-                    lista_de_alunos_cadastrados)
+                    listar_alunos_cadastrados)
 #import os
 
 app = Flask(__name__)
@@ -188,7 +188,7 @@ def resumo():
 
 @app.route("/alunos/listar_alunos_cadastrados/", methods=["GET"])
 def listar_alunos_cadastrados():
-  lista_de_alunos_cadastrados = lista_de_alunos_cadastrados() 
+  lista_de_alunos_cadastrados = listar_alunos_cadastrados() 
   return render.template("lista_de_alunos_cadastrados.html")
 
 
