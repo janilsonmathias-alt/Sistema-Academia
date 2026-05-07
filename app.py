@@ -11,7 +11,7 @@ from calculations import(
                     lucro_mensal,
                     listar_fechamentos_mes,
                     listar_despesas_mes,
-                    listar_alunos_cadastrados)
+                    lista_de_alunos_cadastrados)
 #import os
 
 app = Flask(__name__)
