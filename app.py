@@ -188,7 +188,7 @@ def resumo():
 
 @app.route("/alunos/listar_alunos_cadastrados/", methods=["GET"])
 def listar_alunos_cadastrados():
-  lista_de_alunos_castrados = lista_de_alunos_castrados() 
+  lista_de_alunos_cadastrados = lista_de_alunos_cadastrados() 
   return render.template("lista_de_alunos_cadastrados.html")
 
 
