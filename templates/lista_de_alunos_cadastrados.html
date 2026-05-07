@@ -4,7 +4,7 @@
   <body>
     <h1>Lista de alunos cadastrados</h1><br><br>
 
-    {% if lista_de_alunos_cadastrados %}
+    
     <table>
       <tr>
         <th>Id</th>
@@ -14,7 +14,7 @@
         <th>Data de Matricula</th>
         <th>Ativo ? </th>        
       </tr>      
-
+      {% if lista_de_alunos_cadastrados %}
       {% for lista in lista_de_alunos_cadastrados %}
       <tr>
         <td>{{ lista[0] }}</td>
