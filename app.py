@@ -1,15 +1,17 @@
 from datetime import date
-from calculations import previsao_mes, previsao_diaria
 from flask import Flask, render_template, request, redirect
 #from datetime import datetime
 from db import init_db, get_connection
 from calculations import(
+                    previsao_mes,
+                    previsao_diaria,
                     total_faturamento_mes,
                     total_frequencia_mes,
                     total_despesas_mes,
                     lucro_mensal,
                     listar_fechamentos_mes,
-                    listar_despesas_mes)
+                    listar_despesas_mes,
+                    listar_alunos_cadastrados)
 #import os
 
 app = Flask(__name__)
@@ -183,6 +185,13 @@ def resumo():
       
     return render_template("resumo.html")
   
+
+@app.route("/alunos/listar_alunos_cadastrados/", methods=["GET"])
+def listar_alunos_cadastrados():
+  lista_de_alunos_castrados = lista_de_alunos_castrados() 
+  return render.template("lista_de_alunos_cadastrados.html")
+
+
 @app.route("/fechamento/editar/<int:id>", methods=["GET", "POST"])
 def editar_fechamento(id):
   with get_connection() as conn:
