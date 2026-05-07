@@ -41,7 +41,20 @@ def init_db():
                esta_ativo BOOLEAN
             )
         """)
-        conn.commit()
+
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS pagamentos_de_mensalidade(
+               id SERIAL PRIMARY KEY,
+               aluno_id NUMERIC,
+               valor REAL,
+               data_pagamento TEXT,
+               mes_referencia TEXT,
+               pg_status BOOLEAN
+            )
+        """)
+     
+
+       conn.commit()
          
 
-
+      
