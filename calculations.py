@@ -85,7 +85,7 @@ def listar_despesas_mes(ano: int, mes: int):
         return resultado
 
 
-def listar_alunos():
+def listar_alunos_cadastrados():
     with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
