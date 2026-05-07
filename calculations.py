@@ -84,6 +84,18 @@ def listar_despesas_mes(ano: int, mes: int):
         print(resultado)
         return resultado
 
+
+def listar_alunos():
+    with get_connection() as conn:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT * FROM alunos
+            ORDER BY id
+        """)
+        lista_de_alunos_cadastrados = cur.fetchall()        
+    return lista_de_alunos_cadastrados
+
+
 def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
     prefixo = f"{ano:04d}-{mes:02d}"
 
