@@ -189,7 +189,7 @@ def resumo():
 @app.route("/alunos/listar_alunos_cadastrados/", methods=["GET"])
 def listar_alunos():
   lista_de_alunos_cadastrados = listar_alunos_cadastrados() 
-  return render.template("lista_de_alunos_cadastrados.html")
+  return render_template("lista_de_alunos_cadastrados.html")
 
 
 @app.route("/fechamento/editar/<int:id>", methods=["GET", "POST"])
