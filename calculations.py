@@ -109,7 +109,29 @@ def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
         """, (prefixo + "%", dia))
         return float(cur.fetchone()[0])
 
+def comparativo_corte_atual_entre_meses(dia: int):
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT SUBSTRING(data, 1, 7) as mes
+        COALESCE(SUM(fechamento), 0) as acomulado
+        FROM fechamebntos_diarios
+        WHERE CAS(SUBSTRING(data, 9, 2) AS INTEGER) <= %s
+        GROUP BY mes
+        ORDER BY mes
+    """, (dia, ))
 
+    resultado = cur.fetchall()
+
+    lista_resultado_dos_meses = []
+    for x in resultado:
+        lista_resultado_dos_meses.append({
+            "mes": x[0],
+            "valor": float(x[1])
+        })
+    soma = 0
+    quantidade = 0
+    
+    
 def ultimo_dia_do_mes(ano: int, mes: int) -> int:
     return calendar.monthrange(ano, mes)[1]
 
