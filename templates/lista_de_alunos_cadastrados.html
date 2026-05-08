@@ -1,8 +1,8 @@
 <html>
   
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+
     <style>
       html {
         font-size: 15px;
@@ -23,8 +23,7 @@
       .table-container {
         width: 100%;
         overflow-x: auto;
-      }
-      
+      }      
     </style>
   </head>
 
@@ -33,28 +32,31 @@
     <h1>Lista de alunos cadastrados</h1><br><br>
 
     {% if lista %}
-    <table>
-      <tr>
-        <th>Id</th>
-        <th>Nome</th>
-        <th>Telefone</th>
-        <th>Plano</th>
-        <th>Data Matricula</th>
-        <th>Ativo ? </th>        
-      </tr>      
-      
-      {% for lista in lista %}
-      <tr>
-        <td>{{ lista[0] }}</td>
-        <td>{{ lista[1] }}</td>
-        <td>{{ lista[2] }}</td>
-        <td>{{ lista[3] }}</td>
-        <td>{{ lista[4] }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-    {% endif %}
+    <div class="table-container>
+      <table>
+        <tr>
+          <th>Id</th>
+          <th>Nome</th>
+          <th>Telefone</th>
+          <th>Plano</th>
+          <th>Data Matricula</th>
+          <th>Ativo ? </th>        
+        </tr>      
+        
+        {% for lista in lista %}
+        <tr>
+          <td>{{ lista[0] }}</td>
+          <td>{{ lista[1] }}</td>
+          <td>{{ lista[2] }}</td>
+          <td>{{ lista[3] }}</td>
+          <td>{{ lista[4] }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}      
+    </div>
     <br><br>
+      
     <a href="/">Voltar ao Inicio</a><br><br>
   </body>
 
