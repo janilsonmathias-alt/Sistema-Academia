@@ -130,6 +130,7 @@ def comparativo_corte_atual_entre_meses(dia: int):
         })
     soma = 0
     quantidade = 0
+    return resultado
     
     
 def ultimo_dia_do_mes(ano: int, mes: int) -> int:
