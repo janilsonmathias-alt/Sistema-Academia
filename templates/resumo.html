@@ -54,7 +54,23 @@
 			Mes: <input type="number" name="mes"><br><br>
 			<button type="submit">Buscar</button>
 		</form>
-
+        
+        {% if resultado %}
+        <table>
+            <tr>
+                <th>Mes</th>
+                <th>Faturamento</th>
+            </tr>
+            
+            {% for lista in resultado
+            <tr>
+                <td>{{ "lista[0]" }}</td>
+                <td>{{ "lista[1]" }}</td>
+            </tr>
+            
+        </table>
+        {% endif %}
+        
 		{% if fechamentos %}
 		<h3>Fechamentos de {{ mes_em_foco_str }}</h3>
 
