@@ -120,7 +120,7 @@ def comparativo_corte_atual_entre_meses(data: str) -> dict:
             FROM fechamentos_diarios
             WHERE CAST(SUBSTRING(data, 9, 2) AS INTEGER) <= %s
             GROUP BY SUBSTRING(data, 1, 7)
-            GROUP BY mes
+            ORDER BY mes
         """, (dia,))
         
         dados = cur.fetchall()
