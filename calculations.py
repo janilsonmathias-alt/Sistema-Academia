@@ -114,7 +114,7 @@ def comparativo_corte_atual_entre_meses(dia: int):
         cur = conn.cursor()
         cur.execute("""
             SELECT SUBSTRING(data, 1, 7) as mes
-            COALESCE(SUM(fechamento), 0) as acomulado
+            COALESCE(SUM(faturamento), 0) as acomulado
             FROM fechamentos_diarios
             WHERE CAS(SUBSTRING(data, 9, 2) AS INTEGER) <= %s
             GROUP BY mes
