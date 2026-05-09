@@ -127,8 +127,11 @@ def comparativo_corte_atual_entre_meses(dia: int) -> dict:
         lista = []
         
         soma_total = 0
-        lista_resultado_entre_meses_corte_atual = dados
-        return 
+        lista_resultado_dos_meses_corte_atual = dados
+        return lista_resultado_dos_meses_corte_atual {
+            "mes": 
+        
+            }
     
     
 def ultimo_dia_do_mes(ano: int, mes: int) -> int:
