@@ -71,7 +71,7 @@ def quadro_mensal():
         if mes not in meses:
             meses.append(mes)
         quadro[dia][mes] = {
-            "faturamento": float(faturamento)
+            "faturamento": float(faturamento),
             "frequencia": int(frequencia)
         }
     
@@ -82,26 +82,6 @@ def quadro_mensal():
     }
     
     
-def listar_faturamento_diario_todos_os_meses() -> list:
-    with get_connection() as conn:
-        cur = conn.cursor()
-        cur.execute("""
-            SELECT * 
-            FROM fechamentos_diarios
-            ORDER BY data
-        """)
-        
-        resultado = cur.fetchall()
-        lista_fat_td_meses = []
-    
-        for linha in resultado:
-            lista_fat_td_meses.append({
-                "data": linha[1],
-                "faturamento": linha[2],
-                "frequencia": linha[3]
-            })
-        
-    return  lista_fat_td_meses
 
 
 def listar_fechamentos_mes(ano: int, mes: int):
