@@ -1,5 +1,5 @@
 import calendar
-from collection import defaultdict
+from collections import defaultdict
 from db import get_connection
 from datetime import datetime
 
