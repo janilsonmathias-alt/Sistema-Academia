@@ -45,7 +45,7 @@ def lucro_mensal(ano: int, mes: int) -> float:
 
 
 def listar_faturamento_diario_todos_os_meses() -> list:
-    with get_conection() as conn:
+    with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
             SELECT * 
