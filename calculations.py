@@ -116,7 +116,7 @@ def comparativo_corte_atual_entre_meses(dia: int):
             SELECT SUBSTRING(data, 1, 7) as mes,
             COALESCE(SUM(faturamento), 0) as acomulado
             FROM fechamentos_diarios
-            WHERE CAS(SUBSTRING(data, 9, 2) AS INTEGER) <= %s
+            WHERE CAST(SUBSTRING(data, 9, 2) AS INTEGER) <= %s
             GROUP BY mes
             ORDER BY mes
         """, (dia, ))
