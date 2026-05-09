@@ -55,19 +55,21 @@
 			<button type="submit">Buscar</button>
 		</form>
         
-        {% if lista_fat_td_meses %}
+        
         <table>
+            
+            {% for dia in dias %}
             <tr>
-                <th></th>
-            </tr>
-            {% for lista in lista_fat_td_meses %}
-            <tr>
-                <td>{{ lista.data }}</td><br>
-                <td>{{ lista.faturamento }}</td><br>
+                <td>{{ dia }}</td>
+                {% for mes in meses %}
+                    <td>{{ quadro[dia][mes].faturamento if mes in quadro[dia] else '' }}</td><br>
+                    <td>{{ quadro[dia][mes].frequencia if mes in quadro[dia] else '' }}</td><br>
+                {% endfor %}
             </tr>
             {% endfor %}
+            
         </table>
-        {% endif %}
+        
         
         {% if lista_resultado_dos_meses_corte_atual %}
         <h3>Comparativo entre meses periodo atual</h3>
