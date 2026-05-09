@@ -115,84 +115,6 @@ def comparativo_corte_atual_entre_meses(data: str) -> dict:
     with get_connection() as conn:
         cur = conn.cursor()
         
-        # ==========================================================
-
-        # DEBUG: mostra cada lançamento que está entrando na soma
-
-        # ==========================================================
-
-        print("\n" + "=" * 70)
-
-        print(f"DEBUG DO COMPARATIVO, DIA DE CORTE = {dia}")
-
-        print("=" * 70)
-
-        cur.execute("""
-
-            SELECT
-
-                SUBSTRING(data, 1, 7) AS mes,
-
-                data,
-
-                faturamento
-
-            FROM fechamentos_diarios
-
-            WHERE CAST(SUBSTRING(data, 9, 2) AS INTEGER) <= %s
-
-            ORDER BY mes, data
-
-        """, (dia,))
-
-        registros = cur.fetchall()
-
-        mes_atual = None
-
-        soma_mes = 0.0
-
-        for registro in registros:
-
-            mes = registro[0]
-
-            data_registro = registro[1]
-
-            faturamento = float(registro[2])
-
-            # Quando muda de mês, imprime o total do mês anterior
-
-            if mes_atual is not None and mes != mes_atual:
-
-                print(f"TOTAL DO MÊS {mes_atual}: {soma_mes:.2f}")
-
-                print("-" * 70)
-
-                soma_mes = 0.0
-
-            # Início de um novo mês
-
-            if mes != mes_atual:
-
-                mes_atual = mes
-
-                print(f"\nMÊS: {mes}")
-
-            # Mostra cada registro utilizado na soma
-
-            print(f"  {data_registro} -> {faturamento:.2f}")
-
-            # Soma manual para conferência
-
-            soma_mes += faturamento
-
-        # Imprime o total do último mês
-
-        if mes_atual is not None:
-
-            print(f"TOTAL DO MÊS {mes_atual}: {soma_mes:.2f}")
-
-        print("=" * 70 + "\n")
-        
         cur.execute("""
             SELECT SUBSTRING(data, 1, 7) AS mes,
             COALESCE(SUM(faturamento),0) AS acomulado
@@ -206,7 +128,7 @@ def comparativo_corte_atual_entre_meses(data: str) -> dict:
         """, (dia,))
         
         dados = cur.fetchall()
-    
+        print(dados)
         lista_resultado_dos_meses_corte_atual = dados
         return lista_resultado_dos_meses_corte_atual
     
