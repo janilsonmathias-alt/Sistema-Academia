@@ -62,12 +62,12 @@
                 <th>Faturamento</th>
             </tr>
             
-            {% for lista in resultado
+            {% for lista in resultado %}
             <tr>
                 <td>{{ "lista[0]" }}</td>
                 <td>{{ "lista[1]" }}</td>
             </tr>
-            
+            {% endfor %}
         </table>
         {% endif %}
         
