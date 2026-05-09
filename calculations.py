@@ -1,4 +1,5 @@
 import calendar
+from collection import defaultdict
 from db import get_connection
 from datetime import datetime
 
@@ -44,6 +45,43 @@ def lucro_mensal(ano: int, mes: int) -> float:
     return faturamento - despesas
 
 
+def quadro_mensal():
+    with get_connection() as conn:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT
+                SUBSTRING(data, 1, 7) AS mes,
+                CAST(SUBSTRING(data, 9, 2) AS INTEGER) AS dia,
+                COALESCE(SUM(faturamento), 0) AS faturamento,
+                COALESCE(SUM(frequencia_alunos), 0) AS frequencia
+            FROM fechamentos_diarios
+            WHERE data IS NOT NULL
+                AND data <> ''
+                AND LENGTH(data) >= 10
+            GROUP BY
+                SUBSTRING(data, 1, 7),
+                CAST(SUBSTRING(data, 9, 2) AS INTEGER)
+            ORDER BY mes, dia
+        """)
+        linhas = cur.fetchall()
+    quadro = defaultdict(dict)
+    meses = []
+    
+    for mes, dia, faturamento, frequencia in linhas:
+        if mes not in meses:
+            meses.append(mes)
+        quadro[dia][mes] = {
+            "faturamento": float(faturamento)
+            "frequencia": int(frequencia)
+        }
+    
+    return {
+        "meses": meses,
+        "dias": range(1, 32),
+        "quadro": quadro
+    }
+    
+    
 def listar_faturamento_diario_todos_os_meses() -> list:
     with get_connection() as conn:
         cur = conn.cursor()
