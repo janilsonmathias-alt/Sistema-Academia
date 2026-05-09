@@ -169,9 +169,9 @@ def resumo():
         mes_atual = ( ano == hoje.year and mes == hoje.month )    # verifica se resumo sera sobre o mes atual   
         mes_em_foco_str = lista_meses[ mes - 1]
         comparativo_corte_atual = comparativo_corte_atual_entre_meses(data_str)
-        quadro_mensal = quadro_mensal()
+        dados_quadro_mensal = quadro_mensal()
         return render_template("resumo.html",
-                                quadro_mensal = quadro_mensal,
+                                quadro_mensal = dados_quadro_mensal,
                                 lista_resultado_dos_meses_corte_atual = comparativo_corte_atual,
                                 fechamentos = fechamentos,
                                 despesas = despesas,
