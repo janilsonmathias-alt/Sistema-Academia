@@ -110,6 +110,7 @@ def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
         return float(cur.fetchone()[0])
 
 def comparativo_corte_atual_entre_meses(dia: int):
+    with get_connection() as conn:
     cur = conn.cursor()
     cur.execute("""
         SELECT SUBSTRING(data, 1, 7) as mes
