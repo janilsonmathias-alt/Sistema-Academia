@@ -37,10 +37,34 @@ def total_frequencia_mes(ano: int, mes: int) -> int:
         """, (prefixo + "%",))
         return int(cur.fetchone()[0])
 
+
 def lucro_mensal(ano: int, mes: int) -> float:
     faturamento = total_faturamento_mes(ano, mes)
     despesas = total_despesas_mes(ano, mes)
     return faturamento - despesas
+
+
+def listar_faturamento_diario_todos_os_meses() -> dict
+    with get_conection() as conn:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT * 
+            FROM fechamentos_diarios
+            ORDER BY data
+        """)
+        
+        resultado = cur.fetchall()
+        lista_fat_td_meses = []
+    
+        for linha in resultado:
+            lista_fat_td_meses.append{
+                "data": resultado[1],
+                "faturamento": resultado[2],
+                "frequencia": resultado[3]
+            }
+        
+    return  lista_fat_td_meses
+
 
 def listar_fechamentos_mes(ano: int, mes: int):
     prefixo = f"{ano:04d}-{mes:02d}"
@@ -64,6 +88,7 @@ def listar_fechamentos_mes(ano: int, mes: int):
             "faturamento_ultimo_dia_da_lista": resultado[-1][2]
         }
         
+        
 def listar_despesas_mes(ano: int, mes: int):
     prefixo = f"{ano:04d}-{mes:02d}"
     print("PREFIXO: ", prefixo)
@@ -76,9 +101,7 @@ def listar_despesas_mes(ano: int, mes: int):
             ORDER BY data
         """, (prefixo + "%", ))
 
-        
         #cur.execute("SELECT * FROM despesas")
-    
         
         resultado = cur.fetchall()
         print(resultado)
@@ -108,6 +131,7 @@ def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
             AND CAST(SUBSTRING(data, 9,2) AS INTEGER) <= %s
         """, (prefixo + "%", dia))
         return float(cur.fetchone()[0])
+
 
 def comparativo_corte_atual_entre_meses(data: str) -> dict:
     dia = int(data[8:10])
@@ -202,6 +226,7 @@ def previsao_mes(ano:int, mes: int) -> dict:
         "fator": fator_atual,
         "previsao": previsao
     }
+
 
 def previsao_diaria(ano_atual:int, mes_atual:int, dia:int) -> float:
     #prefixo#
