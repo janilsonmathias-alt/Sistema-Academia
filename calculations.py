@@ -127,7 +127,7 @@ def comparativo_corte_atual_entre_meses(dia: int) -> dict:
         lista = []
         
         soma_total = 0
-        lista_comparativa
+        lista_resultado_entre_meses_corte_atual = dados
         return 
     
     
