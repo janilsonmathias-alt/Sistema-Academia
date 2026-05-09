@@ -55,14 +55,14 @@
 			<button type="submit">Buscar</button>
 		</form>
         
-        {% if resultado %}
+        {% if lista_resultado_dos_meses_corte_atual %}
         <table>
             <tr>
                 <th>Mes</th>
                 <th>Faturamento</th>
             </tr>
             
-            {% for lista in resultado %}
+            {% for lista in lista_resultado_dos_meses_corte_atual %}
             <tr>
                 <td>{{ "lista[0]" }}</td>
                 <td>{{ "lista[1]" }}</td>
