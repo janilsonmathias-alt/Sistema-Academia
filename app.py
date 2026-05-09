@@ -12,7 +12,6 @@ from calculations import(
                     listar_fechamentos_mes,
                     listar_despesas_mes,
                     listar_alunos_cadastrados,
-                    listar_faturamento_diario_todos_os_meses,
                     quadro_mensal,
                     comparativo_corte_atual_entre_meses)
 #import os
@@ -158,8 +157,7 @@ def resumo():
         hoje = date.today() #pega a data de hj
         data_str = str(hoje)
         #a preveisao sera feito sobre todos o s meses mas so sera mostrado quanto  o foco do resumo for 
-        # o mes atual pq se nao da merda na previsao 
-        lista_fat_td_meses = listar_faturamento_diario_todos_os_meses()
+        # o mes atual pq se nao da merda na previsao
         dados = listar_fechamentos_mes(ano, mes)
         fechamentos = dados["lista"]
         ultimo_dia_da_lista = dados["ultimo_dia_da_lista"]
@@ -174,7 +172,6 @@ def resumo():
         quadro_mensal = quadro_mensal()
         return render_template("resumo.html",
                                 quadro_mensal = quadro_mensal,
-                                lista_fat_td_meses = lista_fat_td_meses,
                                 lista_resultado_dos_meses_corte_atual = comparativo_corte_atual,
                                 fechamentos = fechamentos,
                                 despesas = despesas,
