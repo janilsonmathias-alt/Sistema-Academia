@@ -157,7 +157,7 @@ def resumo():
         data_str = str(hoje)
         #a preveisao sera feito sobre todos o s meses mas so sera mostrado quanto  o foco do resumo for 
         # o mes atual pq se nao da merda na previsao 
-              
+        lista_fat_td_meses = 
         dados = listar_fechamentos_mes(ano, mes)
         fechamentos = dados["lista"]
         ultimo_dia_da_lista = dados["ultimo_dia_da_lista"]
