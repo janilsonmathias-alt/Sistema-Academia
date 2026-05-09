@@ -44,7 +44,7 @@ def lucro_mensal(ano: int, mes: int) -> float:
     return faturamento - despesas
 
 
-def listar_faturamento_diario_todos_os_meses() -> dict
+def listar_faturamento_diario_todos_os_meses() -> list:
     with get_conection() as conn:
         cur = conn.cursor()
         cur.execute("""
