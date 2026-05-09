@@ -118,7 +118,10 @@ def comparativo_corte_atual_entre_meses(data: str) -> dict:
             SELECT SUBSTRING(data, 1, 7) AS mes,
             COALESCE(SUM(faturamento),0) AS acomulado
             FROM fechamentos_diarios
-            WHERE CAST(SUBSTRING(data, 9, 2) AS INTEGER) <= %s
+            WHERE data IS NOT NULL
+                AND data <> ''
+                AND LENGTH(data) >= 10
+                AND CAST(SUBSTRING(data, 9, 2) AS INTEGER) <= %s
             GROUP BY SUBSTRING(data, 1, 7)
             ORDER BY mes
         """, (dia,))
