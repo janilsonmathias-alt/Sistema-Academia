@@ -64,8 +64,8 @@
             
             {% for lista in lista_resultado_dos_meses_corte_atual %}
             <tr>
-                <td>{{ "lista[0]" }}</td>
-                <td>{{ "lista[1]" }}</td>
+                <td>{{ lista.mes }}</td>
+                <td>{{ "%.2f" | format(lista.valor) }}</td>
             </tr>
             {% endfor %}
         </table>
