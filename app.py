@@ -170,7 +170,7 @@ def resumo():
         mes_em_foco_str = lista_meses[ mes - 1]
         comparativo_corte_atual = comparativo_corte_atual_entre_meses(data)
         return render_template("resumo.html",
-                                comparativo_corte_atual = comparativo_corte_atual,
+                                lista_resultado_dos_meses_corte_atual = comparativo_corte_atual,
                                 fechamentos = fechamentos,
                                 despesas = despesas,
                                 faturamento = total_faturamento_mes(ano, mes),
