@@ -124,14 +124,10 @@ def comparativo_corte_atual_entre_meses(dia: int) -> dict:
         """, (dia,))
         
         dados = cur.fetchall()
-        lista = []
-        
-        soma_total = 0
+    
         lista_resultado_dos_meses_corte_atual = dados
-        return lista_resultado_dos_meses_corte_atual {
-            "mes": 
-        
-            }
+        return lista_resultado_dos_meses_corte_atual
+    
     
     
 def ultimo_dia_do_mes(ano: int, mes: int) -> int:
