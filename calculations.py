@@ -111,19 +111,20 @@ def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
 
 def comparativo_corte_atual_entre_meses(dia: int):
     with get_connection() as conn:
-    cur = conn.cursor()
-    cur.execute("""
-        SELECT SUBSTRING(data, 1, 7) as mes
-        COALESCE(SUM(fechamento), 0) as acomulado
-        FROM fechamebntos_diarios
-        WHERE CAS(SUBSTRING(data, 9, 2) AS INTEGER) <= %s
-        GROUP BY mes
-        ORDER BY mes
-    """, (dia, ))
-
-    resultado = cur.fetchall()
-
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT SUBSTRING(data, 1, 7) as mes
+            COALESCE(SUM(fechamento), 0) as acomulado
+            FROM fechamentos_diarios
+            WHERE CAS(SUBSTRING(data, 9, 2) AS INTEGER) <= %s
+            GROUP BY mes
+            ORDER BY mes
+        """, (dia, ))
+    
+        resultado = cur.fetchall()
+    
     lista_resultado_dos_meses = []
+    
     for x in resultado:
         lista_resultado_dos_meses.append({
             "mes": x[0],
