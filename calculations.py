@@ -109,7 +109,7 @@ def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
         """, (prefixo + "%", dia))
         return float(cur.fetchone()[0])
 
-def comparativo_corte_atual_entre_meses(data: int) -> dict:
+def comparativo_corte_atual_entre_meses(data: str) -> dict:
     dia = int(data[8,10])
     
     with get_connection() as conn:
