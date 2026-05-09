@@ -154,7 +154,7 @@ def resumo():
         mes = int(mes)
 
         hoje = date.today() #pega a data de hj
-        data = hoje
+       
         #a preveisao sera feito sobre todos o s meses mas so sera mostrado quanto  o foco do resumo for 
         # o mes atual pq se nao da merda na previsao 
               
@@ -168,7 +168,7 @@ def resumo():
         previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day)
         mes_atual = ( ano == hoje.year and mes == hoje.month )    # verifica se resumo sera sobre o mes atual   
         mes_em_foco_str = lista_meses[ mes - 1]
-        comparativo_corte_atual = comparativo_corte_atual_entre_meses(data)
+        comparativo_corte_atual = comparativo_corte_atual_entre_meses(hoje.day)
         return render_template("resumo.html",
                                 lista_resultado_dos_meses_corte_atual = comparativo_corte_atual,
                                 fechamentos = fechamentos,
