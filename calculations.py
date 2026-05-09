@@ -57,11 +57,11 @@ def listar_faturamento_diario_todos_os_meses() -> list:
         lista_fat_td_meses = []
     
         for linha in resultado:
-            lista_fat_td_meses.append{
+            lista_fat_td_meses.append({
                 "data": resultado[1],
                 "faturamento": resultado[2],
                 "frequencia": resultado[3]
-            }
+            })
         
     return  lista_fat_td_meses
 
