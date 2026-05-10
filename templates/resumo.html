@@ -24,6 +24,25 @@
 				word-wrap: break-word;
 			}
 			
+            .quadro_sroll {
+                overflow-x: auto;
+                width: 100%;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .quadro_mensal {
+                width: max-content;
+                min-width: 100%;
+                border-collapse: collapse;
+                table-layout: auto;
+            }
+            
+            .quadro_mensal th,
+            .quadro_mensal td {
+                white-space: nowrap;
+                word-wrape: normal;
+            }
+            
 			.fechamentos {
 				th:nth-child(1), td:nth-child(1) {width: 24%;}
 				th:nth-child(2), td:nth-child(2) {width: 27%;}
@@ -55,20 +74,21 @@
 			<button type="submit">Buscar</button>
 		</form>
         
-        
-        <table>
-            
-            {% for dia in dias %}
-            <tr>
-                <td>{{ dia }}</td>
-                {% for mes in meses %}
-                    <td>{{ quadro[dia][mes].faturamento if mes in quadro[dia] else '' }}</td><br>
-                    <td>{{ quadro[dia][mes].frequencia if mes in quadro[dia] else '' }}</td><br>
+        <div class="quadro_scroll">
+            <table class = "quadro_mensal">
+                
+                {% for dia in dias %}
+                <tr>
+                    <td>{{ dia }}</td>
+                    {% for mes in meses %}
+                        <td>{{ quadro[dia][mes].faturamento if mes in quadro[dia] else '' }}</td><br>
+                        <td>{{ quadro[dia][mes].frequencia if mes in quadro[dia] else '' }}</td><br>
+                    {% endfor %}
+                </tr>
                 {% endfor %}
-            </tr>
-            {% endfor %}
-            
-        </table>
+                
+            </table>
+        </div>
         
         
         
