@@ -10,7 +10,6 @@
                 margin: 0;
                 padding: 15px;
                 font-size: 1rem;
-                line-height: 1;
             }  	
 			table {
 				width: 100%;
@@ -93,8 +92,8 @@
                 <tr>
                     <td>{{ dia }}</td>
                     {% for mes in meses %}
-                        <td>R$ {{ "%.2f" | format(quadro[dia][mes].faturamento) if mes in quadro[dia] else '' }}</td><br>
-                        <td>{{ quadro[dia][mes].frequencia if mes in quadro[dia] else '' }}</td><br>
+                        <td>R$ {{ "%.2f" | format(quadro[dia][mes].faturamento) if mes in quadro[dia] else '' }}</td>
+                        <td>{{ quadro[dia][mes].frequencia if mes in quadro[dia] else '' }}</td>
                     {% endfor %}
                 </tr>
                 {% endfor %}
