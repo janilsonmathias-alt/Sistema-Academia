@@ -84,7 +84,7 @@
                 <tr>
                     <th>Dia</th>   
                     {% for mes in meses %}
-                        <th>{{ nome_meses[mes[5,7] | int - 1] }}</th>
+                        <th>{{ nome_meses[mes[5:7] | int - 1] }}</th>
                         <th>Freq.</th>
                     {% endfor %}
                 </tr>
