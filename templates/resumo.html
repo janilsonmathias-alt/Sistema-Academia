@@ -41,6 +41,8 @@
                 white-space: nowrap;
                 word-wrap: normal;
             }
+            
+            .corte_comparativo th,
             .despesas th,
             .fechamentos th,
             .quadro_mensal th{
@@ -52,7 +54,7 @@
                 top: 0;
                 z-index: 1;
             }
-            
+            .corte_comparativo tr:nth-child(even) td,
             .despesas tr:nth-child(even) td,
             .fechamentos tr:nth-child(even) td,
             .quadro_mensal tr:nth-child(even) td{
@@ -123,21 +125,23 @@
         
         {% if lista_resultado_dos_meses_corte_atual %}
         <h3>Comparativo entre meses periodo atual</h3>
-        <table>
-            <tr>
-                <th>Mes</th>
-                <th>Faturamento</th>
-            </tr>
-            
-            {% for lista in lista_resultado_dos_meses_corte_atual %}
-            <tr>
-                <td>{{ lista[0] }}</td>
-                <td>{{ "%.2f" | format(lista[1]) }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+        <div class="corte_comparativo">
+            <table>
+                <tr>
+                    <th>Mes</th>
+                    <th>Faturamento</th>
+                </tr>
+                
+                {% for lista in lista_resultado_dos_meses_corte_atual %}
+                <tr>
+                    <td>{{ lista[0] }}</td>
+                    <td>{{ "%.2f" | format(lista[1]) }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
         {% endif %}
-        
+      
 		{% if fechamentos %}
 		<h3>Fechamentos de {{ mes_em_foco_str }}</h3>
 
