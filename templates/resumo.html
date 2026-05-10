@@ -93,7 +93,7 @@
                 <tr>
                     <td>{{ dia }}</td>
                     {% for mes in meses %}
-                        <td>{{ quadro[dia][mes].faturamento if mes in quadro[dia] else '' }}</td><br>
+                        <td>{{ "%.2f" | format(quadro[dia][mes].faturamento) if mes in quadro[dia] else '' }}</td><br>
                         <td>{{ quadro[dia][mes].frequencia if mes in quadro[dia] else '' }}</td><br>
                     {% endfor %}
                 </tr>
