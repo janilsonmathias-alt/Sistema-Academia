@@ -74,9 +74,21 @@
 			<button type="submit">Buscar</button>
 		</form>
         
+        {% set nome_meses = [
+            'Janeiro','Fevereiro','Março','Abril','Maio','Junho',
+            'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'
+        ] %}
+        
         <div class="quadro_scroll">
             <table class = "quadro_mensal">
-                
+                <tr>
+                    <th>Dia</th>   
+                    {% for mes in meses %}
+                        <th>{{ nome_meses[mes[5,7] | int - 1] }}</th>
+                        <th>Freq.</th>
+                    {% endfor %}
+                </tr>
+                    
                 {% for dia in dias %}
                 <tr>
                     <td>{{ dia }}</td>
