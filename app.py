@@ -127,12 +127,13 @@ def despesa():
         categoria = request.form["categoria"]
         valor = float(request.form["valor"])
         observacao = request.form["observacao"]
-
+        pago = request.form.get("pago") == "on"
+      
         with get_connection() as conn:
             cur = conn.cursor()
             cur.execute("""
-                INSERT INTO despesas (data, tipo, categoria, valor, observacao)
-                VALUES (%s, %s, %s, %s, %s)
+                INSERT INTO despesas (data, tipo, categoria, valor, observacao, pago)
+                VALUES (%s, %s, %s, %s, %s, %s)
             """,(data, tipo, categoria, valor, observacao))
             conn.commit()
         return redirect("/financeiro")
@@ -239,12 +240,13 @@ def editar_despesa(id):
             categoria = request.form["categoria"]
             valor = float(request.form["valor"])
             observacao = request.form["observacao"]
-            
+            pago = request.form.get("pago") == "on"
+          
             cur.execute("""
                 UPDATE despesas
-                SET data = %s, tipo = %s, categoria = %s, valor = %s, observacao = %s
+                SET data = %s, tipo = %s, categoria = %s, valor = %s, observacao = %s, pago = %s
                 WHERE id = %s
-            """, (data, tipo, categoria, valor, observacao, id))
+            """, (data, tipo, categoria, valor, observacao, pago, id))
             conn.commit()
             return redirect("/resumo")
             
