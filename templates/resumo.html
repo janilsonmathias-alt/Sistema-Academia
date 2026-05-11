@@ -209,7 +209,7 @@
 					<td>
 						{{ "%.2f" | format(f[4]) }}
 						<br>
-						<span class = "[% if f[6] %} status-pago [% else %} status-devendo {% endif %}">
+						<span class = "{% if f[6] %} status-pago {% else %} status-devendo {% endif %}">
 							{% if f[6] %} Pago {% else %} Devendo {% endif %}
 						</span>
 					</td>
