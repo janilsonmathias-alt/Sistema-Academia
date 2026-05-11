@@ -251,7 +251,7 @@ def editar_despesa(id):
             return redirect("/resumo")
             
         cur.execute("""
-            SELECT id, data, tipo, categoria, valor, observacao
+            SELECT id, data, tipo, categoria, valor, observacao, pago
             FROM despesas
             WHERE id = %s
         """,(id,))
