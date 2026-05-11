@@ -113,7 +113,7 @@ def listar_despesas_mes(ano: int, mes: int):
     with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
-            SELECT id, data, tipo, categoria, valor, observacao
+            SELECT id, data, tipo, categoria, valor, observacao, pago
             FROM despesas
             WHERE data LIKE %s
             ORDER BY data
