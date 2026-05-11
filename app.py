@@ -134,7 +134,7 @@ def despesa():
             cur.execute("""
                 INSERT INTO despesas (data, tipo, categoria, valor, observacao, pago)
                 VALUES (%s, %s, %s, %s, %s, %s)
-            """,(data, tipo, categoria, valor, observacao))
+            """,(data, tipo, categoria, valor, observacao, pago))
             conn.commit()
         return redirect("/financeiro")
     return render_template("despesa.html")
