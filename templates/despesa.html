@@ -23,7 +23,14 @@
 			Tipo: <input type="text" name="tipo" value="{{ despesa[2] if despesa else '' }}"><br><br>
 			Categoria: <input type="text" name="categoria" value="{{ despesa[3] if despesa else '' }}"><br><br>
 			Valor: <input type="number" step="0.01" name="valor" value="{{ despesa[4] if despesa else '' }}"><br><br>
-			Pago: <input type="checkbox" name="pago" value={{ despesa[6] if despesa else false }}"><br><br>
+			Pago: <
+					  input type="checkbox" 
+					  name="pago" 
+					  {
+					  {% if despesa and despesa[6] %}
+						checked
+					  {% endif %}
+					  }"><br><br>
 			Observação: <input type="text" name="observacao" value="{{ despesa[5] if despesa else '' }}"><br><br>
 		
 			<button type="submit">Salvar</button>
