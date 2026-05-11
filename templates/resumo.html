@@ -80,6 +80,14 @@
 			.acoes form{
 				display: inline;
 			}
+			.status-pago {
+				color: green;
+				font-weight: bold;
+			}
+			.satus-devendo {
+				color: red;
+				font: weight;
+			}
 		</style>
     </head>
     
@@ -198,7 +206,13 @@
                     </td>
 					<td>{{ f[2] }}</td>
 					<td>{{ f[3] }}</td>
-					<td>{{ "%.2f" | format(f[4]) }}</td>
+					<td>
+						{{ "%.2f" | format(f[4]) }}
+						<br>
+						<span class = "[% if f[6] %} status-pago [%else %} status-devendo {% endif %}">
+							{% if f[6] %} Pago {% else %} Devendo {% endif %}
+						</span>
+					</td>
 					<!--<td>{{ f[5] }}</td>-->
 						
 				</tr>
