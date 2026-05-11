@@ -53,6 +53,11 @@ def init_db():
             )
         """)
 
+        cur.execute("""
+           ALTER TABLE despesas
+           ADD COLUMN IF NOT EXISTS pago BOOLEAN NOT NULL DEFAULT FALSE
+        """)
+        
         conn.commit()
          
 
