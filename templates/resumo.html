@@ -83,7 +83,7 @@
 			.status-pago {
 				color: green !important;				
 			}
-			.satus-devendo {
+			.status-devendo {
 				color: red !important;
 			}
 		</style>
@@ -207,7 +207,7 @@
 					<td>
 						{{ "%.2f" | format(f[4]) }}
 						<br>
-						<span style = "color: {% if f[6] %} green {%0 else %} red {% endif %};">
+						<span style = "color: {% if f[6] %} green {% else %} red {% endif %};">
 							{% if f[6] %} Pago {% else %} Devendo {% endif %}
 						</span>
 					</td>
