@@ -23,31 +23,34 @@
 
   <body>
     <h1>Lista de alunos cadastrados</h1><br><br>
-
-    {% if lista %}
-    <div class="table-container">
-      <table>
-        <tr>
-          <th>Id</th>
-          <th>Nome</th>
-          <th>Telefone</th>
-          <th>Plano</th>
-          <th>Data Matricula</th>
-          <th>Ativo ? </th>        
-        </tr>      
-        
-        {% for lista in lista %}
-        <tr>
-          <td>{{ lista[0] }}</td>
-          <td>{{ lista[1] }}</td>
-          <td>{{ lista[2] }}</td>
-          <td>{{ lista[3] }}</td>
-          <td>{{ lista[4] }}</td>
-        </tr>
-        {% endfor %}
-      </table>
-      {% endif %}      
-    </div>
+	<div style="-webkit-overflow-scrolling: toutch;">
+	    
+		{% if lista %}
+	    <div class="table-container">
+	      <table>
+	        <tr>
+	          <th>Id</th>
+	          <th>Nome</th>
+	          <th>Telefone</th>
+	          <th>Plano</th>
+	          <th>Data Matricula</th>
+	          <th>Ativo ? </th>        
+	        </tr>      
+	        
+	        {% for lista in lista %}
+	        <tr>
+	          <td>{{ lista[0] }}</td>
+	          <td>{{ lista[1] }}</td>
+	          <td>{{ lista[2] }}</td>
+	          <td>{{ lista[3] }}</td>
+	          <td>{{ lista[4] }}</td>
+	        </tr>
+	        {% endfor %}
+	      </table>
+	      {% endif %}      
+	    </div>
+		
+	</div>
     <br><br>
       
     <a href="/">Voltar ao Inicio</a><br><br>
