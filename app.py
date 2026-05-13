@@ -1,4 +1,5 @@
 from datetime import date
+from zoneinfo import ZoneInfo
 from flask import Flask, render_template, request, redirect
 #from datetime import datetime
 from db import init_db, get_connection
@@ -15,6 +16,7 @@ from calculations import(
                     quadro_mensal,
                     comparativo_corte_atual_entre_meses)
 #import os
+date = date(ZoneInfo("America/São Paulo"))
 
 app = Flask(__name__)
 init_db()
