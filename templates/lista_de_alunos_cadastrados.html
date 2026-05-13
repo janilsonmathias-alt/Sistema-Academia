@@ -5,28 +5,32 @@
     
     <style>
     
-		html {
-			font-size: 21px;
-		}
-		body {
-			padding: 15px;
-			font-size: 1rem;
-		}
-		table {	
-			width: 100%;
-			border-collapse: collapse;
-			table-layout: auto;
-		}
+							html {
+								font-size: 21px;
+							}
+							body {
+								padding: 15px;
+								font-size: 1rem;
+							}
+							table {	
+								width: 100%;
+								border-collapse: collapse;
+								table-layout: auto;
+							}
+							
+							.table_container {
+									-webkit-overflow-scrolling: touch;
+							}
 		
-	</style>  </head>
+				</style>  
+		</head>
 
 
   <body>
     <h1>Lista de alunos cadastrados</h1><br><br>
-	<div style="-webkit-overflow-scrolling: toutch;">
+	<div class="table_container">
 	    
 		{% if lista %}
-	    <div class="table-container">
 	      <table>
 	        <tr>
 	          <th>Id</th>
@@ -48,8 +52,7 @@
 	        {% endfor %}
 	      </table>
 	      {% endif %}      
-	    </div>
-		
+	 
 	</div>
     <br><br>
       
