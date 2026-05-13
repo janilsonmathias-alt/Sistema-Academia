@@ -74,7 +74,9 @@ def alunos_novo():
 #@app.route("/alunos/excluir/<int:id>")
 #def alunos_excluir():
 
-
+@app.route("/mensalidade/nova", methods=["GET", "POST"])
+def pagamento_mensalidade():
+  
 
   
 @app.route("/fechamento", methods=["GET", "POST"])
@@ -202,7 +204,10 @@ def resumo():
                                 previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day))
       
     return render_template("resumo.html")
-  
+
+
+
+
 
 @app.route("/alunos/listar_alunos_cadastrados/", methods=["GET"])
 def listar_alunos():
