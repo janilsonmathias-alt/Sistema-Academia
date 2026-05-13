@@ -16,7 +16,7 @@ from calculations import(
                     quadro_mensal,
                     comparativo_corte_atual_entre_meses)
 #import os
-date = date(ZoneInfo("America/São Paulo"))
+date = date(ZoneInfo("America/Sao_Paulo"))
 
 app = Flask(__name__)
 init_db()
