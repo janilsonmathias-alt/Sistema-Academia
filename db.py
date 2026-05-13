@@ -45,11 +45,12 @@ def init_db():
         cur.execute("""
             CREATE TABLE IF NOT EXISTS pagamentos_de_mensalidade(
                id SERIAL PRIMARY KEY,
-               aluno_id NUMERIC,
-               valor REAL,
-               data_pagamento TEXT,
+               aluno_id INTEGER NOT NULL,
+               data_pagamento TEXT NOT NULL,
+               valor NUMERIC(10,2) NOT NULL,
                mes_referencia TEXT,
-               pg_status BOOLEAN
+               observacao TEXT,
+               FOREIGN KEY (aluno_id) REFERENCES alunos[id]
             )
         """)
 
