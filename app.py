@@ -181,6 +181,7 @@ def resumo():
         comparativo_corte_atual = comparativo_corte_atual_entre_meses(data_str)
         dados_quadro_mensal = quadro_mensal()
         return render_template("resumo.html",
+                                dia = hoje.day,
                                 meses = dados_quadro_mensal["meses"],
                                 dias = dados_quadro_mensal["dias"],
                                 quadro = dados_quadro_mensal["quadro"],
