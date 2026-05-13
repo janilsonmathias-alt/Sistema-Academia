@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date as _date, datetime
 from zoneinfo import ZoneInfo
 from flask import Flask, render_template, request, redirect
 #from datetime import datetime
@@ -15,11 +15,18 @@ from calculations import(
                     listar_alunos_cadastrados,
                     quadro_mensal,
                     comparativo_corte_atual_entre_meses)
-#import os
-date = date(ZoneInfo("America/Sao_Paulo"))
+                    
+class date(_date):
+                    @classmethod
+                    def today(cls):
+                                        return datetime.now(ZoneInfo("America/Sao_Paulo"))
 
+
+#import os
 app = Flask(__name__)
 init_db()
+
+
 
 #def limpa_tela():
 #    os.system('cls' if os.name == 'nt' else 'clear')
