@@ -17,9 +17,9 @@ from calculations import(
                     comparativo_corte_atual_entre_meses)
                     
 class date(_date):
-                    @classmethod
-                    def today(cls):
-                                        return datetime.now(ZoneInfo("America/Sao_Paulo"))
+  @classmethod
+  def today(cls):
+    return datetime.now(ZoneInfo("America/Sao_Paulo"))
 
 
 #import os
@@ -75,7 +75,24 @@ def alunos_novo():
 #def alunos_excluir():
 
 @app.route("/mensalidade/nova", methods=["GET", "POST"])
-def pagamento_mensalidade():
+def mensalidade_nova():
+  with getconnection as conn:
+    cur = conn.cursor()
+
+    if request.method == "POST":
+      aluno_id = int(request.form["aluno_id"])
+      data_pagamento = request.form["data_pagamento"]
+      valor = float(request.form["valor"])
+      mes_referencia = request.form["mes_referencia"]
+      observacao = request.form.get("observacao","").strip()
+
+      cur.execute("""
+          SELECT nome
+          FROM alunos
+          WHERE id = %s
+      """, (alunos_id,))
+      
+    
   
 
   
