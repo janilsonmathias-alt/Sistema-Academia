@@ -116,6 +116,16 @@ def mensalidade_nova():
           if observacao:
             texto_obs += f" | {observacao}"
 
+          if fechamento:
+            obs_antiga = fechamento[3] or ""
+          if obs_antiga:
+            obs_final = obs_antiga + " | " + texto_obs
+          else:
+            obs_final = texto_obs
+
+
+
+
 
       
       
