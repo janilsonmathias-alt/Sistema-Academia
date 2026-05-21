@@ -91,6 +91,34 @@ def mensalidade_nova():
           FROM alunos
           WHERE id = %s
       """, (alunos_id,))
+      aluno = cur.fetchone()
+      nome_aluno = aluno[0] if aluno else "Aluno"
+
+      cur.execute("""
+          INSERT INTO pagamentos_mensalidade
+          (aluno_id, data_pagamento, valor, mes_referencia,  observacao)
+          VALUES(%s, %s, %s, %s, %s)          
+      """, (
+          aluno_id,
+          data_pagamento,
+          mes_referencia,
+          observacao
+        ))
+
+      cur.execute("""
+          SELECT id, faturamento, frequencia_alunos, observacao
+          FROM fechamentos_diarios
+          WHERE data = %s
+      """, (data_pagamento,))
+          fechamento = cur.fetchone()
+          
+          texto_obs = f"Mensalidade: {nome_aluno}"
+          if observacao:
+            texto_obs += f" | {observacao}"
+
+
+      
+      
       
     
   
