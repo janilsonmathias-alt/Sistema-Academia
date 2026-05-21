@@ -134,14 +134,16 @@
         <div class="corte_comparativo">
             <table>
                 <tr>
-                    <th>Mes</th>
+                    <th>Mês</th>
                     <th>Faturamento</th>
+					<th>Frequência</th>
                 </tr>
                 
                 {% for lista in lista_resultado_dos_meses_corte_atual %}
                 <tr>
                     <td>{{ lista[0] }}</td>
                     <td>{{ "%.2f" | format(lista[1]) }}</td>
+					<td>{{ lista[2] }}</td>
                 </tr>
                 {% endfor %}
             </table>
