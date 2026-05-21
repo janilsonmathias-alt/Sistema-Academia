@@ -50,7 +50,7 @@ def init_db():
                valor NUMERIC(10,2) NOT NULL,
                mes_referencia TEXT,
                observacao TEXT,
-               FOREIGN KEY (aluno_id) REFERENCES alunos[id]
+               FOREIGN KEY (aluno_id) REFERENCES alunos(id)
             )
         """)
 
