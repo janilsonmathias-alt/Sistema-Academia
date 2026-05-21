@@ -160,7 +160,7 @@ def comparativo_corte_atual_entre_meses(data: str) -> dict:
         cur.execute("""
             SELECT SUBSTRING(data, 1, 7) AS mes,
             COALESCE(SUM(faturamento),0) AS acomulado,
-            COALESCE(SUM(frequencia),0) AS frequencia
+            COALESCE(SUM(frequencia_alunos),0) AS frequencia
             FROM fechamentos_diarios
             WHERE data IS NOT NULL
                 AND data <> ''
