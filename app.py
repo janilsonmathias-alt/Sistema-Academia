@@ -110,20 +110,32 @@ def mensalidade_nova():
           FROM fechamentos_diarios
           WHERE data = %s
       """, (data_pagamento,))
-          fechamento = cur.fetchone()
+      fechamento = cur.fetchone()
           
-          texto_obs = f"Mensalidade: {nome_aluno}"
-          if observacao:
-            texto_obs += f" | {observacao}"
+      texto_obs = f"Mensalidade: {nome_aluno}"
+      if observacao:
+          texto_obs += f" | {observacao}"
 
-          if fechamento:
-            obs_antiga = fechamento[3] or ""
-          if obs_antiga:
-            obs_final = obs_antiga + " | " + texto_obs
-          else:
-            obs_final = texto_obs
-
-
+      if fechamento:
+        obs_antiga = fechamento[3] or ""
+        if obs_antiga:
+          obs_final = obs_antiga + " | " + texto_obs
+        else:
+          obs_final = texto_obs
+  
+          cur.execute("""
+              UPDATE fechamentos_diarios
+              SET faturamento = faturamento + %s,
+              observacao = %s
+              WHERE id = %s
+          """,(valor, obs_final, fechamento[0]))
+      else:
+        cur.execute("""
+            INSERT INTO fechamentos_diarios
+            (data, faturamento, frequencia_alunos, oservacao)
+            values( %s, %s, %s, %s
+            
+        """,(data_pagamento, valor, 0, texto_obs)
 
 
 
