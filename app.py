@@ -136,12 +136,23 @@ def mensalidade_nova():
             values( %s, %s, %s, %s
             
         """,(data_pagamento, valor, 0, texto_obs)
+      conn.commit()
+      return redirect "/resumo"
 
 
+    cur.execute("""
+        SELECT id, nome, plano
+        FROM alunos
+        WHERE esta_ativo = TRUE
+        ORDER BY nome
+    """)
 
-      
-      
-      
+    alunos = cur.fetchall()
+  hoje = date.today().strftime("%Y-%m-%d")
+  competencia = date.today().strftima("%Y-%m")    
+
+  return render_template(
+        mensalidade.html,
     
   
 
