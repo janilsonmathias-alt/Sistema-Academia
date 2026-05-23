@@ -43,7 +43,7 @@ def init_db():
         """)
 
         cur.execute("""
-            CREATE TABLE IF NOT EXISTS pagamentos_de_mensalidade(
+            CREATE TABLE IF NOT EXISTS pagamentos_mensalidade(
                id SERIAL PRIMARY KEY,
                aluno_id INTEGER NOT NULL,
                data_pagamento TEXT NOT NULL,
