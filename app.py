@@ -152,7 +152,7 @@ def mensalidade_nova():
   competencia = date.today().strftime("%Y-%m")    
 
   return render_template(
-        mensalidade.html,
+        mensalidade_nova.html,
         alunos = alunos,
         hoje = hoje,
         competencia = competencia
