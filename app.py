@@ -19,7 +19,7 @@ from calculations import(
 class date(_date):
   @classmethod
   def today(cls):
-    return datetime.now(ZoneInfo("America/Sao_Paulo"))
+    return datetime.now(ZoneInfo("America/Sao_Paulo")).date()
 
 
 #import os
@@ -90,7 +90,7 @@ def mensalidade_nova():
           SELECT nome
           FROM alunos
           WHERE id = %s
-      """, (alunos_id,))
+      """, (aluno_id,))
       aluno = cur.fetchone()
       nome_aluno = aluno[0] if aluno else "Aluno"
 
@@ -101,6 +101,7 @@ def mensalidade_nova():
       """, (
           aluno_id,
           data_pagamento,
+          valor,
           mes_referencia,
           observacao
         ))
