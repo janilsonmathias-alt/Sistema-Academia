@@ -135,7 +135,7 @@ def mensalidade_nova():
             (data, faturamento, frequencia_alunos, oservacao)
             values( %s, %s, %s, %s
             
-        """,(data_pagamento, valor, 0, texto_obs)
+        """,(data_pagamento, valor, 0, texto_obs))
       conn.commit()
       return redirect "/resumo"
 
