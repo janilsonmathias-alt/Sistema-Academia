@@ -149,7 +149,7 @@ def mensalidade_nova():
     alunos = cur.fetchall()
 
   hoje = date.today().strftime("%Y-%m-%d")
-  competencia = date.today().strftima("%Y-%m")    
+  competencia = date.today().strftime("%Y-%m")    
 
   return render_template(
         mensalidade.html,
