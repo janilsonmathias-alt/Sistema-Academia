@@ -124,17 +124,17 @@ def mensalidade_nova():
         else:
           obs_final = texto_obs
   
-          cur.execute("""
-              UPDATE fechamentos_diarios
-              SET faturamento = faturamento + %s,
-              observacao = %s
-              WHERE id = %s
-          """,(valor, obs_final, fechamento[0]))
+        cur.execute("""
+            UPDATE fechamentos_diarios
+            SET faturamento = faturamento + %s,
+            observacao = %s
+            WHERE id = %s
+        """,(valor, obs_final, fechamento[0]))
       else:
         cur.execute("""
             INSERT INTO fechamentos_diarios
-            (data, faturamento, frequencia_alunos, oservacao)
-            values( %s, %s, %s, %s
+            (data, faturamento, frequencia_alunos, observacao)
+            values( %s, %s, %s, %s )
             
         """,(data_pagamento, valor, 0, texto_obs))
       conn.commit()
