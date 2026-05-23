@@ -1,1 +1,41 @@
+<html>
+  <head>
+    <meta name="viewport" content = "width=device-width, initial-scale = 1.0">
+    <style>
+      html {
+        font-size: 22px;
+      {
+      body {
+        margin: 0;
+        padding: 15px;
+        font-size:  1rem;
+        line-height: 1;
+      }        
+    </style>    
+  </head>
 
+  <body>
+    <h2>Registrar Mewnsalidade</h2>
+  
+    <form method="post">
+      Aluno:
+      <select name="aluno_id">
+        {% for aluno in alunos %}
+          <option value="{{ aluno[0] }}"> {{ aluno[1] }} - {{ aluno[2] }}</option>
+        {% endfor %}
+      </select>
+      <br><br>
+
+      Data do Pagamento:
+      <input type="date" name="Data_Pagamento" value = "{{ hoje }}">
+      <br><br>
+
+      Valor
+      <input type="number" step = "0.01" name = "Valor">
+      <br><br>
+      
+  
+      
+    </form>
+  </body> 
+</html>
