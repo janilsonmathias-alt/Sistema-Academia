@@ -76,7 +76,7 @@ def alunos_novo():
 
 @app.route("/mensalidade/nova", methods=["GET", "POST"])
 def mensalidade_nova():
-  with getconnection as conn:
+  with get_connection() as conn:
     cur = conn.cursor()
 
     if request.method == "POST":
