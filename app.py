@@ -146,15 +146,19 @@ def mensalidade_nova():
         WHERE esta_ativo = TRUE
         ORDER BY nome
     """)
-
     alunos = cur.fetchall()
+
   hoje = date.today().strftime("%Y-%m-%d")
   competencia = date.today().strftima("%Y-%m")    
 
   return render_template(
         mensalidade.html,
-    
+        alunos = alunos,
+        hoje = hoje,
+        competencia = competencia
+  )
   
+
 
   
 @app.route("/fechamento", methods=["GET", "POST"])
