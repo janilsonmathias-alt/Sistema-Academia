@@ -28,37 +28,7 @@
             {{ aluno[1] }} - {{ aluno[2] }}
           </option>
         {% endfor %}
-      </datalist>
-      
-      <script>
-        const inputBusca = document.getElementById("buscaAluno");
-        const campoAlunoId = document.getElementById("aluno_id");
-        const opcoes = document.querySelectorAll("#lista_alunos option");
-      
-        inputBusca.addEventListener(
-          "input",
-          function () {
-            const valorDigitado = this.value.trim().toLowerCase();
-            campoAlunoId.value = "";
-        
-            for (const opcao of opcoes) {
-              if (opcao.value.toLowerCase() === valorDigitado) {
-                campoAlunoId.value = opcao.dataset.id;
-                break;                
-              }
-            }
-          }
-        );
-      
-      document.querySelector("form").addEventListener(
-        "submit",
-        function (e) {
-          if (!campoAlunoId.value) {
-            e.preventDefalut();
-            alert("Selecione um aluno valido da lista");
-          }
-        }
-      );
+      </datalist>    
       <br><br>
 
       Data do Pagamento:
@@ -80,5 +50,30 @@
       <a href="/financeiro">Voltar</a>
       
     </form>
+
+    <script>
+        const inputBusca = document.getElementById("buscaAluno");
+        const campoAlunoId = document.getElementById("aluno_id");
+        const opcoes = document.querySelectorAll("#lista_alunos option");
+      
+        inputBusca.addEventListener("input", function () {
+            const valorDigitado = this.value.trim().toLowerCase();
+            campoAlunoId.value = "";
+        
+            for (const opcao of opcoes) {
+              if (opcao.value.toLowerCase() === valorDigitado) {
+                campoAlunoId.value = opcao.dataset.id;
+                break;                
+              }
+            }
+        });
+      
+      document.querySelector("form").addEventListener("submit", function (e) { 
+        if (!campoAlunoId.value) {
+          e.preventDefalut();
+          alert("Selecione um aluno valido da lista");
+        }
+      });
+    </script> 
   </body> 
 </html>
