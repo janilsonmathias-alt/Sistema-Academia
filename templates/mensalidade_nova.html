@@ -70,7 +70,7 @@
       
       document.querySelector("form").addEventListener("submit", function (e) { 
         if (!campoAlunoId.value) {
-          e.preventDefalut();
+          e.preventDefault();
           alert("Selecione um aluno valido da lista");
         }
       });
