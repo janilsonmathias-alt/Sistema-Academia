@@ -136,6 +136,12 @@ def listar_alunos_cadastrados():
         lista_de_alunos_cadastrados = cur.fetchall()        
     return lista_de_alunos_cadastrados
 
+def status_mensalidade_do_aluno(aluno_id: int, hoje):
+    aluno = buscar_aluno_por_id(aluno_id)
+
+if not aluno or not aluno[4]:
+    
+
 
 def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
     prefixo = f"{ano:04d}-{mes:02d}"
