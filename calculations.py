@@ -139,8 +139,15 @@ def listar_alunos_cadastrados():
 def status_mensalidade_do_aluno(aluno_id: int, hoje):
     aluno = buscar_aluno_por_id(aluno_id)
 
-if not aluno or not aluno[4]:
-    
+    if not aluno or not aluno[4]:
+        return {
+            "status" : "sen_data",
+            "testo" : "Sem data de matricula",
+            "vencimento" : None
+        }
+    competencia = f"{hoje.year:04d}-{hoje.month:02d}"
+    dia_venciemento = int(aluno[4][8:10])
+    ultinmo_dia = calendar.monthranger(hoje.year, hoje.month)[1]
 
 
 def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
