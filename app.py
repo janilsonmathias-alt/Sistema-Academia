@@ -3,6 +3,7 @@ from zoneinfo import ZoneInfo
 from flask import Flask, render_template, request, redirect
 #from datetime import datetime
 from db import init_db, get_connection
+
 from calculations import(
                     previsao_mes,
                     previsao_diaria,
@@ -14,8 +15,13 @@ from calculations import(
                     listar_despesas_mes,
                     listar_alunos_cadastrados,
                     quadro_mensal,
-                    comparativo_corte_atual_entre_meses)
-                    
+                    comparativo_corte_atual_entre_meses,
+                    buscar_aluno_por_id,
+                    listar_pagamento_do_aluno,
+                    status_mensalidade_do_aluno
+)
+
+
 class date(_date):
   @classmethod
   def today(cls):
