@@ -136,6 +136,30 @@ def listar_alunos_cadastrados():
         lista_de_alunos_cadastrados = cur.fetchall()        
     return lista_de_alunos_cadastrados
 
+
+def buscar_aluno_por_id(aluno_id: int):
+    with get_connection() as conn:
+        cur = conn.curtsor()
+        cur.execute("""
+            SELECT id, nome, telefone, plano, data_de_matricula, esta_ativo
+            FROM alunos
+            WHERE id = %s
+        """, (aluno_id,))
+        return cur.fetchone()
+                
+
+def listar_pagamentos_do_aluno(aluno_id: int):
+    with get_connection() as conn:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT id, data_pagamento, valor, mes_referencia, observacao
+            FROM pagamentos_mensalidade
+            WHERE id = %s
+            ORDER BY data_pagamento DESC, id DESC
+        """,(aluno_id,))
+        return cur.fetchall()
+
+
 def status_mensalidade_do_aluno(aluno_id: int, hoje):
     aluno = buscar_aluno_por_id(aluno_id)
 
@@ -145,9 +169,43 @@ def status_mensalidade_do_aluno(aluno_id: int, hoje):
             "testo" : "Sem data de matricula",
             "vencimento" : None
         }
+        
     competencia = f"{hoje.year:04d}-{hoje.month:02d}"
     dia_venciemento = int(aluno[4][8:10])
     ultinmo_dia = calendar.monthranger(hoje.year, hoje.month)[1]
+    dia_vencimento = min(dia_vencimento, ultimo_dia)
+    vencimento = date(hoje.year, hoje.month, dia_vencimento)
+
+with get_conection() as conn:
+    cur = conn.cursor()
+    cur.exercute("""
+        SELECT id
+        FROM pagamentos_mensalidade
+        WHERE aluno_id = %s
+            AND mes_referencia = %s
+        LIMITE 1
+    """, (aluno_id, competencia))
+    pagamento = cur.fetchone()
+
+if pagamento:
+    return {
+        "status" : "pago",
+        "texto" : "Pago",
+        "vencimento" : vencimento
+    }
+    
+if hoje > vencimento:
+    rewturn {
+        "status" : "atrasado",
+        "texto" : "Em atraso",
+        "vencimento" : vencimento
+    }
+
+return {
+    "status" : "aberto!",
+    "texto" : "Em aberto",
+    "vencimento" : vencimento
+}
 
 
 def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
