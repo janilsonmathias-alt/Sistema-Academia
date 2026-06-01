@@ -86,7 +86,11 @@ def mensalidade_nova():
     cur = conn.cursor()
 
     if request.method == "POST":
-      aluno_id = int(request.form["aluno_id"])
+      aluno_id_str = request.form.get("aluno_id","").strip()
+      if not aluno_id_str.isdigit():
+        return "selecione um aluno valido na lista",400
+                  
+      aluno_id = int(aluno_id_str)
       data_pagamento = request.form["data_pagamento"]
       valor = float(request.form["valor"])
       mes_referencia = request.form["mes_referencia"]
