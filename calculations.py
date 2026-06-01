@@ -195,7 +195,7 @@ if pagamento:
     }
     
 if hoje > vencimento:
-    rewturn {
+    return {
         "status" : "atrasado",
         "texto" : "Em atraso",
         "vencimento" : vencimento
