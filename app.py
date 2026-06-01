@@ -17,7 +17,7 @@ from calculations import(
                     quadro_mensal,
                     comparativo_corte_atual_entre_meses,
                     buscar_aluno_por_id,
-                    listar_pagamento_do_aluno,
+                    listar_pagamentos_do_aluno,
                     status_mensalidade_do_aluno
 )
 
