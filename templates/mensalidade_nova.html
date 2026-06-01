@@ -55,21 +55,26 @@
         const inputBusca = document.getElementById("buscaAluno");
         const campoAlunoId = document.getElementById("aluno_id");
         const opcoes = document.querySelectorAll("#lista_alunos option");
-      
-        inputBusca.addEventListener("input", function () {
-            const valorDigitado = this.value.trim().toLowerCase();
-            campoAlunoId.value = "";
-        
-            for (const opcao of opcoes) {
-              if (opcao.value.toLowerCase() === valorDigitado) {
-                campoAlunoId.value = opcao.dataset.id;
-                break;                
-              }
+
+        function atualizarAlunoId(){
+          const valorDigitado = inputBusca().valor.trim().toLowerCase();
+          campoAlunoId.value = "";
+          for (const opcao of opcoes){
+            if (opcao.value.trim().toLowerCase() === valorDigitado){
+              campoAlunoId.valu = opcao.dataset.id;
+              break;
             }
-        });
+          }
+        };
+
+
+      inputBUsca.addEventListener("input", atualizarAlunoId);
+      inputBusca.addEventListener("change", atualizarAlunoId);
+      inputBusca.addEventListener("blur", atualizarAlunoId);
       
       document.querySelector("form").addEventListener("submit", function (e) { 
-        if (!campoAlunoId.value) {
+       alualizarAlunoId();
+        if (!campoAlunoId.value){
           e.preventDefault();
           alert("Selecione um aluno valido da lista");
         }
