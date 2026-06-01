@@ -176,36 +176,36 @@ def status_mensalidade_do_aluno(aluno_id: int, hoje):
     dia_vencimento = min(dia_vencimento, ultimo_dia)
     vencimento = date(hoje.year, hoje.month, dia_vencimento)
 
-with get_conection() as conn:
-    cur = conn.cursor()
-    cur.exercute("""
-        SELECT id
-        FROM pagamentos_mensalidade
-        WHERE aluno_id = %s
-            AND mes_referencia = %s
-        LIMITE 1
-    """, (aluno_id, competencia))
-    pagamento = cur.fetchone()
-
-if pagamento:
-    return {
-        "status" : "pago",
-        "texto" : "Pago",
-        "vencimento" : vencimento
-    }
+    with get_conection() as conn:
+        cur = conn.cursor()
+        cur.exercute("""
+            SELECT id
+            FROM pagamentos_mensalidade
+            WHERE aluno_id = %s
+                AND mes_referencia = %s
+            LIMITE 1
+        """, (aluno_id, competencia))
+        pagamento = cur.fetchone()
     
-if hoje > vencimento:
+    if pagamento:
+        return {
+            "status" : "pago",
+            "texto" : "Pago",
+            "vencimento" : vencimento
+        }
+        
+    if hoje > vencimento:
+        return {
+            "status" : "atrasado",
+            "texto" : "Em atraso",
+            "vencimento" : vencimento
+        }
+    
     return {
-        "status" : "atrasado",
-        "texto" : "Em atraso",
+        "status" : "aberto!",
+        "texto" : "Em aberto",
         "vencimento" : vencimento
     }
-
-return {
-    "status" : "aberto!",
-    "texto" : "Em aberto",
-    "vencimento" : vencimento
-}
 
 
 def acomulado_ate_dia(ano: int, mes: int, dia: int) -> float:
