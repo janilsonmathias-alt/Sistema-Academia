@@ -24,7 +24,7 @@
       
       <datalist id="lista_alunos">
         {% for aluno in alunos %}
-          <option value="{{ aluno[0] }}"|"{{ aluno[1] }}">           
+          <option value="{{ aluno[1] }}">           
           </option>
         {% endfor %}
       </datalist>    
@@ -51,18 +51,38 @@
     </form>
 
     <script>
+        const alunos = {{ alunos | tojson }}
         const inputBusca = document.getElementById("buscaAluno");
         const campoAlunoId = document.getElementById("aluno_id");
 
-        inputBusca.addEventListener("input", function() {
-          const texto = this.value.trim();
-          if (texto.includes("|") {
-            campoAlunoId.value = texto.split("|")[0];
-          } 
-          else {
-            campoAlunoId.value = "";
+
+        function atualizarAlunoId() {
+          cont texto = inputBusca.value.trim().toLowerCase();
+          campoAlunoId.value = ""; 
+
+          for (const aluno of alunos) {
+            const id = aluno[0];
+            const nome = String(aluno[1].trim().toLowerCase());
+
+            if (nome === texto) {
+              campoAlunoId.value = id;
+              break;  
+            }
+          }                
+        }
+      
+        inputBusca.addEventListener("input", atualizarAlunoId);
+        inputBusca.addEventListener("change", atualizarAlunoId);
+        inputBusca.addEventListener("blur", atualizarAlunoId);
+
+        document.querySelector("form").addEventListener("submit", function(e) {
+          atualizarAlunoId();
+
+          if (!campoAlunoId.value) {
+            e.preventDefalut();
+            alert("Selecione um aluno valido na lista");
           }
-        };
+        });
     </script> 
   </body> 
 </html>
