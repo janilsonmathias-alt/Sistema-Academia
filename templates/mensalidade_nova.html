@@ -24,8 +24,7 @@
       
       <datalist id="lista_alunos">
         {% for aluno in alunos %}
-          <option value="{{ aluno[1] }}" data-id="{{ aluno[0] }}">
-            {{ aluno[1] }} - {{ aluno[2] }}
+          <option value="{{ aluno[0] }}"|"{{ aluno[1] }}">           
           </option>
         {% endfor %}
       </datalist>    
@@ -54,31 +53,16 @@
     <script>
         const inputBusca = document.getElementById("buscaAluno");
         const campoAlunoId = document.getElementById("aluno_id");
-        const opcoes = document.querySelectorAll("#lista_alunos option");
 
-        function atualizarAlunoId(){
-          const valorDigitado = inputBusca().valor.trim().toLowerCase();
-          campoAlunoId.value = "";
-          for (const opcao of opcoes){
-            if (opcao.value.trim().toLowerCase() === valorDigitado){
-              campoAlunoId.valu = opcao.dataset.id;
-              break;
-            }
+        inputBusca.addEventListener("input", function() {
+          const texto = this.value.trim();
+          if (texto.includes("|") {
+            campoAlunoId.value = texto.split("|")[0];
+          } 
+          else {
+            campoAlunoId.value = "";
           }
         };
-
-
-      inputBUsca.addEventListener("input", atualizarAlunoId);
-      inputBusca.addEventListener("change", atualizarAlunoId);
-      inputBusca.addEventListener("blur", atualizarAlunoId);
-      
-      document.querySelector("form").addEventListener("submit", function (e) { 
-       alualizarAlunoId();
-        if (!campoAlunoId.value){
-          e.preventDefault();
-          alert("Selecione um aluno valido da lista");
-        }
-      });
     </script> 
   </body> 
 </html>
