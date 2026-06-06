@@ -38,7 +38,8 @@
 		        <th>Telefone</th>
 		    	<th>Plano</th>
 		        <th>Data Matricula</th>
-		        <th>Ativo ? </th>        
+		        <th>Ativo ? </th>
+				<th>Ficha</th>
 		    </tr>      
 		        
 		    {% for lista in lista %}
@@ -48,6 +49,7 @@
 		        <td>{{ lista[2] }}</td>
 		        <td>{{ lista[3] }}</td>
 		        <td>{{ lista[4] }}</td>
+				<td><a href="/alunos/ficha/{{ lista[0] }}">Ver Ficha</a></td>
 		    </tr>
 		    {% endfor %}
 		    </table>
