@@ -141,7 +141,7 @@ def buscar_aluno_por_id(aluno_id: int):
     with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
-            SELECT id, nome, telefone, plano, data_de_matricula, esta_ativo
+            SELECT id, nome, telefone, plano, data_da_matricula, esta_ativo
             FROM alunos
             WHERE id = %s
         """, (aluno_id,))
