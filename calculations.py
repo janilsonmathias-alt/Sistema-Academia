@@ -171,7 +171,7 @@ def status_mensalidade_do_aluno(aluno_id: int, hoje):
         }
         
     competencia = f"{hoje.year:04d}-{hoje.month:02d}"
-    dia_venciemento = int(aluno[4][8:10])
+    dia_vencimento = int(aluno[4][8:10])
     ultimo_dia = calendar.monthrange(hoje.year, hoje.month)[1]
     dia_vencimento = min(dia_vencimento, ultimo_dia)
     vencimento = date(hoje.year, hoje.month, dia_vencimento)
