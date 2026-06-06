@@ -172,13 +172,13 @@ def status_mensalidade_do_aluno(aluno_id: int, hoje):
         
     competencia = f"{hoje.year:04d}-{hoje.month:02d}"
     dia_venciemento = int(aluno[4][8:10])
-    ultinmo_dia = calendar.monthranger(hoje.year, hoje.month)[1]
+    ultimo_dia = calendar.monthrange(hoje.year, hoje.month)[1]
     dia_vencimento = min(dia_vencimento, ultimo_dia)
     vencimento = date(hoje.year, hoje.month, dia_vencimento)
 
     with get_conection() as conn:
         cur = conn.cursor()
-        cur.exercute("""
+        cur.execute("""
             SELECT id
             FROM pagamentos_mensalidade
             WHERE aluno_id = %s
