@@ -174,7 +174,7 @@ def status_mensalidade_do_aluno(aluno_id: int, hoje):
     dia_vencimento = int(aluno[4][8:10])
     ultimo_dia = calendar.monthrange(hoje.year, hoje.month)[1]
     dia_vencimento = min(dia_vencimento, ultimo_dia)
-    vencimento = date(hoje.year, hoje.month, dia_vencimento)
+    vencimento = datetime(hoje.year, hoje.month, dia_vencimento).date()
 
     with get_conection() as conn:
         cur = conn.cursor()
