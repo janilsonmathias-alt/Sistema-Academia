@@ -169,7 +169,23 @@ def mensalidade_nova():
         competencia = competencia
   )
   
+@app.route("/alunos/ficha/<int:id>")
+def ficha_aluno(id):
+  aluno = buscar_aluno_por_id(id)
+  if not aluno:
+    return redirect("/alunos/listar_alunos_cadastados/")
 
+  pagamentos = listar_pagamentos_do_aluno(id)
+  hoje = date.today()
+  status_atual = status_mensalidade_do_aluno(id, hoje)
+  return render_template(
+    "aluno_ficha.html",
+    aluno = aluno,
+    pagamentos = pagamentos,
+    status_atual = status_atual
+  )
+
+  
 
   
 @app.route("/fechamento", methods=["GET", "POST"])
