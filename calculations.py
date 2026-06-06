@@ -176,7 +176,7 @@ def status_mensalidade_do_aluno(aluno_id: int, hoje):
     dia_vencimento = min(dia_vencimento, ultimo_dia)
     vencimento = datetime(hoje.year, hoje.month, dia_vencimento).date()
 
-    with get_conection() as conn:
+    with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
             SELECT id
