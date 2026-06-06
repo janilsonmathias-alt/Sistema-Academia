@@ -43,7 +43,7 @@
     <p><strong>Telefone: </strong> {{ aluno[2] }}</p>
     <p><strong>Plano: </strong> {{ aluno[3] }}</p>
     <p><strong>Data da Matricula: </strong> {{ aluno[4] }}</p>
-    <p><strong>Ativo: </strong> "Sim" if aluno[5] else "Não"</p>
+    <p><strong>Ativo: </strong> {{ "Sim" if aluno[5] else "Não" }}</p>
 
     <h3>Situação do mês atual</h3>
     <p>
