@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initia-scale=1.0">
+    <style>
+      html {
+        font-size: 21px;
+      }
+
+      body {
+        magin: 0;
+        padding: 15px;
+        font-size: 1em;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+      }
+
+      .status-pago {
+        color: green;
+        font-weight: bold;
+      }
+
+      .status-atrasado {
+        color: red;
+        font-weight: bold;
+      }
+    </style>      
+  </head>
+
+  
+  <body>
+    <h2>Ficha do Aluno</h2>
+
+    <p><strong>Nome: </strong> {{ aluno[1] }}</p>
+    <p><strong>Telefone: </strong> {{ aluno[2] }}</p>
+    <p><strong>Plano: </strong> {{ aluno[3] }}</p>
+    <p><strong>Data da Matricula: </strong> {{ aluno[4] }}</p>
+    <p><strong>Ativo: </strong> "Sim" if aluno[5] else "Não"</p>
+
+    <h3>Situação do mês atual</h3>
+    <p>
+      <span class = "{% if status_atual.status == 'pago' %} status-pago{% elif status_atual.status == 'atrasado' %} status-atrasado{% else %} status-aberto {% endif %}">
+        {{ status_atual.texto }}
+      </span>
+    </p>
+
+    
+  </body>
+</html>
