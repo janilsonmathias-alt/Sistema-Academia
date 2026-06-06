@@ -183,7 +183,7 @@ def status_mensalidade_do_aluno(aluno_id: int, hoje):
             FROM pagamentos_mensalidade
             WHERE aluno_id = %s
                 AND mes_referencia = %s
-            LIMITE 1
+            LIMIT 1
         """, (aluno_id, competencia))
         pagamento = cur.fetchone()
     
