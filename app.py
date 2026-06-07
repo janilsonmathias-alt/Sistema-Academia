@@ -72,10 +72,13 @@ def alunos_novo():
       """,(nome, telefone, plano, data_da_matricula, esta_ativo))
       conn.commit()
     return redirect("/alunos")
-  return render_template("alunos_novo.html")
+  return render_template(
+    "alunos_novo.html",
+    aluno = none,
+    form_action = "/alunos/novo")
 
 
-@app.route("/alunos/editar/<int:id>")
+@app.route("/alunos/editar/<int:id>", methods = ["GET", "POST"])
 def alunos_editar(id):
   with get_connection() as conn:
     cur = conn.cursor()
@@ -84,7 +87,7 @@ def alunos_editar(id):
       nome = request.form["nome"]
       telefone = request.form["telefone"]
       plano = request.form["plano"]
-      esta_ativo = request.form["esta_ativo"]
+      esta_ativo = bool(request.form["esta_ativo"])
           
       cur.execute("""
         UPDATE alunos
@@ -92,7 +95,7 @@ def alunos_editar(id):
           telefone = %s,
           plano = %s,
           esta_ativo = %s
-      """(nome, telefone, plano, esta_ativo, id))
+      """, (nome, telefone, plano, esta_ativo, id))
       conn.commit()
 
       return redirect(f"/alunos/ficha/{ id }")
