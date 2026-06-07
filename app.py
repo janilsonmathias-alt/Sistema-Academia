@@ -97,8 +97,20 @@ def alunos_editar(id):
       return redirect(f"/alunos/ficha/{ id }")
 
     cur.execute("""
-    
-    """)
+      SELECT id, nome, telefone, plano, data_da_matricula, esta_ativo
+      FROM alunos
+      WHERE id = %s
+    """(id,))
+    aluno = cur.fetchone()
+
+    if not aluno:
+      return redirect("/alunos/listar_alunos_cadastrados/") 
+
+    return render_template(
+      "alunos_novo.html",
+      aluno = aluno,
+      form_action = f"/alunos/editar/{id}"
+    )
 
 
 #@app.route("/alunos/excluir/<int:id>")
