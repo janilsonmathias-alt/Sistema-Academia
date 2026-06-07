@@ -49,7 +49,7 @@
 		        <td>{{ lista[2] }}</td>
 		        <td>{{ lista[3] }}</td>
 		        <td>{{ lista[4] }}</td>
-				<td>{{ lista[5] }}</td>
+				<td>{{ "Sim" if lista[5] else "Nâo" }}</td>
 				<td><a href="/alunos/ficha/{{ lista[0] }}">Ver Ficha</a></td>
 		    </tr>
 		    {% endfor %}
