@@ -74,8 +74,32 @@ def alunos_novo():
     return redirect("/alunos")
   return render_template("alunos_novo.html")
     
-#idapp.route("/alunos/editar/<int:id>")
-#def alunos_editar():
+@app.route("/alunos/editar/<int:id>")
+def alunos_editar(id):
+  with get_connection() as conn:
+    cur = conn.cursor()
+
+    if request.method == "POST":
+      nome = request.form["nome"]
+      telefone = request.form["telefone"]
+      plano = request.form["plano"]
+      esta_ativo = request.form["esta_ativo"]
+          
+      cur.execute("""
+        UPDATE alunos
+        SET nome = %s,
+          telefone = %s,
+          plano = %s,
+          esta_ativo = %s
+      """(nome, telefone, plano, esta_ativo, id))
+      conn.commit()
+
+      return redirect(f"/alunos/ficha/{ id }")
+
+    cur.execute("""
+    
+    """)
+
 
 #@app.route("/alunos/excluir/<int:id>")
 #def alunos_excluir():
