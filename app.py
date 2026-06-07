@@ -73,7 +73,8 @@ def alunos_novo():
       conn.commit()
     return redirect("/alunos")
   return render_template("alunos_novo.html")
-    
+
+
 @app.route("/alunos/editar/<int:id>")
 def alunos_editar(id):
   with get_connection() as conn:
