@@ -104,7 +104,7 @@ def alunos_editar(id):
       SELECT id, nome, telefone, plano, data_da_matricula, esta_ativo
       FROM alunos
       WHERE id = %s
-    """(id,))
+    """, (id,))
     aluno = cur.fetchone()
 
     if not aluno:
