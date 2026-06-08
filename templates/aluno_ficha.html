@@ -56,6 +56,10 @@
       <p><strong>Vencimento: </strong>{{ status_atual.vencimento }}</p>
     {% endif %}
 
+    <p>
+      <a href="/aluno/editar/{{ aluno[0] }}">Editar cadastro do aluno</a>
+    </p>
+        
     <h3>Historico de Pagamento</h3>
 
     {% if pagamentos %}
