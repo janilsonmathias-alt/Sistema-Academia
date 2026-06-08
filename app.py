@@ -95,6 +95,7 @@ def alunos_editar(id):
           telefone = %s,
           plano = %s,
           esta_ativo = %s
+        WHERE id = %s
       """, (nome, telefone, plano, esta_ativo, id))
       conn.commit()
 
