@@ -277,7 +277,7 @@ def editar_pagamento(id):
   if not pagamento:
     return redirect("/alunos/listar_alunos_cadastrados/")
 
-  with get_connection as conn:
+  with get_connection() as conn:
     cur = conn.cursor()
     cur.execute("""
       SELECT id, nome
@@ -310,7 +310,38 @@ def editar_pagamento(id):
         
     conn.commit()
 
-  
+    if data_antiga == nova_data:
+      ajustar_fechamento_por_data(nova_data, novo_valor - valor_antigo)
+    else:
+      ajustar_fechamento_por_data(data_antiga, -valor_antigo)
+      ajustar_fechamento_por_data(nova_data, novo_valor)
+
+    return redirect(f"/alunos/ficha/{ aluno[0] }")
+
+  return render_template(
+    "mensalidade_editar.html",
+    pagamento = pagamento,
+    aluno = aluno,
+    form_action = f"/me1nsalidade/editar/{id}"
+  )
+
+
+@app.route("/mensalidade/excluir/<int:id>", methods = ["POST"])
+def excluir_pagamento(id):
+  pagamento = buscar_pagamento_por_id(id)
+
+  if not pagamento:
+    return redirect("/alunos/listar_alunos_cadastrados/")
+
+  ajustar_pagamento_por_data(pagamento[2], -float(pagamento[3]))
+
+  with get_connection() as conn:
+    cur = conn.cursor()
+    cur.execute(
+    
+    ***,)
+
+
 @app.route("/fechamento", methods=["GET", "POST"])
 def fechamento():
     if request.method == "POST":
