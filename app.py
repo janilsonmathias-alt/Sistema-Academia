@@ -27,6 +27,46 @@ class date(_date):
   def today(cls):
     return datetime.now(ZoneInfo("America/Sao_Paulo")).date()
 
+def buscar_pagamento_por_id(pagamento_id):
+    with get_connection as conn:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT id, aluno_id, data_pagamento, valor, mes_referencia, observacao
+            FROM pagamentos_mensalidades
+            WHERE id = %s
+        """,(pagamento_id,))
+        returm cur.fetchone()
+
+def ajustar_fechamento_por_data(data_referencia, delta_valor):
+    with get_connection as conn:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT id, faturamento
+            FROM fechamentos_diarios
+            WHERE data = %s
+        """,(data_referencia,))
+        fechamento = cur.fetchone()
+
+        if fechamento:
+            novo_faturamento = float(fechamento[1]) + float(delta_valor)
+
+            cur.execute("""
+                UPDATE fechamentos_diarios
+                FROM faturamento = %s
+                WHERE id = %s
+            """,(novo_faturamento, fechamento[0]))
+
+        elif float(delta_valor) > 0:
+            cur.execute("""
+                INSERT INTO fechamentos_diarios
+                (data, faturamento, frequencia_alunos, observacao)
+                VALUE( %S, %S, %S, %S )
+            """, (data_referencia, float(delta_valor), 0, "Mensalidade"))
+
+            conn.commit()
+
+            
+
 
 #import os
 app = Flask(__name__)
@@ -209,7 +249,9 @@ def mensalidade_nova():
         hoje = hoje,
         competencia = competencia
   )
-  
+
+
+
 @app.route("/alunos/ficha/<int:id>")
 def ficha_aluno(id):
   aluno = buscar_aluno_por_id(id)
@@ -226,7 +268,47 @@ def ficha_aluno(id):
     status_atual = status_atual
   )
 
-  
+
+
+@app.route("/mensalidade/editar/<int:id>", methods=[ "GET", "POST" ])
+def editar_pagamento(id):
+  pagamento = buscar_pagamento_por_id(id)
+
+  if not pagamento:
+    return redirect("/alunos/listar_alunos_cadastrados/")
+
+  with get_connection as conn:
+    cur = conn.cursor()
+    cur.execute("""
+      SELECT id, nome
+      FROM alunos
+      WHERE id = %s
+    """,( pagamento[1],))
+    aluno = cur.fetchone()
+
+  if not aluno:
+    return redirect("/alunos/listar_alunos_cadastrados/")
+
+  if request.method = "POST":
+    data_antiga = pagamento[2]
+    valor_antigo = float(pagamento[3])
+
+    nova_data = request.form["data_pagamento"]
+    novo_valor = float(request.form["valor"])
+    nova_competencia = request.form["mes_referencia"]
+    nova_obs = request.form.get("observacao","").strip()
+
+
+    cur.execute("""
+      UPDATE pagamentos_mensalidade
+      SET data_pagamento = %s,
+          valor = %s
+          mes_referencia = %s
+          observacao = %s
+      WHERE id = %s
+    """,(nova_data, novo_valor, nova_competencia, nova_obs, id ))
+        
+    conn.commit()
 
   
 @app.route("/fechamento", methods=["GET", "POST"])
