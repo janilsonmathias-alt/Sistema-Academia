@@ -289,7 +289,7 @@ def editar_pagamento(id):
   if not aluno:
     return redirect("/alunos/listar_alunos_cadastrados/")
 
-  if request.method = "POST":
+  if request.method == "POST":
     data_antiga = pagamento[2]
     valor_antigo = float(pagamento[3])
 
