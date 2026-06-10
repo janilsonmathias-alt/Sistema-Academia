@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta name="viewport" content= "width=device-width, initial-scale=1.0">
+    <style>
+      html{
+        font-size: 22px;
+      }
+      body{
+        margin: 0;
+        padding:  15px;
+        font-size: 1rem;
+        line-height: 1;
+      }      
+    </style>    
+  </head>
+  <body>
+    <h2>Editar Mensalidade</h2>
+
+    <form method="post" action={{ form_action }}>
+      Aluno: 
+      <strong>{{ aluno[1] }}</strong> 
+      <br><br>
+
+      Data do Pagamento:
+      <input type="date" name="data_pagamento" value="{{ pagamento[2] }}">
+      <br><br>
+
+      Valor:
+      <input type="number" step="0,01" name="valor" valor="{{ pagamento[3] }}">
+      <br><br>
+
+      
+  </body>  
+</html>
+
+
