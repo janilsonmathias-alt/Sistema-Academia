@@ -60,7 +60,7 @@ def ajustar_fechamento_por_data(data_referencia, delta_valor):
             cur.execute("""
                 INSERT INTO fechamentos_diarios
                 (data, faturamento, frequencia_alunos, observacao)
-                VALUE( %S, %S, %S, %S )
+                VALUE( %s, %s, %s, %s )
             """, (data_referencia, float(delta_valor), 0, "Mensalidade"))
 
             conn.commit()
@@ -333,7 +333,7 @@ def excluir_pagamento(id):
   if not pagamento:
     return redirect("/alunos/listar_alunos_cadastrados/")
 
-  ajustar_pagamento_por_data(pagamento[2], -float(pagamento[3]))
+  ajustar_fechamento_por_data(pagamento[2], -float(pagamento[3]))
 
   with get_connection() as conn:
     cur = conn.cursor()
