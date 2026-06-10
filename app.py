@@ -32,7 +32,7 @@ def buscar_pagamento_por_id(pagamento_id):
         cur = conn.cursor()
         cur.execute("""
             SELECT id, aluno_id, data_pagamento, valor, mes_referencia, observacao
-            FROM pagamentos_mensalidades
+            FROM pagamentos_mensalidade
             WHERE id = %s
         """,(pagamento_id,))
         return cur.fetchone()
