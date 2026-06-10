@@ -65,10 +65,11 @@
     {% if pagamentos %}
       <table>
         <tr>
-          <tr>Data</tr>
-          <tr>Valor</tr>
-          <tr>Competência</tr>
-          <tr>Observação</tr>
+          <th>Data</tr>
+          <th>Valor</tr>
+          <th>Competência</tr>
+          <th>Observação</tr>
+          <th>Ações</th>
         </tr>
 
         {% for p in pagamentos %}
@@ -77,6 +78,16 @@
             <td>R$ {{ "%.2f" | format( p[2] ) }}</td>
             <td>{{ p[3] }}</td>
             <td>{{ p[4] }}</td>
+            <td>
+              <a href="/mensalidade/editar/{{ p[0] }}">Editar</a>
+              <form method="POST" 
+                action="/mensalidade/excluir/{{ p[0] }}"
+                style="display:inline;"
+                onsubmit="return confirm('Excluir esse Pagamento ?')>
+              <button type="submit">Excluir</button>
+              </form>
+              
+            </td>
           </tr>
         {% endfor %}
       </table>
