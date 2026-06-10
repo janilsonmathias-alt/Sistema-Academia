@@ -35,7 +35,7 @@ def buscar_pagamento_por_id(pagamento_id):
             FROM pagamentos_mensalidades
             WHERE id = %s
         """,(pagamento_id,))
-        returm cur.fetchone()
+        return cur.fetchone()
 
 def ajustar_fechamento_por_data(data_referencia, delta_valor):
     with get_connection as conn:
