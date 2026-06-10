@@ -154,7 +154,7 @@ def listar_pagamentos_do_aluno(aluno_id: int):
         cur.execute("""
             SELECT id, data_pagamento, valor, mes_referencia, observacao
             FROM pagamentos_mensalidade
-            WHERE id = %s
+            WHERE aluno_id = %s
             ORDER BY data_pagamento DESC, id DESC
         """,(aluno_id,))
         return cur.fetchall()
