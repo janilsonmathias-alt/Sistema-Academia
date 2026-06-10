@@ -337,10 +337,13 @@ def excluir_pagamento(id):
 
   with get_connection() as conn:
     cur = conn.cursor()
-    cur.execute(
-    
-    ***,)
-
+    cur.execute("""
+      DELETE FROM pagamentos_mensalidade
+      WHERE id = %s      
+    """,(id,))
+    conn.commit()
+  return redirect(f"/alunos/ficha/{pagamento[1]}")
+  
 
 @app.route("/fechamento", methods=["GET", "POST"])
 def fechamento():
