@@ -29,6 +29,17 @@
       <input type="number" step="0,01" name="valor" valor="{{ pagamento[3] }}">
       <br><br>
 
+      Competencia:
+      <input type="month" name="mes_referencia" value="{{ pagamento[4] }}">
+      <br><br>
+
+      Observação:
+      <input type="text" name="observacao" value="{{ pagamento[5] }} if pagamento[5] else ''">
+      <br><br>
+
+      <button type="submit">Salvar</button>
+      <a href="/alunos/ficha/aluno[0]">Voltar</a>
+      
       
   </body>  
 </html>
