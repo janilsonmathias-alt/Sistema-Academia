@@ -302,8 +302,8 @@ def editar_pagamento(id):
     cur.execute("""
       UPDATE pagamentos_mensalidade
       SET data_pagamento = %s,
-          valor = %s
-          mes_referencia = %s
+          valor = %s,
+          mes_referencia = %s,
           observacao = %s
       WHERE id = %s
     """,(nova_data, novo_valor, nova_competencia, nova_obs, id ))
