@@ -28,7 +28,7 @@ class date(_date):
     return datetime.now(ZoneInfo("America/Sao_Paulo")).date()
 
 def buscar_pagamento_por_id(pagamento_id):
-    with get_connection as conn:
+    with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
             SELECT id, aluno_id, data_pagamento, valor, mes_referencia, observacao
@@ -38,7 +38,7 @@ def buscar_pagamento_por_id(pagamento_id):
         return cur.fetchone()
 
 def ajustar_fechamento_por_data(data_referencia, delta_valor):
-    with get_connection as conn:
+    with get_connection() as conn:
         cur = conn.cursor()
         cur.execute("""
             SELECT id, faturamento
