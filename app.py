@@ -114,7 +114,7 @@ def alunos_novo():
     return redirect("/alunos")
   return render_template(
     "alunos_novo.html",
-    aluno = none,
+    aluno = None,
     form_action = "/alunos/novo")
 
 
