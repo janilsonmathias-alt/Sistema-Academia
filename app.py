@@ -52,7 +52,7 @@ def ajustar_fechamento_por_data(data_referencia, delta_valor):
 
             cur.execute("""
                 UPDATE fechamentos_diarios
-                FROM faturamento = %s
+                SET faturamento = %s
                 WHERE id = %s
             """,(novo_faturamento, fechamento[0]))
 
@@ -60,7 +60,7 @@ def ajustar_fechamento_por_data(data_referencia, delta_valor):
             cur.execute("""
                 INSERT INTO fechamentos_diarios
                 (data, faturamento, frequencia_alunos, observacao)
-                VALUE( %s, %s, %s, %s )
+                VALUES( %s, %s, %s, %s )
             """, (data_referencia, float(delta_valor), 0, "Mensalidade"))
 
             conn.commit()
