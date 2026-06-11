@@ -17,7 +17,12 @@
 				border-collapse: collapse;
 				table-layout: auto;
 				min-width: 800px;
-			}					
+			}
+			
+			tr:nth-child(even) td {
+				background: #f5f5f5;
+			}
+			
 			.table_container {
 				-webkit-overflow-scrolling: touch;
 				white-space: nowrape;
@@ -43,7 +48,7 @@
 		    </tr>      
 		        
 		    {% for lista in lista %}
-		    <tr>
+		    <tr onclick = "marcarLinha(this)">
 		        <td>{{ lista[0] }}</td>
 		        <td>{{ lista[1] }}</td>
 		        <td>{{ lista[2] }}</td>
@@ -62,6 +67,14 @@
 	<a href="/">Voltar ao Inicio</a><br><br>
 	
 	</body>
+
+	<script>
+		function marcaLinha(linha){
+			const linhas = document.querySelectAll("table tr");
+			linhas.forEach(tr => tr.classList.remove(linha_ativa));
+			linha.classList.add("linha_ativa");
+		}
+	</script>
   
 </html>
 
