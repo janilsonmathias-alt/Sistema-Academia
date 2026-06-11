@@ -102,7 +102,7 @@ def alunos_novo():
     telefone = request.form["telefone"]
     plano = request.form["plano"]
     data_da_matricula = date.today().strftime("%Y-%m-%d")
-    esta_ativo = bool(request.form.get("esta_ativo"))
+    esta_ativo = request.form.get("esta_ativo") == "on"
 
     with get_connection() as conn:
       cur = conn.cursor()  
@@ -127,7 +127,7 @@ def alunos_editar(id):
       nome = request.form["nome"]
       telefone = request.form["telefone"]
       plano = request.form["plano"]
-      esta_ativo = bool(request.form["esta_ativo"])
+      esta_ativo = request.form.get("esta_ativo") == "on"
           
       cur.execute("""
         UPDATE alunos
