@@ -27,6 +27,10 @@ class date(_date):
   def today(cls):
     return datetime.now(ZoneInfo("America/Sao_Paulo")).date()
 
+def classe_dia_semana(mes_ano, dia):
+  data = datetime.strptime(f"{mes_ano}-{int(dia):02d)}
+  
+
 def buscar_pagamento_por_id(pagamento_id):
     with get_connection() as conn:
         cur = conn.cursor()
