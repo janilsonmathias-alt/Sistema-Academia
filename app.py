@@ -3,7 +3,7 @@ from zoneinfo import ZoneInfo
 from flask import Flask, render_template, request, redirect
 #from datetime import datetime
 from db import init_db, get_connection
-
+import calendar
 from calculations import(
                     previsao_mes,
                     previsao_diaria,
@@ -28,6 +28,12 @@ class date(_date):
     return datetime.now(ZoneInfo("America/Sao_Paulo")).date()
 
 def classe_dia_semana(mes_ano, dia):
+  ano, mes = map(int, mes_ano.split("-"))
+  ultimo_dia = calendar.monthrange(ano, mes)[1]
+
+  if dia < 1 or dia > ultimo_dia:
+    return ""
+    
   data = datetime.strptime(f"{mes_ano}-{int(dia):02d}","%Y-%m-%d").date()
   classes = [
     "dow-seg", # segunda
