@@ -86,6 +86,34 @@
 			.status-devendo {
 				color: red !important;
 			}
+
+			.dow-seg {
+				background-color: #f3f8ff !important;
+			}
+
+			.dow-ter {
+				background-color: #f3fff6 !important;
+			}
+
+			.dow-qua {
+				background-color: #fffaf0 !important;
+			}
+
+			.dow-qui {
+				background-color: #f9f3ff !important;
+			}
+
+			.dow-sex {
+				background-color: #fff3f3 !important;
+			}
+
+			.dow-sab {
+				background-color: #f2f2f2 !important;
+			}
+
+			.dow-dom {
+				background-color: #eaf6f1 !impoprtant;
+			}
 		</style>
     </head>
     
@@ -118,8 +146,9 @@
                 <tr>
                     <td>{{ dia }}</td>
                     {% for mes in meses %}
-                        <td>R$ {{ "%.2f" | format(quadro[dia][mes].faturamento) if mes in quadro[dia] else '' }}</td>
-                        <td>{{ quadro[dia][mes].frequencia if mes in quadro[dia] else '' }}</td>
+						{% set classe = classe_dia_semana(mes, dia) %}
+                        <td class = "{{ classe }}"> R$ {{ "%.2f" | format(quadro[dia][mes].faturamento) if mes in quadro[dia] else '' }}</td>
+                        <td class = "{{ classe }}"> {{ quadro[dia][mes].frequencia if mes in quadro[dia] else '' }}</td>
                     {% endfor %}
                 </tr>
                 {% endfor %}
