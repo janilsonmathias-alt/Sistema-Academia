@@ -28,8 +28,18 @@ class date(_date):
     return datetime.now(ZoneInfo("America/Sao_Paulo")).date()
 
 def classe_dia_semana(mes_ano, dia):
-  data = datetime.strptime(f"{mes_ano}-{int(dia):02d)}
-  
+  data = datetime.strptime(f"{mes_ano}-{int(dia):02d)}","%Y-%m-%d").date()
+  classes = [
+    "dow-seg", # segunda
+    "dow-ter",
+    "dow-quar",
+    "dow-qui",
+    "dow-sex",
+    "dow-sab",
+    "dow-dom",
+  ]
+  return classes[data.weekday()]
+
 
 def buscar_pagamento_por_id(pagamento_id):
     with get_connection() as conn:
@@ -472,7 +482,7 @@ def resumo():
                                 ultimo_dia_da_lista_e_hj = ultimo_dia_da_lista,
                                 faturamento_ultimo_dia_da_lista = faturamento_ultimo_dia_da_lista,
                                 previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day))
-      
+                                classe_dia_semana = classe_dia_semana
     return render_template("resumo.html")
 
 
