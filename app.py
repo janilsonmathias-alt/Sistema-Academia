@@ -482,7 +482,7 @@ def resumo():
                                 ultimo_dia_da_lista_e_hj = ultimo_dia_da_lista,
                                 faturamento_ultimo_dia_da_lista = faturamento_ultimo_dia_da_lista,
                                 previsao_hoje = previsao_diaria(hoje.year, hoje.month, hoje.day)),
-                                classe_dia_semana = classe_dia_semana
+                                classe_dia_semana = classe_dia_semana(mes_ano, dia)
     return render_template("resumo.html")
 
 
