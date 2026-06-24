@@ -38,7 +38,7 @@ def classe_dia_semana(mes_ano, dia):
   classes = [
     "dow-seg", # segunda
     "dow-ter",
-    "dow-quar",
+    "dow-qua",
     "dow-qui",
     "dow-sex",
     "dow-sab",
