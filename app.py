@@ -475,7 +475,7 @@ def resumo():
           meses=dados_quadro_mensal["meses"],
           dias=dados_quadro_mensal["dias"],
           quadro=dados_quadro_mensal["quadro"],
-          totais_quadro=dados_quadro_mensal["totais"]
+          totais_quadro=dados_quadro_mensal["totais"],
           lista_resultado_dos_meses_corte_atual=comparativo_corte_atual,
           fechamentos=fechamentos,
           despesas=despesas,
