@@ -74,11 +74,22 @@ def quadro_mensal():
             "faturamento": float(faturamento),
             "frequencia": int(frequencia)
         }
+
+    totais = []
+    for linha in quadro:
+        soma = 0
+
+        for valor in linha:
+            if valor is not None:
+                soma += float(valor)
+
+        totaisd.append(soma)
     
     return {
         "meses": meses,
         "dias": range(1, 32),
-        "quadro": quadro
+        "quadro": quadro,
+        "totais": totais
     }
     
     
