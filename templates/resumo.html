@@ -153,11 +153,14 @@
             </table>
         </div>
 
-			
-		{% for i in range(meses|length) %}
-			{{ nome_meses[i] }} : R$ {{ "%.2f" | format(totais_quadro[i]) }}<br>
-		{% endfor %}
-
+		<table>	
+			{% for i in range(meses|length) %}
+				<tr>
+					<td> {{ nome_meses[i] }} </td>
+					<td> R$ {{ "%.2f" | format(totais_quadro[i]) }} </td>						
+				</tr>
+			{% endfor %}			
+		</table>
 			
         {% if lista_resultado_dos_meses_corte_atual %}
         <h3>Comparativo entre meses entre os dias: 01 - {{ dia }}</h3>
