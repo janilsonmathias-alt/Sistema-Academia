@@ -152,7 +152,23 @@
                 
             </table>
         </div>
-        
+
+		<table>
+			<tr>
+				{% for total in totais_quadro %}
+					<td style =<"
+						background: $ffe599;
+						font-weight: bold;
+						text-align: center;
+						border: 2px solid #666;
+						padding: 6px;">
+
+						Total<br>
+						R$ {{ "%.2f" | format(total) }}						
+					</td>
+				{% endfor %}
+			</tr>			
+		</table>
         
         
         {% if lista_resultado_dos_meses_corte_atual %}
