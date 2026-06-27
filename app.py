@@ -193,6 +193,7 @@ def mensalidade_nova():
                   
       aluno_id = int(aluno_id_str)
       data_pagamento = request.form["data_pagamento"]
+      plano = request.form["plano"]      
       valor = float(request.form["valor"])
       mes_referencia = request.form["mes_referencia"]
       observacao = request.form.get("observacao","").strip()
