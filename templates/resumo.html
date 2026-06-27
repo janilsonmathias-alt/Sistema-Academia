@@ -148,20 +148,14 @@
                         <td class = "{{ classe }}"> {{ quadro[dia][mes].frequencia if mes in quadro[dia] else '' }}</td>
                     {% endfor %}
                 </tr>
-                {% endfor %}
-
-				<tr>
-					<th>Total</th>
-					{% for total in totais_quadro %}
-						<th>R$ {{ "%.2f" | format(total) }}	</th>
-					{% endfor %}
-				</tr>			
+                {% endfor %}	
                 
             </table>
         </div>
 
+			
 		{% for i in range(meses|length) %}
-			{{ meses[i] }} : R$ {{ "%.2f" | format(totais_quadro[i]) }}<br>
+			{{ nome_meses[mes[5:7] | int -1] }} : R$ {{ "%.2f" | format(totais_quadro[i]) }}<br>
 		{% endfor %}
 
 			
