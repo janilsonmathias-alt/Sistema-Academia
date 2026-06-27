@@ -76,12 +76,12 @@ def quadro_mensal():
         }
 
     totais = []
-    for linha in quadro:
+    for mes in meses:
         soma = 0
 
-        for valor in linha:
-            if valor is not None:
-                soma += float(valor)
+        for dia in range(1, 32):
+            if mes in quadro[dia]:
+                soma += quadro[dia][mes]["faturamento"]
 
         totais.append(soma)
     
