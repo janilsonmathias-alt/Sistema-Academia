@@ -161,7 +161,7 @@
         </div>
 
 		{% for i in range(meses|length) %}
-			{{ meses[i] }} : R$ {{ "%.2f" | format(totais[i]) }}<br>
+			{{ meses[i] }} : R$ {{ "%.2f" | format(totais_quadro[i]) }}<br>
 		{% endfor %}
 
 			
