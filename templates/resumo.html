@@ -160,7 +160,11 @@
             </table>
         </div>
 
-        
+		{% for i in range(meses|lenght) %}
+			{{ meses[i] }} : R$ {{ "%.2f" | format(totais[i]) }}<br>
+		{% endfor %}
+
+			
         {% if lista_resultado_dos_meses_corte_atual %}
         <h3>Comparativo entre meses entre os dias: 01 - {{ dia }}</h3>
         <div class="corte_comparativo">
