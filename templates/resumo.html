@@ -151,18 +151,10 @@
                 {% endfor %}
 
 				<tr>
-				{% for total in totais_quadro %}
-					<td style =<"
-						background: $ffe599;
-						font-weight: bold;
-						text-align: center;
-						border: 2px solid #666;
-						padding: 6px;">
-
-						Total<br>
-						R$ {{ "%.2f" | format(total) }}						
-					</td>
-				{% endfor %}
+					<th>Total</th>
+					{% for total in totais_quadro %}
+						<th>R$ {{ "%.2f" | format(total) }}	</th>
+					{% endfor %}
 				</tr>			
                 
             </table>
