@@ -155,7 +155,7 @@
 
 			
 		{% for i in range(meses|length) %}
-			{{ nome_meses[mes[5:7] | int -1] }} : R$ {{ "%.2f" | format(totais_quadro[i]) }}<br>
+			{{ nome_meses[i] }} : R$ {{ "%.2f" | format(totais_quadro[i]) }}<br>
 		{% endfor %}
 
 			
