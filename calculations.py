@@ -83,7 +83,7 @@ def quadro_mensal():
             if valor is not None:
                 soma += float(valor)
 
-        totaisd.append(soma)
+        totais.append(soma)
     
     return {
         "meses": meses,
