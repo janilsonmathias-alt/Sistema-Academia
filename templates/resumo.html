@@ -160,7 +160,7 @@
             </table>
         </div>
 
-		{% for i in range(meses|lenght) %}
+		{% for i in range(meses|length) %}
 			{{ meses[i] }} : R$ {{ "%.2f" | format(totais[i]) }}<br>
 		{% endfor %}
 
