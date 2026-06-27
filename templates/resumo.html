@@ -149,12 +149,8 @@
                     {% endfor %}
                 </tr>
                 {% endfor %}
-                
-            </table>
-        </div>
 
-		<table>
-			<tr>
+				<tr>
 				{% for total in totais_quadro %}
 					<td style =<"
 						background: $ffe599;
@@ -167,9 +163,11 @@
 						R$ {{ "%.2f" | format(total) }}						
 					</td>
 				{% endfor %}
-			</tr>			
-		</table>
-        
+				</tr>			
+                
+            </table>
+        </div>
+
         
         {% if lista_resultado_dos_meses_corte_atual %}
         <h3>Comparativo entre meses entre os dias: 01 - {{ dia }}</h3>
