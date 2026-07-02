@@ -36,8 +36,13 @@
                 table-layout: auto;
             }
             
-            .quadro_mensal th,
-            .quadro_mensal td {
+            .quadro_mensal th: first-child,
+            .quadro_mensal td: first-child {
+				position: sticky;
+				left: 0;
+				background: #222;
+				color: white;
+				z-index: 2;
                 white-space: nowrap;
                 word-wrap: normal;
             }
