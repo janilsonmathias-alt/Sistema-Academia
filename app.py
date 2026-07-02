@@ -512,8 +512,17 @@ def resumo_dia(mes, dia):
       FROM pagamentos_mensalidade p
       JOIN aluno a
         ON a.id = p.aluno_id
-        
-    """)
+        WHERE p.data_pagamento = %s
+        ORDER BY a.nome        
+    """, (data,))
+
+    pagamento = cur.fetchall()
+
+  return render_template(
+    "resumo_dia.html",
+    data=data,
+    pagamentos=pagamentos
+  )
 
 
 
