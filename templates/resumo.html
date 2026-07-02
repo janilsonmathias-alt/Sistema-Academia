@@ -149,7 +149,19 @@
                     <td>{{ dia }}</td>
                     {% for mes in meses %}
 						{% set classe = classe_dia_semana(mes, dia) %}
-                        <td class = "{{ classe }}"> R$ {{ "%.2f" | format(quadro[dia][mes].faturamento) if mes in quadro[dia] else '' }}</td>
+                        <td class = "{{ classe }}"> 
+							{% if mes in quadro[dia] %}
+							<a href="/resumo/{{ mes }}/{{ dia }}"
+								style = "
+									display: block;
+									width: 100%;
+									height: 100%;
+									text-decoration: none;
+									color: black;
+									font-weight: bold;
+								">
+							</a>
+								R$ {{ "%.2f" | format(quadro[dia][mes].faturamento) if mes in quadro[dia] else '' }}</td>
                         <td class = "{{ classe }}"> {{ quadro[dia][mes].frequencia if mes in quadro[dia] else '' }}</td>
                     {% endfor %}
                 </tr>
