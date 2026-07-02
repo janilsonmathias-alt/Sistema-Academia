@@ -500,7 +500,7 @@ def resumo():
 @app.route("/resumo/dia/<mes>/<int:dia>")
 def resumo_dia(mes, dia):
   data = f"{mes}-{dia:02d}"
-  with get_conection() as conn:
+  with get_connection() as conn:
     cur = conn.cursor()
 
     cur.execute("""
