@@ -160,9 +160,10 @@
 									color: black;
 									font-weight: bold;
 								">
+					
+							R$ {{ "%.2f" | format(quadro[dia][mes].faturamento) if mes in quadro[dia] else '' }}</td>
 							</a>
 							{% endif %}
-							R$ {{ "%.2f" | format(quadro[dia][mes].faturamento) if mes in quadro[dia] else '' }}</td>
                         <td class = "{{ classe }}"> {{ quadro[dia][mes].frequencia if mes in quadro[dia] else '' }}</td>
                     {% endfor %}
                 </tr>
