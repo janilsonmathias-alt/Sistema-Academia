@@ -1,1 +1,20 @@
+<h2>Pagamento do {{ dia }}</h2>
 
+<table>
+  <tr>
+    <th>Aluno</th>
+    <th>Valor</th>
+    <th>Observação</th>
+  </tr> 
+  {% for p in pagamentos %}
+    <tr>
+      <td>{{ p[0] }}</td>
+      <td>R$ {{ "%.2f" | format( p[1] ) }}</td>
+      <td>{{ p[3] }}</td>
+    </tr>  
+  {% endfor %}
+
+  <br>
+
+  <a href="/resumo">Voltar</a>
+</table>
