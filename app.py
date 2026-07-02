@@ -497,6 +497,24 @@ def resumo():
 
 
 
+@app.route("/resumo/dia/<mes>/<int:dia>")
+def resumo_dia(mes, dia):
+  data = f"{mes}-{dia:02d}"
+  with get_conection() as conn:
+    cur = conn.cursor()
+
+    cur.execute("""
+      SELECT
+        a.nome,
+        p.valor,
+        p.data_pagamento,
+        p.observacao
+      FROM pagamentos_mensalidade p
+      JOIN aluno a
+        ON a.id = p.aluno_id
+        
+    """)
+
 
 
 @app.route("/alunos/listar_alunos_cadastrados/", methods=["GET"])
