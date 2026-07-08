@@ -58,7 +58,37 @@ def init_db():
            ALTER TABLE despesas
            ADD COLUMN IF NOT EXISTS pago BOOLEAN NOT NULL DEFAULT FALSE
         """)
-        
+
+        cur.execute("""
+           ALTER TABLE alunos
+           ADD COLUMN IF NOT EXISTS controlid_user_id INTEGER       
+        """)
+
+        cur.execute("""
+           ALTER TABLE alunos
+           ADD COLUMN IF NOT EXISTS ultimo_sync TIMESTAMP
+        """)
+
+        cur.execute("""
+           ALTER TABLE alunos
+           ADD COLUMN IF NOT EXISTS sicronizado BOOLEAN NOT NULL DEFAULT FALSE
+        """)
+
+        cur.execute("""
+           ALTER TABLE alunos
+           ADD COLUMN IF NOT EXISTS controlid_nome TEXT
+        """)
+
+        cur.execute("""
+           CREATE TABLE IF NOT EXISTS controle_acesso_log(
+              id SERIAL PRIMARY KEY,
+              aluno_id INTEGER NOT NULL,
+              status_enviado BOOLEAN,
+              mensagem TEXT,
+              data_sync TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+           )
+        """)
+      
         conn.commit()
          
 
