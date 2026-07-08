@@ -521,7 +521,7 @@ def resumo_dia(mes, dia):
   return render_template(
     "resumo_dia.html",
     data=data,
-    pagamentos=pagamentos
+    pagamentos=pagamento
   )
 
 
