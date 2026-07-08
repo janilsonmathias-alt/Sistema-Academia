@@ -518,10 +518,15 @@ def resumo_dia(mes, dia):
 
     pagamento = cur.fetchall()
 
+  total_arrecadado = sum(float(p[1]) for p in pagamentos )
+  quantidade_pagamentos = len(pagamentos)
+  
   return render_template(
     "resumo_dia.html",
     data=data,
-    pagamentos=pagamento
+    pagamentos=pagamento,
+    total_arrecadado,
+    quantidade_pagamentos
   )
 
 
