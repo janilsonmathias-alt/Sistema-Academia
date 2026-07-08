@@ -14,8 +14,10 @@
     </tr>  
   {% endfor %}
 
-  <br>
-  Total em Pagamentos: "%.2f" | format({{ total_arrecadado }})
-  Quantidade de pagantes: {{ quantidade_pagamentos }}
+  <br> 
 </table>
+<br>
+Total em Pagamentos: {{ "%.2f" | format(total_arrecadado ) }}
+Quantidade de pagantes: {{ quantidade_pagamentos }}
+<br>
 <a href="/resumo">Voltar</a>
