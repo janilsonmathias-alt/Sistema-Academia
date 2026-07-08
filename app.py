@@ -523,10 +523,10 @@ def resumo_dia(mes, dia):
   
   return render_template(
     "resumo_dia.html",
-    data=data,
-    pagamentos=pagamento,
-    total_arrecadado,
-    quantidade_pagamentos
+    data = data,
+    pagamentos = pagamento,
+    total_arrecadado = total_arrecadado,
+    quantidade_pagamentos = quantidade_pagamentos
   )
 
 
