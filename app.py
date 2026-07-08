@@ -510,7 +510,7 @@ def resumo_dia(mes, dia):
         p.data_pagamento,
         p.observacao
       FROM pagamentos_mensalidade p
-      JOIN aluno a
+      JOIN alunos a
         ON a.id = p.aluno_id
         WHERE p.data_pagamento = %s
         ORDER BY a.nome        
