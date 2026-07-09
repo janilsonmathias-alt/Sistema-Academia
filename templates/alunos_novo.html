@@ -16,12 +16,14 @@
     </head>
 
     <body>
+                
         <h1>{% if aluno %} Editar Aluno {% else %}  Cadastro de Aluno {% endif %}</h1>
 
         <form method = "post" action = "{{ form_action if form_action else '/alunos/novo' }}" >
             Nome: <input type = "text" name = "nome" value = "{{ aluno[1] if aluno else '' }}"><br><br>
             Telefone: <input type = "text" name = "telefone" value = "{{ aluno[2] if aluno else '' }}"><br><br>
             Plano: <input type = "text" name = "plano" value = "{{ aluno[3] if aluno else '' }}"><br><br>
+            ID ControlID: <input type = "number" name = "controlid_id" value="{{ aluno[6] if aluno else '' }}"><br><br>
             Ativo ? <input type = "checkbox" name = "esta_ativo" value = "{% if aluno and aluno[5] %}checked{% endif %}"><br><br>
 
             <button type = "submit">Salvar</button>
