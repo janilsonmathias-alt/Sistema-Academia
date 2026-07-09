@@ -9,7 +9,7 @@ from controlid_api import bloquear_usuario
 def atualizar_status_aluno(aluno_id):
   with get_connection() as conn:
     cur = conn.cursor()
-
+    
     cur.execute("""
       SELECT
         id,
@@ -18,8 +18,8 @@ def atualizar_status_aluno(aluno_id):
       FROM alunos
       WHERE id=%s
     """, (aluno_id,))
-
-  aluno = cur.fetchone()
+    
+    aluno = cur.fetchone()
 
   if not aluno:
     return
@@ -38,7 +38,7 @@ def atualizar_status_aluno(aluno_id):
   with get_connection() as conn:
     cur = conn.cursor()
     cur.execute("""
-      UPDATE
+      UPDATE alunos
         SET esta_ativo=%s,
             ultimo_sync = NOW()
 
@@ -56,7 +56,7 @@ def atualizar_status_aluno(aluno_id):
 
 
 def atualizar_todos_alunos():
-  with get_connectio() as conn:
+  with get_connection() as conn:
     cur = conn.cursor()
     cur.execute("""
       SELECT id
