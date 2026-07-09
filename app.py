@@ -254,6 +254,9 @@ def mensalidade_nova():
             
         """,(data_pagamento, valor, 0, texto_obs))
       conn.commit()
+
+      from status_aluno import atualizar_status_aluno
+      atualizar_satus_aluno(aluno_id)
       return redirect("/resumo")
 
 
@@ -335,6 +338,9 @@ def editar_pagamento(id):
         
     conn.commit()
 
+    from status_aluno import atualizar_status_aluno
+    atualizar_satus_aluno(aluno[0])
+    
     if data_antiga == nova_data:
       ajustar_fechamento_por_data(nova_data, novo_valor - valor_antigo)
     else:
@@ -367,6 +373,9 @@ def excluir_pagamento(id):
       WHERE id = %s      
     """,(id,))
     conn.commit()
+    
+    from status_aluno import atualizar_status_aluno
+    atualizar_satus_aluno(pagamento[1])
   return redirect(f"/alunos/ficha/{pagamento[1]}")
   
 
