@@ -1,4 +1,4 @@
-import request
+import requests
 
 CONTROLID_IP = "192.168.0.100"
 CONTROLID_PORTA = 80
@@ -15,7 +15,7 @@ def liberar_usuario(controlid_id):
     ]
   }
   
-  r = request.post(
+  r = requests.post(
     URL + "/user_set.cgi",
     json = dados,
     timeout = 10
@@ -34,7 +34,7 @@ def bloquear_usuario(controlid_id):
     ]
   }
 
-  r = request.post(
+  r = requests.post(
     URL + "/user_set.cgi",
     json = dados,
     timeout = 10
