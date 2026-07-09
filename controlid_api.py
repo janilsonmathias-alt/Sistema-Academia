@@ -1,4 +1,4 @@
-import requests
+import request
 
 CONTROLID_IP = "192.168.0.100"
 CONTROLID_PORTA = 80
