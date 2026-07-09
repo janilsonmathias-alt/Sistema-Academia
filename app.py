@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, redirect
 #from datetime import datetime
 from db import init_db, get_connection
 import calendar
-from status_aluno import atualizar_todos_alunos
+from status_alunos import atualizar_todos_alunos
 from calculations import(
                     previsao_mes,
                     previsao_diaria,
