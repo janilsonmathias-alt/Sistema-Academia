@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect
 #from datetime import datetime
 from db import init_db, get_connection
 import calendar
+from status_aluno import atualizar_todos_alunos
 from calculations import(
                     previsao_mes,
                     previsao_diaria,
@@ -20,6 +21,12 @@ from calculations import(
                     listar_pagamentos_do_aluno,
                     status_mensalidade_do_aluno
 )
+
+
+#import os
+init_db()
+atualizar_todos_alunos()
+app = Flask(__name__)
 
 
 class date(_date):
@@ -88,9 +95,6 @@ def ajustar_fechamento_por_data(data_referencia, delta_valor):
             
 
 
-#import os
-app = Flask(__name__)
-init_db()
 
 
 
