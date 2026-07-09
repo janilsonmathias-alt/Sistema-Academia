@@ -61,7 +61,7 @@ def init_db():
 
         cur.execute("""
            ALTER TABLE alunos
-           ADD COLUMN IF NOT EXISTS controlid_user_id INTEGER       
+           ADD COLUMN IF NOT EXISTS controlid_id INTEGER       
         """)
 
         cur.execute("""
