@@ -364,7 +364,7 @@ def editar_pagamento(id):
     "mensalidade_editar.html",
     pagamento = pagamento,
     aluno = aluno,
-    form_action = f"/me1nsalidade/editar/{id}"
+    form_action = f"/mensalidade/editar/{id}"
   )
 
 
