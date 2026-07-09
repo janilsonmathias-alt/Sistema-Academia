@@ -160,7 +160,7 @@ def alunos_editar(id):
       if controlid_id == '':
         controid_id = None
       else:
-        controlid_id = int("controlid_id"
+        controlid_id = int("controlid_id")
       esta_ativo = "esta_ativo" in request.form
           
       cur.execute("""
