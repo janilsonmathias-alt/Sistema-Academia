@@ -125,15 +125,20 @@ def alunos_novo():
     nome = request.form["nome"]
     telefone = request.form["telefone"]
     plano = request.form["plano"]
+    controlid_id = request.form.get("controlid_id")
+    if controlid_id == '':
+      controlid_id = None
+    else:
+      controlid_id = int(controlid_id) 
     data_da_matricula = date.today().strftime("%Y-%m-%d")
     esta_ativo = "esta_ativo" in request.form
 
     with get_connection() as conn:
       cur = conn.cursor()  
       cur.execute("""
-          INSERT INTO alunos( nome, telefone, plano, data_da_matricula, esta_ativo)
-          VALUES(%s, %s, %s, %s, %s)
-      """,(nome, telefone, plano, data_da_matricula, esta_ativo))
+          INSERT INTO alunos( nome, telefone, plano, data_da_matricula, esta_ativo, controlid_id)
+          VALUES(%s, %s, %s, %s, %s, %s)
+      """,(nome, telefone, plano, data_da_matricula, esta_ativo, controlid_id))
       conn.commit()
     return redirect("/alunos")
   return render_template(
@@ -151,6 +156,11 @@ def alunos_editar(id):
       nome = request.form["nome"]
       telefone = request.form["telefone"]
       plano = request.form["plano"]
+      controlid_id = request.form.get("controlid_id")
+      if controlid_id == '':
+        controid_id = None
+      else:
+        controlid_id = int("controlid_id"
       esta_ativo = "esta_ativo" in request.form
           
       cur.execute("""
@@ -159,14 +169,15 @@ def alunos_editar(id):
           telefone = %s,
           plano = %s,
           esta_ativo = %s
+          controlid_id = %s
         WHERE id = %s
-      """, (nome, telefone, plano, esta_ativo, id))
+      """, (nome, telefone, plano, esta_ativo, controlid_id, id))
       conn.commit()
 
       return redirect(f"/alunos/ficha/{ id }")
 
     cur.execute("""
-      SELECT id, nome, telefone, plano, data_da_matricula, esta_ativo
+      SELECT id, nome, telefone, plano, data_da_matricula, esta_ativo, controlid_id
       FROM alunos
       WHERE id = %s
     """, (id,))
