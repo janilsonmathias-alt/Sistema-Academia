@@ -158,9 +158,9 @@ def alunos_editar(id):
       plano = request.form["plano"]
       controlid_id = request.form.get("controlid_id")
       if controlid_id == '':
-        controid_id = None
+        controlid_id = None
       else:
-        controlid_id = int("controlid_id")
+        controlid_id = int(controlid_id)
       esta_ativo = "esta_ativo" in request.form
           
       cur.execute("""
@@ -266,8 +266,8 @@ def mensalidade_nova():
         """,(data_pagamento, valor, 0, texto_obs))
       conn.commit()
 
-      from status_aluno import atualizar_status_aluno
-      atualizar_satus_aluno(aluno_id)
+      from status_alunos import atualizar_status_aluno
+      atualizar_status_aluno(aluno_id)
       return redirect("/resumo")
 
 
@@ -349,8 +349,8 @@ def editar_pagamento(id):
         
     conn.commit()
 
-    from status_aluno import atualizar_status_aluno
-    atualizar_satus_aluno(aluno[0])
+    from status_alunos import atualizar_status_aluno
+    atualizar_status_aluno(aluno[0])
     
     if data_antiga == nova_data:
       ajustar_fechamento_por_data(nova_data, novo_valor - valor_antigo)
@@ -385,8 +385,8 @@ def excluir_pagamento(id):
     """,(id,))
     conn.commit()
     
-    from status_aluno import atualizar_status_aluno
-    atualizar_satus_aluno(pagamento[1])
+    from status_alunos import atualizar_status_aluno
+    atualizar_status_aluno(pagamento[1])
   return redirect(f"/alunos/ficha/{pagamento[1]}")
   
 
