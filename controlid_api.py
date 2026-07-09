@@ -10,7 +10,7 @@ def liberar_usuario(controlid_id):
     "users":[
       { 
         "id" : controlid_id,
-        "registration_enable" : TRUE
+        "registration_enable" : True
       }
     ]
   }
@@ -29,7 +29,7 @@ def bloquear_usuario(controlid_id):
     "users":[
       {
         "id" : controlid_id,
-        "registration_enable" : FALSE
+        "registration_enable" : False
       }
     ]
   }
