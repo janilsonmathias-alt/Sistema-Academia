@@ -168,7 +168,7 @@ def alunos_editar(id):
         SET nome = %s,
           telefone = %s,
           plano = %s,
-          esta_ativo = %s
+          esta_ativo = %s,
           controlid_id = %s
         WHERE id = %s
       """, (nome, telefone, plano, esta_ativo, controlid_id, id))
