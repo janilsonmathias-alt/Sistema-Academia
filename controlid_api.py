@@ -3,7 +3,7 @@ import requests
 CONTROLID_IP = "192.168.0.100"
 CONTROLID_PORTA = 80
 
-URL = f"http://{{CONTROLID_IP}}:{{CONTROLID_PORTA}}"
+URL = f"http://{CONTROLID_IP}:{CONTROLID_PORTA}"
 
 def liberar_usuario(controlid_id):
   dados = {
