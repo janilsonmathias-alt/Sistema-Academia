@@ -11,3 +11,9 @@ def get_db_connection():
   return psycopg2.connect(DATABASE_URL)
 
 @app.route("/login.fcgi", methods=["POST"])
+def login():
+  data = request.get_json()
+  usuario = data.get("usuario")
+  senha = data.get("senha")
+  
+if usuario == "admin" and senha == "senha123"
