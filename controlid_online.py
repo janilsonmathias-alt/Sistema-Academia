@@ -16,4 +16,25 @@ def login():
   usuario = data.get("usuario")
   senha = data.get("senha")
   
-if usuario == "admin" and senha == "senha123"
+if usuario == "admin" and senha == "admin123":
+  token = "sessao_valida_token"
+  conn = get_db_connection()
+  cur = conn.cursor()
+  cur.execute("""
+    "INSERT INTO sessions (token, valid, validate) VALUES (%s, %s, NOW() + interval '1 hour')",
+    (token, True)
+  """)
+  conn.commit()
+  conn.close()
+  return jsonify({"sessions" : token})
+else:
+  return jsonify({"error" : "Invalid credentials"}), 401
+
+
+@app.rout("/session_is_valid.fcgi", methods = ["POST"])
+def session_is_valid():
+  
+
+              
+              
+       
