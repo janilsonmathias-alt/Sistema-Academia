@@ -57,6 +57,132 @@ def session_is_valid():
     "valid" : bool(r or r[0])
   })
   
-              
-              
-       
+
+@app.route("/user_identified.cfgi", methods = ["POST"])
+def user_identified():
+  dados = request.get_json(silent = True) or {}
+
+  print("=====================================")
+  print("         C O N T R O L  I D")
+  print(dados)
+  print("=====================================")
+
+  controlid_id = dados.get("user_id")
+
+  if controlid_id is None:
+    return jsonify({
+      "access" : "denied"
+    })
+
+
+  with get_connection() as conn:
+    cur = conn.cursor()
+    cur.execute("""
+      SELECT id
+      FROM alunos
+      WHERE controlid_id = %s
+    """,(controlid_id,))
+
+    aluno = cur.fetchone()
+    
+    if aluno is None:
+      return jsonifY({
+        "access" : "denied"
+      })
+
+    status = status_mensalidade_do_aluno(
+      aluno[0],
+      datetime.today().date()
+    )
+
+    permitido = status["status"] != "atrasado"
+
+    cur.execute("""
+      CREATE TABLE IF NOT EXISTS controlid_eventos(
+        id SERIAL PRIMARY KEY,
+        aluno_id INTEGER,
+        controlid_id INTEGER,
+        data_evento TIMESTAMP,
+        payload JSONB,
+        permitido BOOLEAN        
+      )
+    """)
+
+    cur.exetuce("""
+      INSERT INTO controlid_eventos
+      (
+        aluno_id,
+        controlid_id,
+        data_evento,
+        payload,
+        permitido
+      )    
+    VALUES
+    (
+      %s,
+      %s,
+      NOW(),
+      %s,
+      %s
+    )
+    """, (
+      aluno[0],
+      controlid_id,
+      jsonify(dados).get_data( as_Text = True)
+      permitido,
+    ))
+
+    conn.commit()
+
+
+  if permitido:
+    return jsonify({
+      "access" : "granted"
+    })
+
+  return jsonify({
+    "access" : "denied"
+  })
+  
+
+
+@app.route("/new_user_identified.cfgi", methods = ["POST"]
+def new_user_identified():
+  dados = request.get_json(silent = True) or {}
+
+  print(dados)
+  
+  return jsonify({
+    "status" : "registered"
+  })
+
+
+
+@app.route("/monitor.cfgi", methods = ["POST"])
+def monitor():
+  dados = request.get_json(silent = True) or {}
+
+  print(dados)
+
+  return jsonify({
+    "ack" : True
+  })
+
+
+@app.route("/push.cfgi", methods = ["POST"])
+def push():
+  return jsonify({})
+
+
+@app.route("/alarms.cfgi", methods = ["POST"])
+def alarms():
+
+  dados = request.get_json(silent = True) or {}
+
+  print(dados)
+
+  return jsonify({
+    "ack" : True
+  })
+
+
