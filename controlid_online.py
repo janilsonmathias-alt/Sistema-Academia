@@ -34,9 +34,9 @@ def registrar_rotas_controlid(app):
 
     conn.commit()
 
-  return jsonify({
-    "session" : token
-  })
+    return jsonify({
+      "session" : token
+    })
 
 
   @app.route("/session_is_valid.fcgi", methods = ["POST"])
