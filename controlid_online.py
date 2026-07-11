@@ -7,7 +7,7 @@ from calculations import status_mensalidade_do_aluno
 
   
 def registrar_rotas_controlid(app):
-  @app.route("/login.cfgi", methods = ["POST"] )
+  @app.route("/login.fcgi", methods = ["POST"] )
   def controlid_login():
     dados = request.get_json(silent = True) or {}
 
@@ -58,7 +58,7 @@ def registrar_rotas_controlid(app):
     })
     
   
-  @app.route("/user_identified.cfgi", methods = ["POST"])
+  @app.route("/user_identified.fcgi", methods = ["POST"])
   def user_identified():
     dados = request.get_json(silent = True) or {}
   
@@ -146,7 +146,7 @@ def registrar_rotas_controlid(app):
     
   
   
-  @app.route("/new_user_identified.cfgi", methods = ["POST"])
+  @app.route("/new_user_identified.fcgi", methods = ["POST"])
   def new_user_identified():
     dados = request.get_json(silent = True) or {}
   
@@ -158,7 +158,7 @@ def registrar_rotas_controlid(app):
   
   
   
-  @app.route("/monitor.cfgi", methods = ["POST"])
+  @app.route("/monitor.fcgi", methods = ["POST"])
   def monitor():
     dados = request.get_json(silent = True) or {}
   
@@ -169,12 +169,12 @@ def registrar_rotas_controlid(app):
     })
   
   
-  @app.route("/push.cfgi", methods = ["POST"])
+  @app.route("/push.fcgi", methods = ["POST"])
   def push():
     return jsonify({})
   
   
-  @app.route("/alarms.cfgi", methods = ["POST"])
+  @app.route("/alarms.fcgi", methods = ["POST"])
   def alarms():
   
     dados = request.get_json(silent = True) or {}
@@ -187,7 +187,7 @@ def registrar_rotas_controlid(app):
   
   
         
-  @app.route("/set_configuration", methods = ["POST"])
+  @app.route("/set_configuration.fcgi", methods = ["POST"])
   def set_configuration():
   
      dados = request.get_json(silent = True) or {}  
@@ -200,7 +200,7 @@ def registrar_rotas_controlid(app):
      })
   
   
-  @app.route("/debug.cfgi", methods = ["GET", "POST"])
+  @app.route("/debug.fcgi", methods = ["GET", "POST"])
   def debug():
      print("=========================")
      print("DEBUG CONTROL ID - KIU")
