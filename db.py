@@ -113,34 +113,4 @@ def init_db():
          
 
         
-      
-@app.route("/set_configuration", methods = ["POST"])
-def set_configuration():
 
-   dados = request.get_json(silent = True) or {}  
-
-   print("CONFIGURAÇÃO RECEBIDA")
-   print(dados)
-
-   return jsonify({
-      "status" : "ok"
-   })
-
-
-@app.route("/debug.cfgi", methods = ["GET", "POST"])
-def debug():
-   print("=========================")
-   print("DEBUG CONTROL ID - KIU")
-   print(request.methods)
-   print(request.headers)
-
-   try:
-      print(request.get_json())
-   except:
-      print(request.data)
-   
-   print("=========================")          
-            
-   return jsonify({
-      "ok" : True
-   })
