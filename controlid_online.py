@@ -191,15 +191,36 @@ def registrar_rotas_controlid(app):
         
   @app.route("/set_configuration.fcgi", methods = ["POST"])
   def set_configuration():
+
+    print("=" * 60)
+    print("CONFIGURAÇÃO RECEBIDA")
+    print("Headers:")
+    print(dict(request.headers))
+
+    print("\nJSON:")
+    print(request.get_json(silent=True))
+
+    print("\nFORM:")
+    print(request.form.to_dict())
+
+    print("\nRAW:")
+    print(request.data.decode("utf-8", errors="ignore"))
+
+    print("=" * 60)
+
+    return jsonify({
+        "success": True
+    })
+
+    
+     #dados = request.get_json(silent = True) or {}  
   
-     dados = request.get_json(silent = True) or {}  
+     #print("CONFIGURAÇÃO RECEBIDA")
+     #print(dados)
   
-     print("CONFIGURAÇÃO RECEBIDA")
-     print(dados)
-  
-     return jsonify({
-        "status" : "ok"
-     })
+     #return jsonify({
+        #"status" : "ok"
+     #})
   
   
   @app.route("/debug.fcgi", methods = ["GET", "POST"])
