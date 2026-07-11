@@ -1,3 +1,4 @@
+import json
 from flask import request, jsonify
 from datetime import datetime
 import secrets
@@ -54,7 +55,7 @@ def registrar_rotas_controlid(app):
       r = cur.fetchone()
   
     return jsonify({
-      "valid" : bool(r or r[0])
+      "valid" : bool(r and r[0])
     })
     
   
@@ -86,7 +87,7 @@ def registrar_rotas_controlid(app):
       aluno = cur.fetchone()
       
       if aluno is None:
-        return jsonifY({
+        return jsonify({
           "access" : "denied"
         })
   
@@ -108,7 +109,7 @@ def registrar_rotas_controlid(app):
         )
       """)
   
-      cur.exetuce("""
+      cur.execute("""
         INSERT INTO controlid_eventos
         (
           aluno_id,
@@ -128,7 +129,8 @@ def registrar_rotas_controlid(app):
       """, (
         aluno[0],
         controlid_id,
-        jsonify(dados).get_data(as_Text = True),
+        json.dumps(dados),
+        #jsonify(dados).get_data(as_text = True),
         permitido
       ))
   
@@ -204,7 +206,7 @@ def registrar_rotas_controlid(app):
   def debug():
      print("=========================")
      print("DEBUG CONTROL ID - KIU")
-     print(request.methods)
+     print(request.method)
      print(request.headers)
   
      try:
