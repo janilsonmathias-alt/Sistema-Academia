@@ -146,7 +146,7 @@ def user_identified():
   
 
 
-@app.route("/new_user_identified.cfgi", methods = ["POST"]
+@app.route("/new_user_identified.cfgi", methods = ["POST"])
 def new_user_identified():
   dados = request.get_json(silent = True) or {}
 
