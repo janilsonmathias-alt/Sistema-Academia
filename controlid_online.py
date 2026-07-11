@@ -128,8 +128,8 @@ def user_identified():
     """, (
       aluno[0],
       controlid_id,
-      jsonify(dados).get_data( as_Text = True)
-      permitido,
+      jsonify(dados).get_data(as_Text = True),
+      permitido
     ))
 
     conn.commit()
