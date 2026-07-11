@@ -133,5 +133,14 @@ def debug():
    print("DEBUG CONTROL ID - KIU")
    print(request.methods)
    print(request.headers)
-         
-        
+
+   try:
+      print(request.get_json())
+   except:
+      print(request.data)
+   
+   print("=========================")          
+            
+   return jsonify({
+      "ok" : True
+   })
