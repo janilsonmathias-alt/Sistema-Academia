@@ -39,7 +39,7 @@ def registrar_rotas_controlid(app):
   })
 
 
-@app.rout("/session_is_valid.fcgi", methods = ["POST"])
+@app.route("/session_is_valid.fcgi", methods = ["POST"])
 def session_is_valid():
   dados = request.get_json(silent = True) or {}
   token = dados.get("sessions")
