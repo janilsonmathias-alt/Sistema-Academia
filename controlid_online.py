@@ -5,7 +5,7 @@ from db import get_connection
 from calculations import status_mensalidade_do_aluno
 
 
-
+  
 def registrar_rotas_controlid(app):
   @app.route("/login.cfgi", methods = ["POST"] )
   def controlid_login():
@@ -39,181 +39,181 @@ def registrar_rotas_controlid(app):
   })
 
 
-@app.route("/session_is_valid.fcgi", methods = ["POST"])
-def session_is_valid():
-  dados = request.get_json(silent = True) or {}
-  token = dados.get("sessions")
-
-  with get_connection() as conn:
-    cur = conn.cursor()
-    cur.execute("""
-      SELECT valido
-      FROM controlid_sessions
-      WHERE token = %s      
-    """,(token,))
-    r = cur.fetchone()
-
-  return jsonify({
-    "valid" : bool(r or r[0])
-  })
+  @app.route("/session_is_valid.fcgi", methods = ["POST"])
+  def session_is_valid():
+    dados = request.get_json(silent = True) or {}
+    token = dados.get("sessions")
   
-
-@app.route("/user_identified.cfgi", methods = ["POST"])
-def user_identified():
-  dados = request.get_json(silent = True) or {}
-
-  print("=====================================")
-  print("         C O N T R O L  I D")
-  print(dados)
-  print("=====================================")
-
-  controlid_id = dados.get("user_id")
-
-  if controlid_id is None:
+    with get_connection() as conn:
+      cur = conn.cursor()
+      cur.execute("""
+        SELECT valido
+        FROM controlid_sessions
+        WHERE token = %s      
+      """,(token,))
+      r = cur.fetchone()
+  
+    return jsonify({
+      "valid" : bool(r or r[0])
+    })
+    
+  
+  @app.route("/user_identified.cfgi", methods = ["POST"])
+  def user_identified():
+    dados = request.get_json(silent = True) or {}
+  
+    print("=====================================")
+    print("         C O N T R O L  I D")
+    print(dados)
+    print("=====================================")
+  
+    controlid_id = dados.get("user_id")
+  
+    if controlid_id is None:
+      return jsonify({
+        "access" : "denied"
+      })
+  
+  
+    with get_connection() as conn:
+      cur = conn.cursor()
+      cur.execute("""
+        SELECT id
+        FROM alunos
+        WHERE controlid_id = %s
+      """,(controlid_id,))
+  
+      aluno = cur.fetchone()
+      
+      if aluno is None:
+        return jsonifY({
+          "access" : "denied"
+        })
+  
+      status = status_mensalidade_do_aluno(
+        aluno[0],
+        datetime.today().date()
+      )
+  
+      permitido = status["status"] != "atrasado"
+  
+      cur.execute("""
+        CREATE TABLE IF NOT EXISTS controlid_eventos(
+          id SERIAL PRIMARY KEY,
+          aluno_id INTEGER,
+          controlid_id INTEGER,
+          data_evento TIMESTAMP,
+          payload JSONB,
+          permitido BOOLEAN        
+        )
+      """)
+  
+      cur.exetuce("""
+        INSERT INTO controlid_eventos
+        (
+          aluno_id,
+          controlid_id,
+          data_evento,
+          payload,
+          permitido
+        )    
+      VALUES
+      (
+        %s,
+        %s,
+        NOW(),
+        %s,
+        %s
+      )
+      """, (
+        aluno[0],
+        controlid_id,
+        jsonify(dados).get_data(as_Text = True),
+        permitido
+      ))
+  
+      conn.commit()
+  
+  
+    if permitido:
+      return jsonify({
+        "access" : "granted"
+      })
+  
     return jsonify({
       "access" : "denied"
     })
-
-
-  with get_connection() as conn:
-    cur = conn.cursor()
-    cur.execute("""
-      SELECT id
-      FROM alunos
-      WHERE controlid_id = %s
-    """,(controlid_id,))
-
-    aluno = cur.fetchone()
     
-    if aluno is None:
-      return jsonifY({
-        "access" : "denied"
-      })
-
-    status = status_mensalidade_do_aluno(
-      aluno[0],
-      datetime.today().date()
-    )
-
-    permitido = status["status"] != "atrasado"
-
-    cur.execute("""
-      CREATE TABLE IF NOT EXISTS controlid_eventos(
-        id SERIAL PRIMARY KEY,
-        aluno_id INTEGER,
-        controlid_id INTEGER,
-        data_evento TIMESTAMP,
-        payload JSONB,
-        permitido BOOLEAN        
-      )
-    """)
-
-    cur.exetuce("""
-      INSERT INTO controlid_eventos
-      (
-        aluno_id,
-        controlid_id,
-        data_evento,
-        payload,
-        permitido
-      )    
-    VALUES
-    (
-      %s,
-      %s,
-      NOW(),
-      %s,
-      %s
-    )
-    """, (
-      aluno[0],
-      controlid_id,
-      jsonify(dados).get_data(as_Text = True),
-      permitido
-    ))
-
-    conn.commit()
-
-
-  if permitido:
+  
+  
+  @app.route("/new_user_identified.cfgi", methods = ["POST"])
+  def new_user_identified():
+    dados = request.get_json(silent = True) or {}
+  
+    print(dados)
+    
     return jsonify({
-      "access" : "granted"
+      "status" : "registered"
     })
-
-  return jsonify({
-    "access" : "denied"
-  })
   
-
-
-@app.route("/new_user_identified.cfgi", methods = ["POST"])
-def new_user_identified():
-  dados = request.get_json(silent = True) or {}
-
-  print(dados)
   
-  return jsonify({
-    "status" : "registered"
-  })
-
-
-
-@app.route("/monitor.cfgi", methods = ["POST"])
-def monitor():
-  dados = request.get_json(silent = True) or {}
-
-  print(dados)
-
-  return jsonify({
-    "ack" : True
-  })
-
-
-@app.route("/push.cfgi", methods = ["POST"])
-def push():
-  return jsonify({})
-
-
-@app.route("/alarms.cfgi", methods = ["POST"])
-def alarms():
-
-  dados = request.get_json(silent = True) or {}
-
-  print(dados)
-
-  return jsonify({
-    "ack" : True
-  })
-
-
-      
-@app.route("/set_configuration", methods = ["POST"])
-def set_configuration():
-
-   dados = request.get_json(silent = True) or {}  
-
-   print("CONFIGURAÇÃO RECEBIDA")
-   print(dados)
-
-   return jsonify({
-      "status" : "ok"
-   })
-
-
-@app.route("/debug.cfgi", methods = ["GET", "POST"])
-def debug():
-   print("=========================")
-   print("DEBUG CONTROL ID - KIU")
-   print(request.methods)
-   print(request.headers)
-
-   try:
-      print(request.get_json())
-   except:
-      print(request.data)
-   
-   print("=========================")          
-            
-   return jsonify({
-      "ok" : True
-   })
+  
+  @app.route("/monitor.cfgi", methods = ["POST"])
+  def monitor():
+    dados = request.get_json(silent = True) or {}
+  
+    print(dados)
+  
+    return jsonify({
+      "ack" : True
+    })
+  
+  
+  @app.route("/push.cfgi", methods = ["POST"])
+  def push():
+    return jsonify({})
+  
+  
+  @app.route("/alarms.cfgi", methods = ["POST"])
+  def alarms():
+  
+    dados = request.get_json(silent = True) or {}
+  
+    print(dados)
+  
+    return jsonify({
+      "ack" : True
+    })
+  
+  
+        
+  @app.route("/set_configuration", methods = ["POST"])
+  def set_configuration():
+  
+     dados = request.get_json(silent = True) or {}  
+  
+     print("CONFIGURAÇÃO RECEBIDA")
+     print(dados)
+  
+     return jsonify({
+        "status" : "ok"
+     })
+  
+  
+  @app.route("/debug.cfgi", methods = ["GET", "POST"])
+  def debug():
+     print("=========================")
+     print("DEBUG CONTROL ID - KIU")
+     print(request.methods)
+     print(request.headers)
+  
+     try:
+        print(request.get_json())
+     except:
+        print(request.data)
+     
+     print("=========================")          
+              
+     return jsonify({
+        "ok" : True
+     })
