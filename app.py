@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, redirect
 from db import init_db, get_connection
 import calendar
 from status_alunos import atualizar_todos_alunos
+from controlid_online import registrar_rotas_controlid
 from calculations import(
                     previsao_mes,
                     previsao_diaria,
@@ -27,6 +28,8 @@ from calculations import(
 init_db()
 atualizar_todos_alunos()
 app = Flask(__name__)
+
+registrar_rotas_controlid(app)
 
 
 class date(_date):
