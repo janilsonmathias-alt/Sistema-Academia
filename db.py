@@ -22,7 +22,7 @@ def init_db():
 
         cur.execute("""
             CREATE TABLE IF NOT EXISTS despesas(
-                id SERIAL PRIMARY KEY,
+               id SERIAL PRIMARY KEY,
                data TEXT NOT NULL,
                tipo TEXT NOT NULL,
                categoria TEXT NOT NULL,
@@ -88,8 +88,29 @@ def init_db():
               data_sync TIMESTAMP DEFAULT CURRENT_TIMESTAMP
            )
         """)
-      
+
+
+        cur.execute("""
+           CREATE TABLE IF NOT EXISTS controlid_sessions(
+              token TEXT PRIMARY KEY,
+              criado_em TIMESTAMP NOT NULL,
+              valido BOOLEAN NOT NULL
+           )
+        """)
+
+        cur.execute("""
+           CREATE TABLE IF NOT EXISTS controlid_eventos(
+              id SERIAL PRIMARY KEY,
+              aluno_id INTEGER,
+              controlid_id INTEGER,
+              data_evento TIMESTAMP,
+              payload JSONB,
+              permitido BOOLEAN
+           )
+        """)
+     
         conn.commit()
          
 
+        
       
