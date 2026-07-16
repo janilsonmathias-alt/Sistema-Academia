@@ -126,7 +126,29 @@ def alunos():
 @app.route("/alunos/importar", methods= ["GET"],["POST"])
 def importar_alunos():
   if request.method == "POST":
-    
+    arquivo = request.files.get("arquivo")
+
+if not arquivo:
+  return "Nenhum arquivo enviado"
+
+conteudo = arquivo.read().decode("urf-8-sig")
+
+leitor = csv.reader(
+  io.StringIO("conteudo"), 
+  delimiter=";"  
+)
+
+with get_connection() as conn:
+  cur = conn.cursor()
+
+  for linha in leitor:
+    if len(linha) < 4:
+      continue
+
+  nome = linha[0].strip()
+  telefone = linha[1].strip()
+  
+
 
 @app.route("/alunos/novo", methods = ["GET", "POST"] )
 def alunos_novo():
