@@ -1,3 +1,5 @@
+import csv
+import io
 from datetime import date as _date, datetime
 from zoneinfo import ZoneInfo
 from flask import Flask, render_template, request, redirect
@@ -119,6 +121,11 @@ def financeiro():
 @app.route("/alunos")
 def alunos():
     return render_template("alunos.html")
+
+
+@app.route("/alunos/importar", methods= ["GET"],["POST"])
+def importar_alunos():
+  if request.method == "POST":
     
 
 @app.route("/alunos/novo", methods = ["GET", "POST"] )
