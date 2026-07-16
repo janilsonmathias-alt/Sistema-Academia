@@ -23,6 +23,23 @@
         <h1>Alunos</h1>
 
         <a href="/alunos/novo">Cadastrar Novo Aluno</a><br><br>
+        <form action="/alunos/importar" method="post" enctype="multipart/form-data">
+            <input 
+                type = "file"
+                id = "arquivo"
+                name = "arquivo"
+                accept = ".csv"
+                style = "display:none"
+                onchange = "this.form.submit()">
+            <button
+                type = "button"
+                onclieck = document.getElementeById('arquivo').click()>
+
+                Importar Lista de Alunos
+
+            </button>
+        </form>        
+        <br><br>        
         <a href="/alunos/listar_alunos_cadastrados">Lista de Alunos Cadastrados</a><br><br>
         <a href="/mensalidade/nova">Pagar Mensalidade</a><br><br>
         <a href="/">Voltar ao Inicio</a><br><br>
