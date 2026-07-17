@@ -128,27 +128,63 @@ def importar_alunos():
   if request.method == "POST":
     arquivo = request.files.get("arquivo")
 
-if not arquivo:
-  return "Nenhum arquivo enviado"
-
-conteudo = arquivo.read().decode("urf-8-sig")
-
-leitor = csv.reader(
-  io.StringIO("conteudo"), 
-  delimiter=";"  
-)
-
-with get_connection() as conn:
-  cur = conn.cursor()
-
-  for linha in leitor:
-    if len(linha) < 4:
-      continue
-
-  nome = linha[0].strip()
-  telefone = linha[1].strip()
+    if not arquivo:
+      return "Nenhum arquivo enviado"
+    
+    conteudo = arquivo.read().decode("urf-8-sig")
+    
+    leitor = csv.reader(
+      io.StringIO("conteudo"), 
+      delimiter=";"  
+    )
+    
+    with get_connection() as conn:
+      cur = conn.cursor()
+    
+      for linha in leitor:
+        if len(linha) < 4:
+          continue
+    
+      nome = linha[0].strip()
+      cpf = linha[1]
+      telefone = linha[2].strip()
+      matricula = linha[3].strip()
+      plano = linha[4].strip()
+      observacao = linha[5].strip()
+      cur.execute("""
+        SELECT id
+        FROM alunos
+        WHERE telefone = %s
+      """,(telefone,))
   
+      existe = cur.fetchone()
+  
+      if existe:
+        continue
+  
+      cur.execute("""
+        INSERT INTO alunos 
+        (
+          nome,
+          cpf,
+          telefone,          
+          data_da_matricula,
+          plano,
+          observacao,
+          esta_ativo
+        )
+        VALUES
+        ( %s, %s, %s, %s, %s, %s, TRUE )
+      """, (nome, cpf, telefone, matricula, plano, observacao))
+  
+      conn.commit()
+  
+    return redirect("/alunos/lista_de_alunos_cadastrados")
 
+  return render_template(
+    "importar_alunos.html"
+  )
+    
 
 @app.route("/alunos/novo", methods = ["GET", "POST"] )
 def alunos_novo():
