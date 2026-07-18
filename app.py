@@ -123,7 +123,7 @@ def alunos():
     return render_template("alunos.html")
 
 
-@app.route("/alunos/importar", methods= ["GET"],["POST"])
+@app.route("/alunos/importar", methods= ["GET", "POST"])
 def importar_alunos():
   if request.method == "POST":
     arquivo = request.files.get("arquivo")
@@ -131,55 +131,81 @@ def importar_alunos():
     if not arquivo:
       return "Nenhum arquivo enviado"
     
-    conteudo = arquivo.read().decode("urf-8-sig")
+    conteudo = arquivo.read().decode("utf-8-sig")
     
     leitor = csv.reader(
-      io.StringIO("conteudo"), 
+      io.StringIO(conteudo), 
       delimiter=";"  
     )
     
     with get_connection() as conn:
       cur = conn.cursor()
-    
+
+      importados = 0
+      ignorados = 0
+      
       for linha in leitor:
-        if len(linha) < 4:
+        if len(linha) < 6:
           continue
     
-      nome = linha[0].strip()
-      cpf = linha[1]
-      telefone = linha[2].strip()
-      matricula = linha[3].strip()
-      plano = linha[4].strip()
-      observacao = linha[5].strip()
-      cur.execute("""
-        SELECT id
-        FROM alunos
-        WHERE telefone = %s
-      """,(telefone,))
+        nome = linha[0].strip()
+        cpf = linha[1].strip()
+        telefone = linha[2].strip()
+        matricula = linha[3].strip()
+        plano = linha[4].strip()
+        observacao = linha[5].strip()
+
+        if cpf:
+          cur.execute("""
+            SELECT id
+            FROM alunos
+            WHERE cpf = %s
+          """,(cpf,))
   
-      existe = cur.fetchone()
+        elif telefone:
+          cur.execute("""
+            SELECT id
+            FROM alunos
+            WHERE telefone = %s
+          """,(telefone,))
+        else:
+          cur.execute("""
+            SELECT id
+            FROM alunos
+            WHERE nome = %s
+          """,(nome,))
+          
+        existe = cur.fetchone()
   
-      if existe:
-        continue
-  
-      cur.execute("""
-        INSERT INTO alunos 
-        (
-          nome,
-          cpf,
-          telefone,          
-          data_da_matricula,
-          plano,
-          observacao,
-          esta_ativo
-        )
-        VALUES
-        ( %s, %s, %s, %s, %s, %s, TRUE )
-      """, (nome, cpf, telefone, matricula, plano, observacao))
-  
+        if existe:
+          ignorados += 1
+          continue
+    
+        cur.execute("""
+          INSERT INTO alunos 
+          (
+            nome,
+            cpf,
+            telefone,          
+            data_da_matricula,
+            plano,
+            observacao,
+            esta_ativo
+          )
+          VALUES
+          ( %s, %s, %s, %s, %s, %s, TRUE )
+        """, (nome, cpf, telefone, matricula, plano, observacao))
+
+        importados += 1
       conn.commit()
   
-    return redirect("/alunos/lista_de_alunos_cadastrados")
+    return f"""
+      <h2>Importação concluida</h2>
+      Importados: {importados}<br>
+      Ignorados: {ignorados}<br><br>
+
+      <a href="/alunos">Voltar</a>      
+    """
 
   return render_template(
     "importar_alunos.html"
