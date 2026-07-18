@@ -76,7 +76,7 @@ def init_db():
 
         cur.execute("""
            ALTER TABLE alunos
-           ADD COLUMN IF NOT EXISTS cpf INTEGER
+           ADD COLUMN IF NOT EXISTS cpf TEXT
         """)
 
    
